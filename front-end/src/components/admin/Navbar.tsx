@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 import MenuIcon from "@mui/icons-material/Menu";
+import CloseIcon from "@mui/icons-material/Close";
 
 const Navbar = () => {
   const [toggleSidebar, setToggleSidebar] = useState(false);
@@ -40,7 +41,29 @@ const Navbar = () => {
         />
       </div>
       {toggleSidebar && (
-        <div className="fixed w-4/5 bg-white h-full overflow-y-auto shadow-md z-10 animate-slide-in"></div>
+        <div className="fixed top-0 right-0 bottom-0 w-1/2 h-full bg-white overflow-y-auto shadow-md z-10 animate-slide-in rounded-md">
+          <div className="absolute w-full flex justify-end items-center p-2">
+            <CloseIcon
+              onClick={() => setToggleSidebar(false)}
+              className="cursor-pointer"
+            />
+          </div>
+          <div className="mt-14 mr-5 text-lg flex flex-col gap-6">
+            {Object.entries(links).map(([key, value]) => (
+              <NavLink
+                to={value}
+                key={key}
+                className={({ isActive }) =>
+                  isActive
+                    ? "bg-my-purple text-white py-2 rounded-lg h-10 w-4/5 flex justify-center shadow-md"
+                    : "py-2 h-10 w-4/5 flex flex-col items-center"
+                }
+              >
+                {key}
+              </NavLink>
+            ))}
+          </div>
+        </div>
       )}
       <div className="flex">
         <p className="flex items-center pl-3 text-sm">مرتضی پوررمضان</p>
