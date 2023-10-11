@@ -17,22 +17,22 @@ const Navbar = () => {
 
   return (
     <div className="fixed w-full flex items-center justify-between shadow-md rounded-lg py-3 px-5">
-      <div className="hidden md:flex gap-3 text-lg">
+      <div className="hidden lg:flex gap-6 text-lg">
         {Object.entries(links).map(([key, value]) => (
           <NavLink
             to={value}
             key={key}
             className={({ isActive }) =>
               isActive
-                ? "bg-my-purple bg-opacity-80 text-white p-2 rounded-lg"
-                : "p-2"
+                ? "bg-my-purple text-white py-2 rounded-lg h-10 w-24 flex justify-center shadow-md"
+                : "py-2 h-10 w-20 flex justify-center"
             }
           >
             {key}
           </NavLink>
         ))}
       </div>
-      <div className="flex md:hidden">
+      <div className="flex lg:hidden">
         <MenuIcon
           fontSize="large"
           className="cursor-pointer"
