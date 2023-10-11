@@ -16,7 +16,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="flex items-center justify-between shadow-md rounded-lg py-3 px-5">
+    <div className="fixed w-full flex items-center justify-between shadow-md rounded-lg py-3 px-5">
       <div className="hidden md:flex gap-3 text-lg">
         {Object.entries(links).map(([key, value]) => (
           <NavLink
