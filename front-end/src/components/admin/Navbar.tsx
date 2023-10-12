@@ -17,8 +17,8 @@ const Navbar = () => {
   };
 
   return (
-    <div className="fixed w-full flex items-center justify-between shadow-md rounded-lg py-3 px-5">
-      <div className="hidden lg:flex gap-6 text-lg">
+    <div className="fixed w-full flex items-center justify-between shadow-md rounded-lg py-3 px-5 bg-white">
+      <div className="hidden lg:flex gap-6 text-lg font-semibold">
         {Object.entries(links).map(([key, value]) => (
           <NavLink
             to={value}
@@ -45,7 +45,7 @@ const Navbar = () => {
           <div className="absolute w-full flex justify-end items-center p-2">
             <CloseIcon
               onClick={() => setToggleSidebar(false)}
-              className="cursor-pointer"
+              className="cursor-pointer rounded-xl hover:shadow-sm"
             />
           </div>
           <div className="mt-14 mr-5 text-lg flex flex-col gap-6">
