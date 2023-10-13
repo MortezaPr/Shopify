@@ -1,8 +1,17 @@
-import React, { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { useState } from "react";
+import { NavLink } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import CategoryIcon from "@mui/icons-material/Category";
+import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
+import SettingsIcon from "@mui/icons-material/Settings";
+
+type IconsType = {
+  [key: string]: JSX.Element;
+};
 
 const Navbar = () => {
   const [toggleSidebar, setToggleSidebar] = useState(false);
@@ -10,30 +19,39 @@ const Navbar = () => {
     داشبرد: "/admin/dashboard",
     سفارشات: "/admin/orders",
     محصولات: "/admin/products",
-    انبار: "/admin/inventory",
     " مشتری ها": "/admin/customers",
-    کارکنان: "/admin/staff",
-    تنظیمات: "/admin/settings",
+  };
+
+  let icons: IconsType = {
+    داشبرد: <DashboardIcon fontSize="small" />,
+    سفارشات: <ShoppingCartIcon fontSize="small" />,
+    محصولات: <CategoryIcon fontSize="small" />,
+    " مشتری ها": <PeopleAltIcon fontSize="small" />,
   };
 
   return (
     <div className="fixed w-full flex items-center justify-between shadow-md rounded-lg py-3 px-5 bg-white">
-      <div className="hidden lg:flex gap-6 text-lg font-semibold">
+      <div className="hidden md:flex gap-6 text-lg font-semibold">
         {Object.entries(links).map(([key, value]) => (
-          <NavLink
-            to={value}
-            key={key}
-            className={({ isActive }) =>
-              isActive
-                ? "bg-my-purple text-white py-2 rounded-lg h-10 w-24 flex justify-center shadow-md"
-                : "py-2 h-10 w-20 flex justify-center"
-            }
-          >
-            {key}
-          </NavLink>
+          <div className="flex items-center gap-3">
+            <NavLink
+              to={value}
+              key={key}
+              className={({ isActive }) =>
+                isActive
+                  ? "bg-my-purple text-white py-2 rounded-lg h-10 w-28 flex justify-center shadow-md"
+                  : "py-2 h-10 w-28 flex justify-center"
+              }
+            >
+              <div className="flex gap-2 items-center">
+                {icons[key]}
+                {key}
+              </div>
+            </NavLink>
+          </div>
         ))}
       </div>
-      <div className="flex lg:hidden">
+      <div className="flex md:hidden">
         <MenuIcon
           fontSize="large"
           className="cursor-pointer"
@@ -65,8 +83,11 @@ const Navbar = () => {
           </div>
         </div>
       )}
-      <div className="flex">
-        <p className="flex items-center pl-3 text-sm">مرتضی پوررمضان</p>
+      <div className="flex items-center gap-3">
+        <div onClick={() => console.log("clicked")}>
+          <SettingsIcon fontSize="small" style={{ cursor: "pointer" }} />
+        </div>
+        <p className="text-sm">مرتضی پوررمضان</p>
         <Avatar src="../../../public/progile.jpg" alt="profile picture" />
       </div>
     </div>
