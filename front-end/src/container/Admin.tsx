@@ -35,7 +35,9 @@ const Admin = () => {
 
   return (
     <div>
-      <Navbar />
+      <div className="pb-20">
+        <Navbar />
+      </div>
       {componentToRender}
     </div>
   );

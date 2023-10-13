@@ -5,7 +5,6 @@ export default {
     extend: {
       colors: {
         "my-purple": "#865DFF",
-        "my-blue": "#e5fafb",
       },
     },
   },
