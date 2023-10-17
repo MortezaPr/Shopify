@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
@@ -15,6 +15,7 @@ type IconsType = {
 
 const Navbar = () => {
   const [toggleSidebar, setToggleSidebar] = useState(false);
+  const navigate = useNavigate();
   let links = {
     داشبرد: "/admin/dashboard",
     سفارشات: "/admin/orders",
@@ -84,7 +85,7 @@ const Navbar = () => {
         </div>
       )}
       <div className="flex items-center gap-3">
-        <div onClick={() => console.log("clicked")}>
+        <div onClick={() => navigate("/admin/settings")}>
           <SettingsIcon fontSize="small" style={{ cursor: "pointer" }} />
         </div>
         <p className="text-sm">مرتضی پوررمضان</p>
