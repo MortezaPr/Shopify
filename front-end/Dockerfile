@@ -1,4 +1,4 @@
-# Use an official Node runtime as the base image
+# Base image
 FROM node:18-alpine
 
 # Set the working directory in the Docker image
