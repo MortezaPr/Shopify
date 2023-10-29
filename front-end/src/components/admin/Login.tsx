@@ -1,17 +1,27 @@
-import Button from "@mui/material/Button";
 import { useState } from "react";
+import { useForm, Controller, SubmitHandler } from "react-hook-form";
+import Button from "@mui/material/Button";
 import { InputAdornment, IconButton } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
+type FormData = {
+  username: string;
+  password: string;
+};
+
 const Login = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
+  const { control, handleSubmit } = useForm<FormData>();
+
+  const onSubmit: SubmitHandler<FormData> = (data) => {
+    console.log(data);
+  };
+
   const buttonStyle = {
     backgroundColor: "#068FFF",
     fontFamily: "VazirFont",
@@ -21,6 +31,7 @@ const Login = () => {
     fontSize: "1.1rem",
     borderRadius: "10px",
   };
+
   return (
     <div className="h-screen flex justify-center items-center bg">
       <div className="bg-white shadow-lg rounded-2xl h-full w-full md:h-[450px] md:w-96 flex flex-col items-center">
@@ -33,22 +44,37 @@ const Login = () => {
           </p>
           <p className="text-slate-500 pt-2">لطفا اطلاعات خود را وارد کنید</p>
         </div>
-        <form className="flex flex-col items-center gap-5 pt-10">
-          <input
-            type="text"
-            placeholder="   نام کاربری"
-            className="p-2 rounded-md border border-slate-400 focus:outline-blue-500 w-80"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+        <form
+          className="flex flex-col items-center gap-5 pt-10"
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <Controller
+            name="username"
+            control={control}
+            defaultValue=""
+            render={({ field }) => (
+              <input
+                {...field}
+                type="text"
+                placeholder="   نام کاربری"
+                className="p-2 rounded-md border border-slate-400 focus:outline-blue-500 w-80"
+              />
+            )}
           />
 
           <div className="relative w-80">
-            <input
-              type={showPassword ? "text" : "password"}
-              placeholder="   کلمه عبور"
-              className="p-2 rounded-md border border-slate-400 focus:outline-blue-500 w-full"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+            <Controller
+              name="password"
+              control={control}
+              defaultValue=""
+              render={({ field }) => (
+                <input
+                  {...field}
+                  type={showPassword ? "text" : "password"}
+                  placeholder="   کلمه عبور"
+                  className="p-2 rounded-md border border-slate-400 focus:outline-blue-500 w-full"
+                />
+              )}
             />
             <InputAdornment position="end" className="absolute top-5 left-0">
               <IconButton
@@ -60,13 +86,13 @@ const Login = () => {
               </IconButton>
             </InputAdornment>
           </div>
-        </form>
 
-        <div className="pt-11">
-          <Button variant="contained" style={buttonStyle}>
-            ورود
-          </Button>
-        </div>
+          <div className="pt-11">
+            <Button type="submit" variant="contained" style={buttonStyle}>
+              ورود
+            </Button>
+          </div>
+        </form>
       </div>
     </div>
   );
