@@ -40,7 +40,7 @@ const Navbar = () => {
               key={key}
               className={({ isActive }) =>
                 isActive
-                  ? "bg-my-purple text-white py-2 rounded-lg h-10 w-28 flex justify-center shadow-md"
+                  ? "bg-[#068FFF] text-white py-2 rounded-lg h-10 w-28 flex justify-center shadow-md"
                   : "py-2 h-10 w-28 flex justify-center"
               }
             >
