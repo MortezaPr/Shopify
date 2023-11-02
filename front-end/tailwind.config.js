@@ -1,10 +1,12 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+  darkMode: "class",
   theme: {
     extend: {
       colors: {
         "my-purple": "#865DFF",
+        "dark-bg": "#191c24",
       },
     },
     keyframes: {

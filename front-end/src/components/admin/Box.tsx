@@ -16,7 +16,7 @@ const Box: React.FC<BoxProps> = ({
   data,
 }) => {
   return (
-    <div className="h-52 w-52 rounded-xl bg-white shadow-md pt-7 pr-4">
+    <div className="h-52 w-52 rounded-xl bg-white dark:bg-dark-bg dark:text-white shadow-md pt-7 pr-4">
       <div
         className={`flex justify-center items-center h-14 w-14 ${color} rounded-full outline-none`}
       >

@@ -8,6 +8,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import CategoryIcon from "@mui/icons-material/Category";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import SettingsIcon from "@mui/icons-material/Settings";
+import DarkMode from "./DarkMode";
 
 type IconsType = {
   [key: string]: JSX.Element;
@@ -31,7 +32,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="fixed w-full flex items-center justify-between shadow-md rounded-lg py-3 px-5 bg-white">
+    <div className="fixed w-full flex items-center justify-between shadow-md rounded-lg py-3 px-5 bg-white dark:bg-dark-bg">
       <div className="hidden md:flex gap-6 text-lg font-semibold">
         {Object.entries(links).map(([key, value]) => (
           <div className="flex items-center gap-3">
@@ -40,11 +41,11 @@ const Navbar = () => {
               key={key}
               className={({ isActive }) =>
                 isActive
-                  ? "bg-[#068FFF] text-white py-2 rounded-lg h-10 w-28 flex justify-center shadow-md"
+                  ? "bg-my-purple text-white py-2 rounded-lg h-10 w-28 flex justify-center shadow-md"
                   : "py-2 h-10 w-28 flex justify-center"
               }
             >
-              <div className="flex gap-2 items-center">
+              <div className="flex gap-2 items-center dark:text-white">
                 {icons[key]}
                 {key}
               </div>
@@ -52,7 +53,7 @@ const Navbar = () => {
           </div>
         ))}
       </div>
-      <div className="flex md:hidden">
+      <div className="flex md:hidden dark:text-white">
         <MenuIcon
           fontSize="large"
           className="cursor-pointer"
@@ -60,8 +61,8 @@ const Navbar = () => {
         />
       </div>
       {toggleSidebar && (
-        <div className="fixed top-0 right-0 bottom-0 w-1/2 h-full bg-white overflow-y-auto shadow-md z-10 animate-slide-in rounded-md">
-          <div className="absolute w-full flex justify-end items-center p-2">
+        <div className="fixed top-0 right-0 bottom-0 w-1/2 h-full bg-white dark:bg-dark-bg dark:text-white overflow-y-auto shadow-md z-10 animate-slide-in rounded-md">
+          <div className="absolute w-full flex justify-end items-center p-2 ">
             <CloseIcon
               onClick={() => setToggleSidebar(false)}
               className="cursor-pointer rounded-xl hover:shadow-sm"
@@ -85,10 +86,14 @@ const Navbar = () => {
         </div>
       )}
       <div className="flex items-center gap-3">
-        <div onClick={() => navigate("/admin/settings")}>
+        <DarkMode />
+        <div
+          onClick={() => navigate("/admin/settings")}
+          className="dark:text-white"
+        >
           <SettingsIcon fontSize="small" style={{ cursor: "pointer" }} />
         </div>
-        <p className="text-sm">مرتضی پوررمضان</p>
+        <p className="text-sm dark:text-white">مرتضی پوررمضان</p>
         <Avatar src="../../../public/progile.jpg" alt="profile picture" />
       </div>
     </div>
