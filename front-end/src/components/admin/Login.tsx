@@ -24,7 +24,7 @@ const Login = () => {
   };
 
   const buttonStyle = {
-    backgroundColor: "#865DFF",
+    backgroundColor: "#5664d2",
     fontFamily: "VazirFont",
     width: "320px",
     padding: "10px",
@@ -39,13 +39,13 @@ const Login = () => {
         <DarkMode />
       </div>
       <div className="h-screen flex justify-center items-center">
-        <div className="dark:bg-dark-bg shadow-lg h-full w-full md:h-[450px] md:w-96 md:rounded-2xl flex flex-col items-center">
+        <div className="bg-white dark:bg-dark-bg shadow-xl h-full w-full md:h-[450px] md:w-96 md:rounded-2xl flex flex-col items-center">
           <div className="md:hidden pt-3 w-full flex justify-end pl-3">
             <DarkMode />
           </div>
           <div className="flex flex-col items-center">
             <p
-              className="pt-10 font-bold text-5xl text-[#865DFF]"
+              className="pt-10 font-bold text-5xl text-my-purple"
               style={{ fontFamily: "Roboto" }}
             >
               Shopify

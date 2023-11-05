@@ -5,8 +5,8 @@ export default {
   theme: {
     extend: {
       colors: {
-        "my-purple": "#865DFF",
-        "dark-bg": "#191c24",
+        "my-purple": "#5664d2",
+        "dark-bg": "#252b3b",
       },
     },
     keyframes: {

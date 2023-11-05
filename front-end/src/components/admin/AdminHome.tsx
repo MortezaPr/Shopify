@@ -9,7 +9,7 @@ const AdminHome = () => {
   const sales = 42339;
 
   return (
-    <div className="h-screen grid grid-cols-2 md:grid-cols-3 place-items-center ">
+    <div className="h-screen w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-items-center px-20 gap-10">
       <div className="h-52 w-52 rounded-xl bg-white shadow-md dark:bg-dark-bg dark:text-white">
         <p className="text-slate-500 text-xl font-bold pt-4 pr-5">درآمد</p>
         <p

@@ -6,12 +6,15 @@ import Orders from "../components/admin//Orders";
 import Products from "../components/admin//Products";
 import Customers from "../components/admin//Customers";
 import Settings from "../components/admin//Settings";
-import { useEffect, ReactElement } from "react";
+import { useEffect, ReactElement, useState } from "react";
+import Sidebar from "../components/admin/Sidebar";
 
 const Admin = () => {
   const location = useLocation();
   const currentPath = location.pathname;
   const navigate = useNavigate();
+
+  const [toggleSidebar, setToggleSidebar] = useState(false);
 
   let componentToRender: ReactElement | undefined = undefined;
 
@@ -34,11 +37,19 @@ const Admin = () => {
   }, [componentToRender, navigate]);
 
   return (
-    <div>
-      <div className="pb-20">
-        <Navbar />
+    <div className="flex">
+      <div className={`hidden md:flex  ${toggleSidebar ? "" : "w-64"}`}>
+        <Sidebar toggleSidebar={toggleSidebar} />
       </div>
-      {componentToRender}
+      <div className="w-full">
+        <div className="pb-20">
+          <Navbar
+            toggleSidebar={toggleSidebar}
+            setToggleSidebar={setToggleSidebar}
+          />
+        </div>
+        {componentToRender}
+      </div>
     </div>
   );
 };
