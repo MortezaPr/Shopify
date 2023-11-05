@@ -3,7 +3,7 @@ import Avatar from "@mui/material/Avatar";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import SettingsIcon from "@mui/icons-material/Settings";
-import DarkMode from "./DarkMode";
+import DarkMode from "./ThemeToggle";
 import { links, icons } from "./LinksAndIcons";
 
 interface SidebarProps {
