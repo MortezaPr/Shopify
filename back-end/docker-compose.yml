@@ -1,14 +1,27 @@
 
-version: '3.8'
+# version: '3.10'
+
+# services:
+#   app:
+#     build: .
+#     # ports:
+#     #   -8000:8000
+#     dockerfile: Dockerfile
+#     command: ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+#     ports:
+#       - "8000:8000"
+#     # volumes:
+#     #   - .:/app
+
+version: '3.10'
 
 services:
-  app:
-    build: .
-    ports:
-      -8000:8000
-    # dockerfile: Dockerfile
-    # command: ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
-    # ports:
-    #   - "8000:8000"
-    # volumes:
-    #   - .:/app
+ app:
+   build:
+     context: .
+     dockerfile: Dockerfile
+   command: ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+   ports:
+     - "8000:8000"
+   volumes:
+     - .:/app
