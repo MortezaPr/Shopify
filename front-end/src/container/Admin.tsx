@@ -1,17 +1,19 @@
 import Navbar from "../components/admin/Navbar";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import AdminHome from "../components/admin/AdminHome";
 import Orders from "../components/admin//Orders";
 import Products from "../components/admin//Products";
 import Customers from "../components/admin//Customers";
 import Settings from "../components/admin//Settings";
+import { useEffect, ReactElement } from "react";
 
 const Admin = () => {
   const location = useLocation();
   const currentPath = location.pathname;
+  const navigate = useNavigate();
 
-  let componentToRender;
+  let componentToRender: ReactElement | undefined = undefined;
 
   if (currentPath === "/admin/dashboard") {
     componentToRender = <AdminHome />;
@@ -23,9 +25,13 @@ const Admin = () => {
     componentToRender = <Customers />;
   } else if (currentPath === "/admin/settings") {
     componentToRender = <Settings />;
-  } else {
-    componentToRender = <div>404 Not Found</div>;
   }
+
+  useEffect(() => {
+    if (!componentToRender) {
+      navigate("/admin/dashboard", { replace: true });
+    }
+  }, [componentToRender, navigate]);
 
   return (
     <div>
