@@ -1,32 +1,12 @@
-import DashboardIcon from "@mui/icons-material/Dashboard";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import CategoryIcon from "@mui/icons-material/Category";
-import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import React from "react";
 import { NavLink } from "react-router-dom";
-
-type IconsType = {
-  [key: string]: JSX.Element;
-};
+import { links, icons } from "./LinksAndIcons";
 
 interface SidebarProps {
   toggleSidebar: boolean;
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ toggleSidebar }) => {
-  let links = {
-    داشبرد: "/admin/dashboard",
-    سفارشات: "/admin/orders",
-    محصولات: "/admin/products",
-    " مشتری ها": "/admin/customers",
-  };
-
-  let icons: IconsType = {
-    داشبرد: <DashboardIcon fontSize="small" />,
-    سفارشات: <ShoppingCartIcon fontSize="small" />,
-    محصولات: <CategoryIcon fontSize="small" />,
-    " مشتری ها": <PeopleAltIcon fontSize="small" />,
-  };
   return (
     <div
       className={`bg-white z-50 dark:bg-[#252b3b] h-screen fixed shadow-md ${
@@ -41,7 +21,7 @@ const Sidebar: React.FC<SidebarProps> = ({ toggleSidebar }) => {
           Shopify
         </p>
       </div>
-      <div className="flex flex-col items-center gap-6 pt-5">
+      <div className="flex flex-col items-center gap-6 pt-8">
         {Object.entries(links).map(([key, value]) => (
           <div className="flex items-center gap-3">
             <NavLink
