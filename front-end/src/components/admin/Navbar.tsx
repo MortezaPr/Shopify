@@ -66,7 +66,7 @@ const Navbar: React.FC<SidebarProps> = ({
         <DarkMode />
         <div
           onClick={() => navigate("/admin/settings")}
-          className="dark:text-white"
+          className="text-darker-bg dark:text-white"
         >
           <SettingsIcon fontSize="small" style={{ cursor: "pointer" }} />
         </div>

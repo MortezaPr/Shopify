@@ -65,7 +65,7 @@ const Login = () => {
                   {...field}
                   type="text"
                   placeholder="   نام کاربری"
-                  className="p-2 rounded-md border border-slate-400 dark:border-none outline-none focus:outline-my-purple focus:border-none dark:text-white dark:bg-black w-80"
+                  className="p-2 rounded-md border border-slate-400 dark:border-none outline-none focus:outline-my-purple focus:border-none dark:text-white dark:bg-darker-bg w-80"
                 />
               )}
             />
@@ -80,7 +80,7 @@ const Login = () => {
                     {...field}
                     type={showPassword ? "text" : "password"}
                     placeholder="   کلمه عبور"
-                    className="p-2 rounded-md border border-slate-400 dark:border-none dark:text-white outline-none focus:outline-my-purple focus:border-none w-full dark:bg-black"
+                    className="p-2 rounded-md border border-slate-400 dark:border-none dark:text-white outline-none focus:outline-my-purple focus:border-none w-full dark:bg-darker-bg"
                   />
                 )}
               />

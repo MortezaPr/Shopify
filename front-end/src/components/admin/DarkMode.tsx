@@ -36,7 +36,9 @@ const DarkMode: React.FC = () => {
           <LightModeIcon />
         </div>
       ) : (
-        <DarkModeIcon />
+        <div className="text-darker-bg">
+          <DarkModeIcon />
+        </div>
       )}
     </div>
   );

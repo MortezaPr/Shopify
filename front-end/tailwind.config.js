@@ -7,6 +7,7 @@ export default {
       colors: {
         "my-purple": "#5664d2",
         "dark-bg": "#252b3b",
+        "darker-bg": "#1e222e",
       },
     },
     keyframes: {
