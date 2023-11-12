@@ -8,25 +8,18 @@ interface BoxProps {
   data: number;
 }
 
-const Box: React.FC<BoxProps> = ({
-  title,
-  icon: Icon,
-  color,
-  accent,
-  data,
-}) => {
+const Box: React.FC<BoxProps> = ({ title, icon: Icon, accent, data }) => {
   return (
-    <div className="h-52 w-52 rounded-xl bg-white shadow-md pt-7 pr-4">
-      <div
-        className={`flex justify-center items-center h-14 w-14 ${color} rounded-full outline-none`}
-      >
+    <div className="h-40 w-[27rem] md:w-[24rem] lg:w-[21.5rem] rounded-lg bg-white dark:bg-dark-bg dark:text-white shadow-md pt-7 pr-4">
+      <div className="pr-3">
         <Icon
           style={{
             color: `${accent}`,
           }}
-          fontSize="large"
+          size={28}
         />
       </div>
+
       <p
         className="w-full font-extrabold text-2xl mt-2 truncate pl-5"
         dir="ltr"
