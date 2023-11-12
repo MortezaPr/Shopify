@@ -1,6 +1,6 @@
 // import "./DarkMode.css";
 import LightModeIcon from "@mui/icons-material/LightMode";
-import DarkModeIcon from "@mui/icons-material/DarkMode";
+import { MdOutlineDarkMode } from "react-icons/md";
 import { useState } from "react";
 
 const DarkMode: React.FC = () => {
@@ -37,7 +37,7 @@ const DarkMode: React.FC = () => {
         </div>
       ) : (
         <div className="text-darker-bg">
-          <DarkModeIcon />
+          <MdOutlineDarkMode size={22} />
         </div>
       )}
     </div>

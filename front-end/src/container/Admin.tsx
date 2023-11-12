@@ -19,7 +19,7 @@ const Admin = () => {
   let componentToRender: ReactElement | undefined = undefined;
 
   if (currentPath === "/admin/dashboard") {
-    componentToRender = <AdminHome />;
+    componentToRender = <AdminHome toggleSidebar={toggleSidebar} />;
   } else if (currentPath === "/admin/orders") {
     componentToRender = <Orders />;
   } else if (currentPath === "/admin/products") {
@@ -38,7 +38,7 @@ const Admin = () => {
 
   return (
     <div className="flex">
-      <div className={`hidden md:flex  ${toggleSidebar ? "" : "w-64"}`}>
+      <div className={`hidden md:flex  ${toggleSidebar ? "" : "w-44"}`}>
         <Sidebar toggleSidebar={toggleSidebar} />
       </div>
       <div className="w-full">

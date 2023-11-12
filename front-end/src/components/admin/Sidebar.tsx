@@ -10,7 +10,7 @@ const Sidebar: React.FC<SidebarProps> = ({ toggleSidebar }) => {
   return (
     <div
       className={`bg-white z-50 dark:bg-[#252b3b] h-screen fixed shadow-md ${
-        toggleSidebar ? "" : "w-[14em]"
+        toggleSidebar ? "" : "w-[10.5em]"
       }  dark:text-white text-black`}
     >
       <div className="flex justify-center py-[18px] px-2 shadow-md">

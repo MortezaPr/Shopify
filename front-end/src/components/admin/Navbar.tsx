@@ -18,7 +18,7 @@ const Navbar: React.FC<SidebarProps> = ({
   const navigate = useNavigate();
 
   return (
-    <div className="w-full fixed flex items-center justify-between shadow-md py-3 px-5 bg-white dark:bg-dark-bg">
+    <div className="w-full fixed flex items-center justify-between shadow-md py-3 px-5 bg-white dark:bg-dark-bg z-40">
       <div
         className={`flex dark:text-white ${toggleSidebar ? "md:pr-20" : ""}`}
       >
@@ -60,7 +60,7 @@ const Navbar: React.FC<SidebarProps> = ({
       )}
       <div
         className={`flex items-center gap-3 ${
-          !toggleSidebar ? "md:pl-[220px]" : ""
+          !toggleSidebar ? "md:pl-[158px]" : ""
         }`}
       >
         <DarkMode />
