@@ -1,77 +1,84 @@
-import { NavLink, useNavigate } from "react-router-dom";
-import Avatar from "@mui/material/Avatar";
-import MenuIcon from "@mui/icons-material/Menu";
-import CloseIcon from "@mui/icons-material/Close";
-import SettingsIcon from "@mui/icons-material/Settings";
+"use client";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { CgMenuRightAlt } from "react-icons/cg";
+import { AiFillCloseCircle } from "react-icons/ai";
+import { FiSettings } from "react-icons/fi";
 import DarkMode from "./ThemeToggle";
 import { links, icons } from "./LinksAndIcons";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
+import useSidebarToggle from "@/hooks/useSidebarToggle";
 
-interface SidebarProps {
-  toggleSidebar: boolean;
-  setToggleSidebar: React.Dispatch<React.SetStateAction<boolean>>;
-}
+const Navbar = () => {
+  // const navigate = useNavigate();
+  const router = useRouter();
+  const pathname = usePathname();
+  const { isOpen, onOpen, onClose } = useSidebarToggle();
 
-const Navbar: React.FC<SidebarProps> = ({
-  toggleSidebar,
-  setToggleSidebar,
-}) => {
-  const navigate = useNavigate();
+  const handleToggle = (isOpen: boolean) => {
+    if (isOpen) {
+      onClose();
+    } else {
+      onOpen();
+    }
+  };
 
   return (
     <div className="w-full fixed flex items-center justify-between shadow-md py-3 px-5 bg-white dark:bg-dark-bg z-40">
       <div
-        className={`flex dark:text-white ${toggleSidebar ? "md:pr-20" : ""}`}
+        className={`flex dark:text-white ${isOpen ? "md:mr-20" : "md:mr-40"}`}
       >
-        <MenuIcon
-          fontSize="large"
+        <CgMenuRightAlt
+          size={22}
           className="cursor-pointer"
-          onClick={() => setToggleSidebar(!toggleSidebar)}
+          onClick={() => handleToggle(isOpen)}
         />
       </div>
-      {toggleSidebar && (
+      {isOpen && (
         <div className="flex md:hidden">
           <div className="fixed top-0 right-0 bottom-0 w-1/2 h-full bg-white dark:bg-dark-bg dark:text-white overflow-y-auto shadow-md z-10 animate-slide-in rounded-md">
             <div className="absolute w-full flex justify-end items-center p-2 ">
-              <CloseIcon
-                onClick={() => setToggleSidebar(false)}
+              <AiFillCloseCircle
+                onClick={() => handleToggle(isOpen)}
                 className="cursor-pointer rounded-xl hover:shadow-sm"
               />
             </div>
             <div className="mt-14 mr-5 text-lg flex flex-col gap-6">
               {Object.entries(links).map(([key, value]) => (
-                <NavLink
-                  to={value}
+                <li
                   key={key}
-                  className={({ isActive }) =>
-                    isActive
+                  className={
+                    pathname == value
                       ? "bg-my-purple text-white py-2 rounded-lg h-10 w-4/5 flex justify-center gap-5 shadow-md"
                       : "py-2 h-10 w-4/5 flex flex-col items-center"
                   }
                 >
-                  <div className="flex gap-3">
-                    {icons[key]}
-                    {key}
-                  </div>
-                </NavLink>
+                  <Link href={value}>
+                    <div className="flex justify-center items-center gap-3">
+                      {icons[key]}
+                      {key}
+                    </div>
+                  </Link>
+                </li>
               ))}
             </div>
           </div>
         </div>
       )}
-      <div
-        className={`flex items-center gap-3 ${
-          !toggleSidebar ? "md:pl-[158px]" : ""
-        }`}
-      >
+      <div className="flex items-center gap-3">
         <DarkMode />
         <div
-          onClick={() => navigate("/admin/settings")}
+          // onClick={() => navigate("/admin/settings")}
           className="text-darker-bg dark:text-white"
         >
-          <SettingsIcon fontSize="small" style={{ cursor: "pointer" }} />
+          <FiSettings fontSize="small" style={{ cursor: "pointer" }} />
         </div>
         <p className="text-sm dark:text-white">مرتضی پوررمضان</p>
-        <Avatar src="../../../public/progile.jpg" alt="profile picture" />
+        <Avatar>
+          <AvatarImage src="https://github.com/shadcn.png" />
+          <AvatarFallback>CN</AvatarFallback>
+        </Avatar>
       </div>
     </div>
   );

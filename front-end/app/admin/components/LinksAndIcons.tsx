@@ -1,7 +1,6 @@
-import DashboardIcon from "@mui/icons-material/Dashboard";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import CategoryIcon from "@mui/icons-material/Category";
-import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
+import { BiSolidDashboard, BiCategory } from "react-icons/bi";
+import { HiOutlineShoppingCart } from "react-icons/hi";
+import { BsFillPeopleFill } from "react-icons/bs";
 
 type IconsType = {
   [key: string]: JSX.Element;
@@ -15,8 +14,8 @@ export let links = {
 };
 
 export let icons: IconsType = {
-  داشبورد: <DashboardIcon fontSize="small" />,
-  سفارشات: <ShoppingCartIcon fontSize="small" />,
-  محصولات: <CategoryIcon fontSize="small" />,
-  " مشتری ها": <PeopleAltIcon fontSize="small" />,
+  داشبورد: <BiSolidDashboard fontSize="small" />,
+  سفارشات: <HiOutlineShoppingCart fontSize="small" />,
+  محصولات: <BiCategory fontSize="small" />,
+  " مشتری ها": <BsFillPeopleFill fontSize="small" />,
 };

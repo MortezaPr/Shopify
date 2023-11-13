@@ -1,5 +1,6 @@
 // import "./DarkMode.css";
-import LightModeIcon from "@mui/icons-material/LightMode";
+"use client";
+import { MdOutlineLightMode } from "react-icons/md";
 import { MdOutlineDarkMode } from "react-icons/md";
 import { useState } from "react";
 
@@ -30,13 +31,13 @@ const DarkMode: React.FC = () => {
   };
 
   return (
-    <div className="cursor-pointer" onClick={toggleTheme}>
+    <div onClick={toggleTheme}>
       {isDarkMode ? (
-        <div className="dark:text-white">
-          <LightModeIcon />
+        <div className="dark:text-white cursor-pointer">
+          <MdOutlineLightMode size={22} />
         </div>
       ) : (
-        <div className="text-darker-bg">
+        <div className="text-darker-bg cursor-pointer">
           <MdOutlineDarkMode size={22} />
         </div>
       )}

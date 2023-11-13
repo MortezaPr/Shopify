@@ -11,6 +11,7 @@
   "dependencies": {
     "@nivo/line": "^0.83.0",
     "@nivo/pie": "^0.83.0",
+    "@radix-ui/react-avatar": "^1.0.4",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "lucide-react": "^0.292.0",
@@ -20,7 +21,8 @@
     "react-hook-form": "^7.48.2",
     "react-icons": "^4.11.0",
     "tailwind-merge": "^2.0.0",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "zustand": "^4.4.6"
   },
   "devDependencies": {
     "@types/node": "^20",

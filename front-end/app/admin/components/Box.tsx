@@ -3,20 +3,19 @@ import React from "react";
 interface BoxProps {
   title: string;
   icon: React.ElementType;
-  color: string;
   accent: string;
   data: number;
 }
 
 const Box: React.FC<BoxProps> = ({ title, icon: Icon, accent, data }) => {
   return (
-    <div className="h-40 w-[27rem] md:w-[24rem] lg:w-[21.5rem] rounded-lg bg-white dark:bg-dark-bg dark:text-white shadow-md pt-7 pr-4">
+    <div className="h-40 w-[27rem] md:w-[14rem] lg:w-[20rem] xl:w-[16rem] 2xl:w-[20rem] rounded-lg bg-white dark:bg-dark-bg dark:text-white shadow-md pt-7 pr-4">
       <div className="pr-3">
         <Icon
           style={{
             color: `${accent}`,
           }}
-          size={28}
+          size={30}
         />
       </div>
 
