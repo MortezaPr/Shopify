@@ -14,8 +14,8 @@ export let links = {
 };
 
 export let icons: IconsType = {
-  داشبورد: <BiSolidDashboard fontSize="small" />,
-  سفارشات: <HiOutlineShoppingCart fontSize="small" />,
-  محصولات: <BiCategory fontSize="small" />,
-  " مشتری ها": <BsFillPeopleFill fontSize="small" />,
+  داشبورد: <BiSolidDashboard size={20} />,
+  سفارشات: <HiOutlineShoppingCart size={20} />,
+  محصولات: <BiCategory size={20} />,
+  " مشتری ها": <BsFillPeopleFill size={20} />,
 };

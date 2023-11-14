@@ -1,7 +1,9 @@
 import React from "react";
 
-const page = () => {
-  return <div>page</div>;
+const Products = () => {
+  return (
+    <div className="h-screen flex justify-center items-center">Products</div>
+  );
 };
 
-export default page;
+export default Products;
