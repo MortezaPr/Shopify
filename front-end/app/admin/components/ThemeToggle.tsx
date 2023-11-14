@@ -3,9 +3,11 @@
 import { MdOutlineLightMode } from "react-icons/md";
 import { MdOutlineDarkMode } from "react-icons/md";
 import { useState } from "react";
+import useTheme from "@/hooks/useTheme";
 
 const DarkMode: React.FC = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const { onDark, onLight } = useTheme();
 
   const setDarkMode = () => {
     localStorage.setItem("adminTheme", "dark");
@@ -21,12 +23,13 @@ const DarkMode: React.FC = () => {
 
   const toggleTheme = () => {
     if (!isDarkMode) {
-      console.log("ea");
       setIsDarkMode(true);
       setDarkMode();
+      onDark();
     } else {
       setIsDarkMode(false);
       setLightMode();
+      onLight();
     }
   };
 

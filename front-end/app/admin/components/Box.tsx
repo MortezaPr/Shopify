@@ -9,7 +9,7 @@ interface BoxProps {
 
 const Box: React.FC<BoxProps> = ({ title, icon: Icon, accent, data }) => {
   return (
-    <div className="h-40 w-[27rem] md:w-[14rem] lg:w-[20rem] xl:w-[16rem] 2xl:w-[20rem] rounded-lg bg-white dark:bg-dark-bg dark:text-white shadow-md pt-7 pr-4">
+    <div className="cursor-pointer hover:scale-110  h-40 w-[27rem] md:w-[14rem] lg:w-[20rem] xl:w-[16rem] 2xl:w-[20rem] rounded-lg bg-white dark:bg-dark-bg dark:text-white shadow-md hover:shadow-sm hover:shadow-cyan-400 pt-7 pr-4">
       <div className="pr-3">
         <Icon
           style={{

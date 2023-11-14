@@ -11,7 +11,6 @@ import { usePathname } from "next/navigation";
 import useSidebarToggle from "@/hooks/useSidebarToggle";
 
 const Navbar = () => {
-  // const navigate = useNavigate();
   const router = useRouter();
   const pathname = usePathname();
   const { isOpen, onOpen, onClose } = useSidebarToggle();
@@ -51,7 +50,7 @@ const Navbar = () => {
                   className={
                     pathname == value
                       ? "bg-my-purple text-white py-2 rounded-lg h-10 w-4/5 flex justify-center gap-5 shadow-md"
-                      : "py-2 h-10 w-4/5 flex flex-col items-center"
+                      : "py-2 h-10 w-4/5 px-10 flex flex-col items-center"
                   }
                 >
                   <Link href={value}>
@@ -69,7 +68,7 @@ const Navbar = () => {
       <div className="flex items-center gap-3">
         <DarkMode />
         <div
-          // onClick={() => navigate("/admin/settings")}
+          onClick={() => router.push("/admin/settings")}
           className="text-darker-bg dark:text-white"
         >
           <FiSettings fontSize="small" style={{ cursor: "pointer" }} />

@@ -23,24 +23,23 @@ const Sidebar = () => {
       </div>
       <div className="flex flex-col items-center gap-6 pt-8">
         {Object.entries(links).map(([key, value]) => (
-          <div className="flex items-center gap-3" key={key}>
-            <li
-              className={
-                pathname == value
-                  ? `bg-my-purple text-white py-2 rounded-lg ${
-                      isOpen ? "w-16" : "w-28"
-                    } flex justify-center shadow-md`
-                  : `py-2 flex justify-center`
-              }
-            >
-              <Link href={value}>
-                <div className="flex gap-2 items-center dark:text-white">
-                  {icons[key]}
-                  {isOpen ? "" : key}
-                </div>
-              </Link>
-            </li>
-          </div>
+          <li
+            key={key}
+            className={
+              pathname == value
+                ? `bg-my-purple text-white py-2 rounded-lg ${
+                    isOpen ? "w-16" : "w-28"
+                  } flex justify-center shadow-md`
+                : `py-2 flex justify-center`
+            }
+          >
+            <Link href={value}>
+              <div className="flex gap-2 items-center dark:text-white">
+                {icons[key]}
+                {isOpen ? "" : key}
+              </div>
+            </Link>
+          </li>
         ))}
       </div>
     </div>
