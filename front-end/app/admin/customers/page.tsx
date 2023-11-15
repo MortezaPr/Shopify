@@ -1,6 +1,6 @@
 import React from "react";
 import { Customer, columns } from "./columns";
-import { DataTable } from "@/components/data-table";
+import { DataTable } from "@/components/CustomerTable";
 
 async function getUsers(): Promise<Customer[]> {
   const res = await fetch(
@@ -15,7 +15,7 @@ export default async function Customers() {
 
   return (
     <div
-      className="h-screen overflow-x-auto grid place-items-center mt-14 pt-14"
+      className="h-screens overflow-x-auto grid place-items-center mt-14 pt-14"
       dir="ltr"
     >
       <DataTable columns={columns} data={data} />
