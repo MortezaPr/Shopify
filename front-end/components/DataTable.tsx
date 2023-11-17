@@ -23,15 +23,18 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import ShoppingCartDialog from "./ShoppingCartDialog";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+  header: string;
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
+  header,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
@@ -63,7 +66,7 @@ export function DataTable<TData, TValue>({
           }
           className="max-w-sm"
         />
-        <h1 className="text-4xl font-bold flex justify-end pr-16">مشتری ها</h1>
+        <h1 className="text-4xl font-bold flex justify-end pr-16">{header}</h1>
       </div>
       <div className="rounded-md border table-container">
         <Table>
@@ -94,9 +97,13 @@ export function DataTable<TData, TValue>({
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
+                      {cell.column.id == "shoppingCart" ? (
+                        <ShoppingCartDialog />
+                      ) : (
+                        flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext()
+                        )
                       )}
                     </TableCell>
                   ))}

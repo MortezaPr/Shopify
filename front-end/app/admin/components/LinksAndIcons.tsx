@@ -10,12 +10,12 @@ export let links = {
   داشبورد: "/admin/dashboard",
   سفارشات: "/admin/orders",
   محصولات: "/admin/products",
-  " مشتری ها": "/admin/customers",
+  کاربران: "/admin/customers",
 };
 
 export let icons: IconsType = {
   داشبورد: <BiSolidDashboard size={20} />,
   سفارشات: <HiOutlineShoppingCart size={20} />,
   محصولات: <BiCategory size={20} />,
-  " مشتری ها": <BsFillPeopleFill size={20} />,
+  کاربران: <BsFillPeopleFill size={20} />,
 };

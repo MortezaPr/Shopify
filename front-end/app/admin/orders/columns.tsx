@@ -15,15 +15,19 @@ import {
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
-export type Customer = {
+export type Orders = {
   id: string;
   name: string;
   email: string;
   phoneNumber: string;
-  lastSeen: string;
+  date: string;
 };
 
-export const columns: ColumnDef<Customer>[] = [
+export const columns: ColumnDef<Orders>[] = [
+  {
+    accessorKey: "shoppingCart",
+    header: "سبد خرید",
+  },
   {
     accessorKey: "name",
     header: ({ column }) => {
@@ -32,40 +36,35 @@ export const columns: ColumnDef<Customer>[] = [
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          نام
+          نام کاربر
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
     },
   },
   {
-    accessorKey: "email",
+    accessorKey: "totalAmount",
     header: ({ column }) => {
       return (
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          ایمیل
+          مبلغ کل
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
     },
   },
-
   {
-    accessorKey: "phoneNumber",
-    header: "شماره تلفن",
-  },
-  {
-    accessorKey: "lastSeen",
+    accessorKey: "date",
     header: ({ column }) => {
       return (
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          آخرین بازدید
+          تاریخ سفارش
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
@@ -74,6 +73,20 @@ export const columns: ColumnDef<Customer>[] = [
       const date = new Date(row.getValue("lastSeen"));
       const formatted = date.toLocaleDateString();
       return <div className="font-medium">{formatted}</div>;
+    },
+  },
+  {
+    accessorKey: "id",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          شناسه سفارش
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
     },
   },
   {
