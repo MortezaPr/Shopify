@@ -19,7 +19,9 @@ const Sidebar = () => {
       }  dark:text-white text-black`}
     >
       <div className="flex justify-center py-[18px] px-2 shadow-md">
-        <p className={`${roboto} text-my-purple font-bold text-xl`}>Shopify</p>
+        <h1 className={`${roboto} text-my-purple font-bold text-xl`}>
+          Shopify
+        </h1>
       </div>
       <div className="flex flex-col items-center gap-6 pt-8">
         {Object.entries(links).map(([key, value]) => (
