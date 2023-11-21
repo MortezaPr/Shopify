@@ -20,6 +20,8 @@ module.exports = {
         "my-purple": "#5664d2",
         "dark-bg": "#252b3b",
         "darker-bg": "#1e222e",
+        "dark-user": "#1a1c1e",
+        "darker-user": "#0f0e0e",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

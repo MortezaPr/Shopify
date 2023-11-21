@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Vazirmatn } from "next/font/google";
 import "./globals.css";
+import Navbar from "@/components/Navbar";
 
 const vazir = Vazirmatn({ subsets: ["latin"] });
 
@@ -16,7 +17,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" dir="rtl">
-      <body className={`${vazir.className} dark:bg-darker-bg`}>{children}</body>
+      <body className={`${vazir.className} dark:bg-darker-bg`}>
+        <Navbar />
+        <div className="h-screen flex justify-center items-center">{children}</div>
+      </body>
     </html>
   );
 }
