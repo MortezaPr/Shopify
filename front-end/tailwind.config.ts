@@ -15,6 +15,7 @@ module.exports = {
         "2xl": "1400px",
       },
     },
+
     extend: {
       colors: {
         "my-purple": "#5664d2",
@@ -22,6 +23,8 @@ module.exports = {
         "darker-bg": "#1e222e",
         "dark-user": "#1a1c1e",
         "darker-user": "#0f0e0e",
+        blackOverlay: "rgba(0, 0, 0, 0.4)",
+        whiteOverlay: "rgba(0, 0, 0, 1)",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -61,6 +64,7 @@ module.exports = {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+
       keyframes: {
         "accordion-down": {
           from: { height: 0 },

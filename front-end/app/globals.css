@@ -88,3 +88,11 @@ body {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
 }
+
+.blackOverlay {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.whiteOverlay {
+  background-color: rgba(71, 70, 70, 0.7);
+}

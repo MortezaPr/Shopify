@@ -2,8 +2,8 @@ import React from "react";
 
 const page = () => {
   return (
-    <div className="h-screen w-screen flex justify-center items-center">
-      Shopping Cart
+    <div className="h-screen w-full flex justify-center items-center">
+      Login
     </div>
   );
 };

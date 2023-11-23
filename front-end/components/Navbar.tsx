@@ -1,47 +1,65 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { Roboto } from "next/font/google";
 import { Input } from "@/components/ui/input";
-import { FiShoppingCart } from "react-icons/fi";
 import { Button } from "@/components/ui/button";
-import { TbLogin } from "react-icons/tb";
 import DarkMode from "@/app/admin/components/ThemeToggle";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
+import useSearching from "@/hooks/useSearching";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+
+import { FiShoppingCart } from "react-icons/fi";
+import { TbLogin } from "react-icons/tb";
 import { RiHome2Fill } from "react-icons/ri";
+import { FaRegHeart } from "react-icons/fa";
+import { PiShoppingCartSimpleFill } from "react-icons/pi";
+import { FaRegComment } from "react-icons/fa";
+import { GoPersonFill, GoTriangleDown, GoPerson } from "react-icons/go";
+import { RxExit } from "react-icons/rx";
+import { IoPersonOutline } from "react-icons/io5";
 import {
   BiCategory,
   BiHomeAlt2,
   BiSearch,
   BiSolidCategory,
 } from "react-icons/bi";
-import { GoPerson } from "react-icons/go";
-import { PiShoppingCartSimpleFill } from "react-icons/pi";
-import { GoPersonFill } from "react-icons/go";
-import { usePathname } from "next/navigation";
-import Link from "next/link";
+import { MdKeyboardArrowLeft } from "react-icons/md";
 
 type IconsType = {
   [key: string]: JSX.Element;
+};
+
+type LinksType = {
+  [key: string]: string;
 };
 
 let icons: IconsType = {
   خانه: <BiHomeAlt2 size={25} />,
   "دسته بندی": <BiCategory size={25} />,
   "سبد خرید": <FiShoppingCart size={25} />,
-  کاربر: <GoPerson size={25} />,
+  پروفایل: <GoPerson size={25} />,
 };
 
-let links = {
+let links: LinksType = {
   خانه: "/",
   "دسته بندی": "/category",
   "سبد خرید": "/shoppingCart",
-  کاربر: "/user",
+  پروفایل: "/profile",
 };
 
 let fillIcons: IconsType = {
   خانه: <RiHome2Fill size={25} />,
   "دسته بندی": <BiSolidCategory size={25} />,
   "سبد خرید": <PiShoppingCartSimpleFill size={25} />,
-  کاربر: <GoPersonFill size={25} />,
+  پروفایل: <GoPersonFill size={25} />,
 };
 
 const roboto = Roboto({
@@ -51,41 +69,140 @@ const roboto = Roboto({
 
 const Navbar = () => {
   const pathname = usePathname();
-  console.log(pathname);
+  const { isSearching, onSearch, onCloseSearch } = useSearching();
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
+
+  const handleSearchClick = (
+    e: React.MouseEvent<HTMLInputElement, MouseEvent>
+  ) => {
+    e.stopPropagation();
+    if (isSearching) {
+      onCloseSearch();
+    } else {
+      onSearch();
+    }
+  };
+
+  const handleClick = () => {
+    onCloseSearch();
+  };
+
   return (
-    <div>
-      <div className="w-full fixed bg-white dark:bg-dark-user h-16 lg:h-24 shadow-sm border-b-2 border-gray-300 dark:border-gray-950">
+    <div onClick={handleClick}>
+      <div
+        className={`w-full fixed z-50 bg-white dark:bg-dark-user h-16 lg:h-24 shadow-sm`}
+      >
         <div className="flex justify-between items-center">
           <div className="flex items-center pt-2 lg:pt-4 gap-5">
-            <h1
-              className={`${roboto} text-my-purple font-extrabold text-4xl pr-10 hidden lg:flex`}
-            >
-              Shopify
-            </h1>
+            <Link href={"/"}>
+              <h1
+                className={`${roboto} text-my-purple font-extrabold text-4xl pr-10 hidden lg:flex`}
+              >
+                Shopify
+              </h1>
+            </Link>
 
             <div className="relative">
               <Input
                 className="w-screen lg:w-[35rem] border-none bg-gray-100 dark:bg-darker-user pr-14 flex"
                 placeholder="جستجو"
+                onClick={(e) => handleSearchClick(e)}
               />
               <div className="text-gray-400 absolute top-3 right-3 cursor-pointer">
                 <BiSearch size={22} />
               </div>
             </div>
+            {isSearching ? (
+              <div
+                onClick={(e) => e.stopPropagation()}
+                className="hidden lg:flex absolute top-[4.5rem] right-[11.5rem] bg-gray-100 dark:bg-darker-user w-[35rem] h-60 rounded-xl flex-col pr-5 pt-5"
+              >
+                hello
+              </div>
+            ) : (
+              ""
+            )}
           </div>
           <div className="hidden lg:flex pl-12 items-center pt-4 gap-5">
-            <Button
-              variant="outline"
-              className="bg-white dark:bg-darker-user border-gray-300 dark:border-darker-user"
-            >
-              <div className="flex gap-2">
-                <TbLogin size={22} />
-                ورود | ثبت نام
+            {isLoggedIn ? (
+              <div className="border-l-2 border-gray-200 dark:border-gray-700 pl-5 flex items-center">
+                <DropdownMenu>
+                  <DropdownMenuTrigger
+                    style={{
+                      outline: "none",
+                    }}
+                  >
+                    <div className="flex gap-1">
+                      <IoPersonOutline size={22} />
+                      <GoTriangleDown />
+                    </div>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent>
+                    <DropdownMenuItem className="flex p-2">
+                      <Link
+                        href={"/profile"}
+                        className="flex gap-10 items-center p-2"
+                      >
+                        <MdKeyboardArrowLeft size={20} />
+                        مرتضی پوررمضان
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuSeparator />
+
+                    <DropdownMenuItem>
+                      <Link
+                        href={"/orders"}
+                        className="flex gap-2 items-center p-2"
+                      >
+                        سفارش ها
+                        <FiShoppingCart />
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem className="gap-2">
+                      <Link
+                        href={"/lists"}
+                        className="flex gap-2 items-center p-2"
+                      >
+                        لیست ها
+                        <FaRegHeart />
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem className="gap-2">
+                      <Link
+                        href={"/comments"}
+                        className="flex gap-2 items-center p-2"
+                      >
+                        دیدگاه ها
+                        <FaRegComment />
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem className="gap-2">
+                      <button className="flex gap-2 items-center p-2">
+                        خروج از حساب کاربری
+                        <RxExit />
+                      </button>
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
               </div>
-            </Button>
-            <div className="text-gray-700 dark:text-white">
+            ) : (
+              <Button
+                variant="outline"
+                className="bg-white dark:bg-darker-user border-gray-300 dark:border-darker-user"
+              >
+                <div className="flex gap-2">
+                  <TbLogin size={22} />
+                  ورود | ثبت نام
+                </div>
+              </Button>
+            )}
+
+            <Link
+              href={"/shoppingCart"}
+              className="text-gray-700 dark:text-white"
+            >
               <FiShoppingCart size={22} />
-            </div>
+            </Link>
             <DarkMode />
           </div>
         </div>
