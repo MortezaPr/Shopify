@@ -25,12 +25,10 @@ export default function RootLayout({
         <Navbar />
         <div className={`${isSearching ? "absolute lg:bg-blackOverlay" : ""}`}>
           <div
-            className={`h-screen flex justify-center items-center  ${
-              isSearching ? "z-40" : ""
-            } `}
+            className={`h-screen flex  ${isSearching ? "z-40" : ""} `}
             onClick={onCloseSearch}
           >
-            <div className="-z-10">{children}</div>
+            <div className={`${isSearching ? "-z-10" : ""}`}>{children}</div>
           </div>
         </div>
       </body>
