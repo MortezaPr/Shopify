@@ -5,6 +5,7 @@ import { Vazirmatn } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import useSearching from "@/hooks/useSearching";
+import { usePathname } from "next/navigation";
 
 const vazir = Vazirmatn({ subsets: ["latin"] });
 
@@ -19,19 +20,28 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   const { isSearching, onCloseSearch } = useSearching();
+  const pathname = usePathname();
   return (
     <html lang="en" dir="rtl">
-      <body className={`${vazir.className} dark:bg-darker-user`}>
-        <Navbar />
-        <div className={`${isSearching ? "absolute lg:bg-blackOverlay" : ""}`}>
+      {pathname.startsWith("/admin/") ? (
+        <body className={`${vazir.className} dark:bg-darker-bg`}>
+          <div>{children}</div>
+        </body>
+      ) : (
+        <body className={`${vazir.className} dark:bg-darker-user`}>
+          <Navbar />
           <div
-            className={`h-screen flex  ${isSearching ? "z-40" : ""} `}
-            onClick={onCloseSearch}
+            className={`${isSearching ? "absolute lg:bg-blackOverlay" : ""}`}
           >
-            <div className={`${isSearching ? "-z-10" : ""}`}>{children}</div>
+            <div
+              className={`h-screen flex  ${isSearching ? "z-40" : ""} `}
+              onClick={onCloseSearch}
+            >
+              <div className={`${isSearching ? "-z-10" : ""}`}>{children}</div>
+            </div>
           </div>
-        </div>
-      </body>
+        </body>
+      )}
     </html>
   );
 }

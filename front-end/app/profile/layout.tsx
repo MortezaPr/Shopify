@@ -54,7 +54,7 @@ export default function ProfileLayout({
           <ul key={key}>
             <Link
               href={value}
-              className="flex items-center gap-3 pr-5 py-5 hover:bg-gray-100"
+              className="flex items-center gap-3 pr-5 py-5 hover:bg-gray-100 dark:hover:bg-darker-user"
             >
               <div className="tex">{icons[key]}</div>
               {key}
