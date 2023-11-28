@@ -26,7 +26,7 @@ const Navbar = () => {
   return (
     <div className="w-full fixed flex items-center justify-between shadow-md py-3 px-5 bg-white dark:bg-dark-bg z-40">
       <div
-        className={`flex dark:text-white ${isOpen ? "md:mr-20" : "md:mr-40"}`}
+        className={`flex dark:text-white ${isOpen ? "md:mr-28" : "md:mr-40"}`}
       >
         <CgMenuRightAlt
           size={22}
@@ -50,11 +50,15 @@ const Navbar = () => {
                   className={
                     pathname == value
                       ? "bg-my-purple text-white py-2 rounded-lg h-10 w-4/5 flex justify-center gap-5 shadow-md"
-                      : "py-2 h-10 w-4/5 px-10 flex flex-col items-center"
+                      : "h-10 w-4/5 px-10 flex flex-col items-center"
                   }
                 >
                   <Link href={value}>
-                    <div className="flex justify-center items-center gap-3">
+                    <div
+                      className={`flex justify-center items-center gap-3 ${
+                        !(pathname == value) ? "hover:bg-gray-100 dark:hover:bg-darker-bg w-64 py-2 rounded-lg" : ""
+                      }`}
+                    >
                       {icons[key]}
                       {key}
                     </div>

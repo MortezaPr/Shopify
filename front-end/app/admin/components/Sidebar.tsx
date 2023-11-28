@@ -2,10 +2,10 @@ import React from "react";
 import Link from "next/link";
 import { links, icons } from "./LinksAndIcons";
 import { usePathname } from "next/navigation";
-import { Roboto } from "next/font/google";
+import { Poppins } from "next/font/google";
 import useSidebarToggle from "@/hooks/useSidebarToggle";
 
-const roboto = Roboto({
+const pacifico = Poppins({
   weight: "700",
   subsets: ["latin"],
 });
@@ -14,12 +14,14 @@ const Sidebar = () => {
   const { isOpen } = useSidebarToggle();
   return (
     <div
-      className={`bg-white z-50 dark:bg-[#252b3b] h-screen fixed shadow-md ${
+      className={`bg-dark-bg z-50 dark:bg-[#252b3b] h-screen fixed shadow-md ${
         isOpen ? "" : "w-[10.5em]"
-      }  dark:text-white text-black`}
+      }  text-white`}
     >
-      <div className="flex justify-center py-[18px] px-2 shadow-md">
-        <h1 className={`${roboto} text-my-purple font-bold text-xl`}>
+      <div className="flex justify-center py-[18px] px-2">
+        <h1
+          className={`${pacifico.className} text-my-purple font-bold text-2xl`}
+        >
           Shopify
         </h1>
       </div>
@@ -32,11 +34,17 @@ const Sidebar = () => {
                 ? `bg-my-purple text-white py-2 rounded-lg ${
                     isOpen ? "w-16" : "w-28"
                   } flex justify-center shadow-md`
-                : `py-2 flex justify-center`
+                : `flex justify-center`
             }
           >
             <Link href={value}>
-              <div className="flex gap-2 items-center dark:text-white">
+              <div
+                className={`flex gap-2 items-center dark:text-white ${
+                  !(pathname == value)
+                    ? "hover:bg-gray-100 dark:hover:bg-darker-bg rounded-lg w-28 flex justify-center py-2"
+                    : ""
+                }`}
+              >
                 {icons[key]}
                 {isOpen ? "" : key}
               </div>
