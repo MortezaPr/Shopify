@@ -96,7 +96,7 @@ const Navbar = () => {
           <div className="flex items-center pt-2 lg:pt-4 gap-5">
             <Link href={"/"}>
               <h1
-                className={`${roboto} text-my-purple font-extrabold text-4xl pr-10 hidden lg:flex`}
+                className={`${roboto.className} text-my-purple font-extrabold text-4xl pr-10 hidden lg:flex`}
               >
                 Shopify
               </h1>

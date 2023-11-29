@@ -23,7 +23,7 @@ export default function RootLayout({
   const pathname = usePathname();
   return (
     <html lang="en" dir="rtl">
-      {pathname.startsWith("/admin/") ? (
+      {pathname.startsWith("/admin/") || pathname == "/login" ? (
         <body className={`${vazir.className} dark:bg-darker-bg`}>
           <div>{children}</div>
         </body>
