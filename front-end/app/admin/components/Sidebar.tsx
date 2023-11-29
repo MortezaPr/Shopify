@@ -41,7 +41,7 @@ const Sidebar = () => {
               <div
                 className={`flex gap-2 items-center dark:text-white ${
                   !(pathname == value)
-                    ? "hover:bg-gray-100 dark:hover:bg-darker-bg rounded-lg w-28 flex justify-center py-2"
+                    ? "hover:bg-darker-bg rounded-lg w-28 flex justify-center py-2"
                     : ""
                 }`}
               >

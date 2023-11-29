@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { Roboto } from "next/font/google";
+import { Poppins } from "next/font/google";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import DarkMode from "@/app/admin/components/ThemeToggle";
@@ -62,7 +62,7 @@ let fillIcons: IconsType = {
   پروفایل: <GoPersonFill size={25} />,
 };
 
-const roboto = Roboto({
+const poppins = Poppins({
   weight: "700",
   subsets: ["latin"],
 });
@@ -96,7 +96,7 @@ const Navbar = () => {
           <div className="flex items-center pt-2 lg:pt-4 gap-5">
             <Link href={"/"}>
               <h1
-                className={`${roboto.className} text-my-purple font-extrabold text-4xl pr-10 hidden lg:flex`}
+                className={`${poppins.className} text-my-purple font-extrabold text-4xl pr-10 hidden lg:flex`}
               >
                 Shopify
               </h1>
