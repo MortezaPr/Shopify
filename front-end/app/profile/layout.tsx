@@ -1,3 +1,4 @@
+"use client"
 import React from "react";
 import { LuPencilLine } from "react-icons/lu";
 import { AiOutlineHome } from "react-icons/ai";
@@ -7,6 +8,7 @@ import { BsSignpost2 } from "react-icons/bs";
 import { GoPerson } from "react-icons/go";
 import { RxExit } from "react-icons/rx";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 type IconsType = {
   [key: string]: JSX.Element;
@@ -35,9 +37,15 @@ export default function ProfileLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const pathname = usePathname();
+
   return (
-    <div className="h-screen w-screen grid grid-cols-5 gap-5 pt-32 pb-7 px-16 justify-center">
-      <div className="bg-white dark:bg-dark-user shadow-sm border-[1.5px] border-gray-200 dark:border-none rounded-lg flex flex-col">
+    <div className="lg:h-screen w-screen flex flex-col-reverse lg:grid lg:grid-cols-7 gap-5 lg:pt-32 pb-20 lg:pb-10 lg:px-16 justify-center">
+      <div
+        className={`${
+          pathname == "/profile" ? "" : "hidden lg:flex lg:flex-col"
+        } bg-white h-[35rem] lg:h-auto dark:bg-dark-user shadow-sm border-[1.5px] border-gray-200 dark:border-none lg:rounded-lg col-span-2`}
+      >
         <div className="pt-5 px-5 flex justify-between">
           <div className="flex flex-col gap-1">
             <h1>مرتضی پوررمضان</h1>

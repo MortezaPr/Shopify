@@ -90,7 +90,9 @@ const Navbar = () => {
   return (
     <div onClick={handleClick}>
       <div
-        className={`w-full fixed z-50 bg-white dark:bg-dark-user h-16 lg:h-24 shadow-sm`}
+        className={`w-full fixed z-50 bg-white dark:bg-dark-user h-16 lg:h-24 shadow-sm ${
+          pathname.startsWith("/profile") ? "hidden lg:block" : ""
+        }`}
       >
         <div className="flex justify-between items-center">
           <div className="flex items-center pt-2 lg:pt-4 gap-5">
@@ -115,7 +117,7 @@ const Navbar = () => {
             {isSearching ? (
               <div
                 onClick={(e) => e.stopPropagation()}
-                className="hidden lg:flex absolute top-[4.5rem] right-[11.5rem] bg-gray-100 dark:bg-darker-user w-[35rem] h-60 rounded-xl flex-col pr-5 pt-5"
+                className="hidden lg:flex absolute top-[4.5rem] right-[12.5rem] bg-gray-100 dark:bg-darker-user w-[35rem] h-60 rounded-xl flex-col pr-5 pt-5"
               >
                 hello
               </div>
@@ -207,7 +209,7 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-      <div className="absolute flex items-center justify-center gap-20 sm:gap-30 md:gap-44 lg:hidden bottom-0 bg-white dark:bg-dark-user h-16 w-full shadow-sm border-gray-300 dark:border-gray-950 border-t-2 text-gray-700 dark:text-white">
+      <div className="fixed flex items-center justify-center gap-20 sm:gap-30 md:gap-44 lg:hidden bottom-0 bg-white dark:bg-dark-user h-16 w-full shadow-sm border-gray-300 dark:border-gray-950 border-t-2 text-gray-700 dark:text-white">
         {Object.entries(icons).map(([key]) => (
           <Link
             href={links[key]}
