@@ -90,11 +90,11 @@ const Navbar = () => {
   return (
     <div onClick={handleClick}>
       <div
-        className={`w-full fixed z-50 bg-white dark:bg-dark-user h-16 lg:h-24 shadow-sm ${
+        className={`fixed z-50 bg-white dark:bg-dark-user bg-opacity-60 backdrop-blur-lg h-16 lg:h-24 shadow-sm ${
           pathname.startsWith("/profile") ? "hidden lg:block" : ""
         }`}
       >
-        <div className="flex justify-between items-center">
+        <div className="flex w-screen justify-between items-center">
           <div className="flex items-center pt-2 lg:pt-4 gap-5">
             <Link href={"/"}>
               <h1
@@ -209,7 +209,7 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-      <div className="fixed flex items-center justify-center gap-20 sm:gap-30 md:gap-44 lg:hidden bottom-0 bg-white dark:bg-dark-user h-16 w-full shadow-sm border-gray-300 dark:border-gray-950 border-t-2 text-gray-700 dark:text-white">
+      <div className="fixed flex items-center justify-center gap-14 sm:gap-30 md:gap-44 lg:hidden bottom-0 bg-white dark:bg-dark-user bg-opacity-30 backdrop-blur-lg h-16 w-screen shadow-sm border-gray-300 dark:border-gray-950 border-t-2 text-gray-700 dark:text-white">
         {Object.entries(icons).map(([key]) => (
           <Link
             href={links[key]}

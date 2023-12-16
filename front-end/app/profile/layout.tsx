@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React from "react";
 import { LuPencilLine } from "react-icons/lu";
 import { AiOutlineHome } from "react-icons/ai";
@@ -9,6 +9,7 @@ import { GoPerson } from "react-icons/go";
 import { RxExit } from "react-icons/rx";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { IoIosArrowBack } from "react-icons/io";
 
 type IconsType = {
   [key: string]: JSX.Element;
@@ -40,7 +41,7 @@ export default function ProfileLayout({
   const pathname = usePathname();
 
   return (
-    <div className="lg:h-screen w-screen flex flex-col-reverse lg:grid lg:grid-cols-7 gap-5 lg:pt-32 pb-20 lg:pb-10 lg:px-16 justify-center">
+    <div className="lg:h-screen w-[calc(100vw-16px)] lg:w-screen flex flex-col-reverse lg:grid lg:grid-cols-7 gap-5 lg:pt-32 pb-20 lg:pb-10 lg:px-16 justify-center">
       <div
         className={`${
           pathname == "/profile" ? "" : "hidden lg:flex lg:flex-col"
@@ -52,7 +53,7 @@ export default function ProfileLayout({
             <p className="text-sm text-gray-500">شماره تماس</p>
           </div>
 
-          <Link href={"/"} className="text-cyan-500">
+          <Link href={"/"} className="text-cyan-500 pl-2">
             <LuPencilLine size={20} />
           </Link>
         </div>
@@ -62,10 +63,15 @@ export default function ProfileLayout({
           <ul key={key}>
             <Link
               href={value}
-              className="flex items-center gap-3 pr-5 py-5 hover:bg-gray-100 dark:hover:bg-darker-user"
+              className="flex justify-between items-center pl-7 hover:bg-gray-100 dark:hover:bg-darker-user"
             >
-              <div className="tex">{icons[key]}</div>
-              {key}
+              <div className="flex items-center gap-3 pr-5 py-5">
+                <div className="">{icons[key]}</div>
+                {key}
+              </div>
+              <div className="lg:hidden">
+                <IoIosArrowBack />
+              </div>
             </Link>
             {key !== "خروج" ? (
               <div className="mx-5 border-b-[1.5px] border-gray-100 dark:border-gray-500"></div>
