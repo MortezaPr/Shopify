@@ -11,6 +11,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { IoIosArrowBack } from "react-icons/io";
 
+
 type IconsType = {
   [key: string]: JSX.Element;
 };
