@@ -153,7 +153,7 @@ const Navbar = () => {
 
                     <DropdownMenuItem>
                       <Link
-                        href={"/orders"}
+                        href={"/profile"}
                         className="flex gap-2 items-center p-2"
                       >
                         سفارش ها
@@ -162,7 +162,7 @@ const Navbar = () => {
                     </DropdownMenuItem>
                     <DropdownMenuItem className="gap-2">
                       <Link
-                        href={"/lists"}
+                        href={"/profile/lists"}
                         className="flex gap-2 items-center p-2"
                       >
                         لیست ها
@@ -171,7 +171,7 @@ const Navbar = () => {
                     </DropdownMenuItem>
                     <DropdownMenuItem className="gap-2">
                       <Link
-                        href={"/comments"}
+                        href={"/profile/comments"}
                         className="flex gap-2 items-center p-2"
                       >
                         دیدگاه ها

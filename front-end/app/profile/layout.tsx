@@ -41,7 +41,7 @@ export default function ProfileLayout({
   const pathname = usePathname();
 
   return (
-    <div className="lg:h-screen w-[calc(100vw-16px)] lg:w-screen flex flex-col-reverse lg:grid lg:grid-cols-7 gap-5 lg:pt-32 pb-20 lg:pb-10 lg:px-16 justify-center">
+    <div className="lg:h-screen w-[calc(100vw-15px)] lg:w-screen flex flex-col-reverse lg:grid lg:grid-cols-7 gap-5 lg:pt-32 pb-20 lg:pb-10 lg:px-16 justify-center">
       <div
         className={`${
           pathname == "/profile" ? "" : "hidden lg:flex lg:flex-col"
@@ -53,7 +53,7 @@ export default function ProfileLayout({
             <p className="text-sm text-gray-500">شماره تماس</p>
           </div>
 
-          <Link href={"/"} className="text-cyan-500 pl-2">
+          <Link href={"/profile/personal-info"} className="text-cyan-500 pl-2">
             <LuPencilLine size={20} />
           </Link>
         </div>
