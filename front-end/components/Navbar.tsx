@@ -95,7 +95,7 @@ const Navbar = () => {
         }`}
       >
         <div className="flex w-screen justify-between items-center">
-          <div className="flex items-center pt-2 lg:pt-4 gap-5">
+          <div className="flex items-center pt-2 lg:pt-4 lg:gap-5">
             <Link href={"/"}>
               <h1
                 className={`${poppins.className} text-my-purple font-extrabold text-4xl pr-10 hidden lg:flex`}
@@ -104,9 +104,9 @@ const Navbar = () => {
               </h1>
             </Link>
 
-            <div className="relative">
+            <div className="relative mx-2 lg:mx-0">
               <Input
-                className="w-screen lg:w-[35rem] border-none bg-gray-100 dark:bg-darker-user pr-14 flex"
+                className="w-[calc(100vw-15px)] lg:w-[35rem] border-none bg-gray-100 dark:bg-darker-user pr-14 flex"
                 placeholder="جستجو"
                 onClick={(e) => handleSearchClick(e)}
               />
