@@ -130,7 +130,7 @@ export default function Home() {
             ))}
           </div>
           <button
-            className="absolute top-1/2 left-0 w-10 h-10 p-6 bg-white dark:bg-neutral-800 bg-opacity-90 shadow-xl rounded-full flex justify-center items-center"
+            className="absolute top-1/2 left-2 w-10 h-10 p-6 bg-white dark:bg-neutral-800 bg-opacity-90 shadow-xl rounded-full flex justify-center items-center"
             onClick={scrollLeft}
           >
             <div className="text-slate-600 font-bold text-2xl">

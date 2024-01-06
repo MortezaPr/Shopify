@@ -26,10 +26,8 @@ import { GoPersonFill, GoTriangleDown, GoPerson } from "react-icons/go";
 import { RxExit } from "react-icons/rx";
 import { IoPersonOutline } from "react-icons/io5";
 import {
-  BiCategory,
   BiHomeAlt2,
   BiSearch,
-  BiSolidCategory,
 } from "react-icons/bi";
 import { MdKeyboardArrowLeft } from "react-icons/md";
 
@@ -43,21 +41,18 @@ type LinksType = {
 
 let icons: IconsType = {
   خانه: <BiHomeAlt2 size={25} />,
-  "دسته بندی": <BiCategory size={25} />,
   "سبد خرید": <FiShoppingCart size={25} />,
   پروفایل: <GoPerson size={25} />,
 };
 
 let links: LinksType = {
   خانه: "/",
-  "دسته بندی": "/category",
   "سبد خرید": "/shoppingCart",
   پروفایل: "/profile",
 };
 
 let fillIcons: IconsType = {
   خانه: <RiHome2Fill size={25} />,
-  "دسته بندی": <BiSolidCategory size={25} />,
   "سبد خرید": <PiShoppingCartSimpleFill size={25} />,
   پروفایل: <GoPersonFill size={25} />,
 };
@@ -114,7 +109,7 @@ const Navbar = () => {
                 <BiSearch size={22} />
               </div>
             </div>
-            {isSearching ? (
+            {/* {isSearching ? (
               <div
                 onClick={(e) => e.stopPropagation()}
                 className="hidden lg:flex absolute top-[4.5rem] right-[12.5rem] bg-gray-100 dark:bg-darker-user w-[35rem] h-60 rounded-xl flex-col pr-5 pt-5"
@@ -123,7 +118,7 @@ const Navbar = () => {
               </div>
             ) : (
               ""
-            )}
+            )} */}
           </div>
           <div className="hidden lg:flex pl-12 items-center pt-4 gap-5">
             {isLoggedIn ? (
@@ -170,15 +165,6 @@ const Navbar = () => {
                       </Link>
                     </DropdownMenuItem>
                     <DropdownMenuItem className="gap-2">
-                      <Link
-                        href={"/profile/comments"}
-                        className="flex gap-2 items-center p-2"
-                      >
-                        دیدگاه ها
-                        <FaRegComment />
-                      </Link>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem className="gap-2">
                       <button className="flex gap-2 items-center p-2">
                         خروج از حساب کاربری
                         <RxExit />
@@ -209,7 +195,7 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-      <div className="fixed flex items-center justify-center gap-14 sm:gap-30 md:gap-44 lg:hidden bottom-0 bg-white dark:bg-dark-user bg-opacity-30 backdrop-blur-lg h-16 w-screen shadow-sm border-gray-300 dark:border-gray-950 border-t-2 text-gray-700 dark:text-white">
+      <div className="fixed flex items-center justify-center gap-24 sm:gap-30 md:gap-44 lg:hidden bottom-0 bg-white dark:bg-dark-user bg-opacity-30 backdrop-blur-lg h-16 w-screen shadow-sm border-gray-300 dark:border-gray-950 border-t-2 text-gray-700 dark:text-white">
         {Object.entries(icons).map(([key]) => (
           <Link
             href={links[key]}

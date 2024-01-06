@@ -1,6 +1,8 @@
 import React from "react";
 import { IoArrowForward } from "react-icons/io5";
 import Link from "next/link";
+import Image from "next/image";
+import heart from "@/public/images/heart.png";
 
 const lg_class =
   "shadow-sm border-[1.5px] border-gray-200 dark:border-none col-span-5 rounded-lg";
@@ -25,8 +27,18 @@ const page = () => {
         <div className="hidden lg:block h-[2px] w-[5.5rem] rounded-xl bg-my-purple mt-2"></div>
       </div>
 
+      <div className="hidden lg:block">
+        <div className="h-80 flex flex-col justify-center items-center">
+          <Image src={heart} alt="lists" width={120} height={120} />
+          <p>لیستی موجود نیست!</p>
+        </div>
+      </div>
+
       <div className="lg:hidden h-screen mt-3 bg-white dark:bg-dark-user pt-5 pr-5">
-        show personal info and a way to edit it
+        <div className="h-80 flex flex-col justify-center items-center">
+          <Image src={heart} alt="lists" width={120} height={120} />
+          <p>لیستی موجود نیست!</p>
+        </div>
       </div>
     </div>
   );

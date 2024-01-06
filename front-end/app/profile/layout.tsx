@@ -19,7 +19,6 @@ type IconsType = {
 export let links = {
   "خلاصه فعالیت ها": "/profile",
   "لیست های من": "/profile/lists",
-  "دیدگاه ها": "/profile/comments",
   "آدرس ها": "/profile/addresses",
   "اطلاعات حساب کاربری": "/profile/personal-info",
   خروج: "/",
@@ -28,7 +27,6 @@ export let links = {
 export let icons: IconsType = {
   "خلاصه فعالیت ها": <AiOutlineHome size={22} />,
   "لیست های من": <FaRegHeart size={22} />,
-  "دیدگاه ها": <FaRegComment size={22} />,
   "آدرس ها": <BsSignpost2 size={22} />,
   "اطلاعات حساب کاربری": <GoPerson size={22} />,
   خروج: <RxExit size={22} />,
@@ -51,7 +49,7 @@ export default function ProfileLayout({
         <div className="pt-5 px-5 flex justify-between">
           <div className="flex flex-col gap-1">
             <h1>مرتضی پوررمضان</h1>
-            <p className="text-sm text-gray-500">شماره تماس</p>
+            <p className="text-sm text-gray-500">09123456789</p>
           </div>
 
           <Link href={"/profile/personal-info"} className="text-cyan-500 pl-2">
