@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import shopping from "@/public/images/shopping.png";
 import Image from "next/image";
@@ -6,7 +7,7 @@ import { FaRegTrashAlt } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
 
 const ShoppingCart = () => {
-  const shopping_cart = [
+  const [shopping_cart, setShopping_cart] = React.useState([
     {
       title:
         "گوشی موبایل اپل مدل آیفون 13 پرو مکس نات اکتیو TH/A (A2643) تک سیم کارت ظرفیت 256 گیگابایت رم 6 گیگابایت",
@@ -16,12 +17,32 @@ const ShoppingCart = () => {
       pic: iphone,
       id: 1,
     },
-  ];
+  ]);
 
   const total_price = shopping_cart.reduce(
     (total, item) => total + item.price * item.count,
     0
   );
+
+  const removeItem = (id: number) => {
+    setShopping_cart(shopping_cart.filter((item) => item.id !== id));
+  };
+
+  const handleIncrement = (id: number) => {
+    setShopping_cart(
+      shopping_cart.map((item) =>
+        item.id === id ? { ...item, count: item.count + 1 } : item
+      )
+    );
+  };
+
+  const handleDecrement = (id: number) => {
+    setShopping_cart(
+      shopping_cart.map((item) =>
+        item.id === id ? { ...item, count: item.count - 1 } : item
+      )
+    );
+  };
 
   return (
     <div className="h-screen w-screen flex justify-center pt-28 lg:pt-40">
@@ -56,18 +77,32 @@ const ShoppingCart = () => {
                   </div>
                   <div className="flex flex-col-reverse md:flex-row items-center justify-between">
                     <div className="h-10 w-36 border-2 border-gray-200 dark:border-neutral-700 rounded-lg flex justify-between items-center md:mr-8 mt-3">
-                      <button className="pr-3 text-lg font-bold text-my-purple">
+                      <button
+                        data-testid="increment-button"
+                        className="pr-3 text-lg font-bold text-my-purple"
+                        onClick={() => handleIncrement(item.id)}
+                      >
                         +
                       </button>
-                      <div className="text-lg font-bold text-my-purple">
+                      <p
+                        data-testid="item-count"
+                        className="text-lg font-bold text-my-purple"
+                      >
                         {item.count}
-                      </div>
+                      </p>
                       {item.count == 1 ? (
-                        <button className="text-red-500 pl-3">
+                        <button
+                          data-testid="remove-button"
+                          className="text-red-500 pl-3"
+                          onClick={() => removeItem(item.id)}
+                        >
                           <FaRegTrashAlt />
                         </button>
                       ) : (
-                        <button className="pl-3 text-lg font-bold text-my-purple">
+                        <button
+                          className="pl-3 text-lg font-bold text-my-purple"
+                          onClick={() => handleDecrement(item.id)}
+                        >
                           -
                         </button>
                       )}
@@ -82,7 +117,7 @@ const ShoppingCart = () => {
           ))}
           <div className="hidden lg:block h-72 md:w-64 lg:w-80 xl:w-96 border-2 border-gray-200 dark:border-neutral-800 bg-white dark:bg-dark-user rounded-lg">
             <div className="pt-5 flex justify-between">
-              <p className="text-gray-600 pr-5">
+              <p className="text-gray-600 dark:text-gray-300 pr-5">
                 قیمت کالاها ({shopping_cart.length.toLocaleString("fa")})
               </p>
               <p className="pl-5 text-lg font-bold">
@@ -101,14 +136,16 @@ const ShoppingCart = () => {
               </Button>
             </div>
           </div>
-          <div className="fixed bottom-16 h-20 w-full bg-white border-2 border-b-0 border-x-0 border-gray-200 dark:border-neutral-800 lg:hidden">
+          <div className="fixed bottom-16 h-20 w-full bg-white dark:bg-dark-user border-2 border-b-0 border-x-0 border-gray-200 dark:border-neutral-800 lg:hidden">
             <div className="flex justify-between pt-5">
               <div className="pr-5">
                 <Button className="text-base font-bold">ثبت سفارش</Button>
               </div>
               <div className="flex flex-col items-center pl-5">
-                <p className="text-sm text-gray-600">جمع سبد خرید</p>
-                <p className="text-gray-600 font-bold">
+                <p className="text-sm text-gray-600 dark:text-gray-300">
+                  جمع سبد خرید
+                </p>
+                <p className="text-gray-600 dark:text-gray-300 font-bold">
                   {total_price.toLocaleString("fa")} تومان
                 </p>
               </div>
