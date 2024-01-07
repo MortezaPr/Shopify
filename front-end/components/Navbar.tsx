@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import DarkMode from "@/app/admin/components/ThemeToggle";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import useSearching from "@/hooks/useSearching";
 import {
   DropdownMenu,
@@ -60,9 +61,12 @@ const poppins = Poppins({
 });
 
 const Navbar = () => {
+  const [searchValue, setSearchValue] = useState("");
   const pathname = usePathname();
   const { isSearching, onSearch, onCloseSearch } = useSearching();
   const [isLoggedIn, setIsLoggedIn] = useState(true);
+
+  const router = useRouter();
 
   const handleSearchClick = (
     e: React.MouseEvent<HTMLInputElement, MouseEvent>
@@ -77,6 +81,10 @@ const Navbar = () => {
 
   const handleClick = () => {
     onCloseSearch();
+  };
+
+  const handleSearch = (value: string) => {
+    router.push(`/search?query=${value}`);
   };
 
   return (
@@ -98,11 +106,17 @@ const Navbar = () => {
 
             <div className="relative mx-2 lg:mx-0">
               <Input
+                type="text"
+                value={searchValue}
+                onChange={(e) => setSearchValue(e.target.value)}
                 className="w-[calc(100vw-15px)] lg:w-[35rem] border-none bg-gray-100 dark:bg-darker-user pr-14 flex"
                 placeholder="جستجو"
                 onClick={(e) => handleSearchClick(e)}
               />
-              <div className="text-gray-400 absolute top-3 right-3 cursor-pointer">
+              <div
+                className="text-gray-400 absolute top-3 right-3 cursor-pointer"
+                onClick={() => handleSearch(searchValue)}
+              >
                 <BiSearch size={22} />
               </div>
             </div>
