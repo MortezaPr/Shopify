@@ -31,7 +31,7 @@ export default function RootLayout({
         <body className={`${vazir.className} dark:bg-darker-user`}>
           <Navbar />
           <div
-            className={`${isSearching ? "absolute lg:bg-blackOverlay" : ""}`}
+            className={`${isSearching ? "absolute bg-blackOverlay" : ""}`}
           >
             <div
               className={`h-screen flex  ${isSearching ? "z-40" : ""} `}

@@ -25,10 +25,7 @@ import { FaRegComment } from "react-icons/fa";
 import { GoPersonFill, GoTriangleDown, GoPerson } from "react-icons/go";
 import { RxExit } from "react-icons/rx";
 import { IoPersonOutline } from "react-icons/io5";
-import {
-  BiHomeAlt2,
-  BiSearch,
-} from "react-icons/bi";
+import { BiHomeAlt2, BiSearch } from "react-icons/bi";
 import { MdKeyboardArrowLeft } from "react-icons/md";
 
 type IconsType = {
@@ -109,16 +106,16 @@ const Navbar = () => {
                 <BiSearch size={22} />
               </div>
             </div>
-            {/* {isSearching ? (
+            {isSearching ? (
               <div
                 onClick={(e) => e.stopPropagation()}
-                className="hidden lg:flex absolute top-[4.5rem] right-[12.5rem] bg-gray-100 dark:bg-darker-user w-[35rem] h-60 rounded-xl flex-col pr-5 pt-5"
+                className="absolute top-[4.5rem] lg:right-[12.5rem] bg-gray-100 dark:bg-darker-user w-full lg:w-[35rem] h-60 rounded-xl flex-col pr-5 pt-5"
               >
-                hello
+                search results
               </div>
             ) : (
               ""
-            )} */}
+            )}
           </div>
           <div className="hidden lg:flex pl-12 items-center pt-4 gap-5">
             {isLoggedIn ? (
