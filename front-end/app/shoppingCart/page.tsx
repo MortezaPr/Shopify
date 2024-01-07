@@ -5,26 +5,19 @@ import Image from "next/image";
 import iphone from "@/public/images/iphone.webp";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
+import useCart from "@/hooks/useCart";
 
 const ShoppingCart = () => {
-  const [shopping_cart, setShopping_cart] = React.useState([
-    {
-      title:
-        "گوشی موبایل اپل مدل آیفون 13 پرو مکس نات اکتیو TH/A (A2643) تک سیم کارت ظرفیت 256 گیگابایت رم 6 گیگابایت",
-      price: 54400000,
-      color: "مشکی",
-      count: 1,
-      pic: iphone,
-      id: 1,
-    },
-  ]);
+  const { items, addItem, editItem, removeItem } = useCart();
+  const [shopping_cart, setShopping_cart] = React.useState(items);
 
   const total_price = shopping_cart.reduce(
     (total, item) => total + item.price * item.count,
     0
   );
 
-  const removeItem = (id: number) => {
+  const remove = (id: number) => {
+    removeItem(id);
     setShopping_cart(shopping_cart.filter((item) => item.id !== id));
   };
 
@@ -34,6 +27,10 @@ const ShoppingCart = () => {
         item.id === id ? { ...item, count: item.count + 1 } : item
       )
     );
+    const newItem = shopping_cart.find((item) => item.id === id);
+    if (newItem) {
+      editItem(id, newItem);
+    }
   };
 
   const handleDecrement = (id: number) => {
@@ -42,6 +39,10 @@ const ShoppingCart = () => {
         item.id === id ? { ...item, count: item.count - 1 } : item
       )
     );
+    const newItem = shopping_cart.find((item) => item.id === id);
+    if (newItem) {
+      editItem(id, newItem);
+    }
   };
 
   return (
@@ -94,12 +95,13 @@ const ShoppingCart = () => {
                         <button
                           data-testid="remove-button"
                           className="text-red-500 pl-3"
-                          onClick={() => removeItem(item.id)}
+                          onClick={() => remove(item.id)}
                         >
                           <FaRegTrashAlt />
                         </button>
                       ) : (
                         <button
+                          data-testid="decrement-button"
                           className="pl-3 text-lg font-bold text-my-purple"
                           onClick={() => handleDecrement(item.id)}
                         >
