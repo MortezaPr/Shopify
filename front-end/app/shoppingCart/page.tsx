@@ -5,7 +5,7 @@ import iphone from "@/public/images/iphone.webp";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
 
-const page = () => {
+const ShoppingCart = () => {
   const shopping_cart = [
     {
       title:
@@ -24,7 +24,7 @@ const page = () => {
   );
 
   return (
-    <div className="h-screen w-screen pt-28 lg:pt-40 lg:pr-28">
+    <div className="h-screen w-screen flex justify-center pt-28 lg:pt-40">
       {shopping_cart.length == 0 ? (
         <div className="flex flex-col justify-center items-center">
           <Image
@@ -40,7 +40,7 @@ const page = () => {
           {shopping_cart.map((item) => (
             <div
               key={item.id}
-              className="h-72 lg:w-[50rem] border-2 border-gray-200 dark:border-neutral-800 bg-white dark:bg-dark-user rounded-lg"
+              className="h-72 w-screen flex justify-center lg:justify-normal lg:w-[40rem] xl:w-[50rem] border-2 border-gray-200 dark:border-neutral-800 bg-white dark:bg-dark-user rounded-lg"
             >
               <div className="flex pt-14 lg:pr-8">
                 <div>
@@ -54,8 +54,8 @@ const page = () => {
                     <div className="w-5 h-5 rounded-full bg-black"></div>
                     <p className="text-gray-500">{item.color}</p>
                   </div>
-                  <div className="flex items-center justify-between">
-                    <div className="h-10 w-36 border-2 border-gray-200 dark:border-neutral-700 rounded-lg flex justify-between items-center lg:mr-8 mt-3">
+                  <div className="flex flex-col-reverse md:flex-row items-center justify-between">
+                    <div className="h-10 w-36 border-2 border-gray-200 dark:border-neutral-700 rounded-lg flex justify-between items-center md:mr-8 mt-3">
                       <button className="pr-3 text-lg font-bold text-my-purple">
                         +
                       </button>
@@ -72,7 +72,7 @@ const page = () => {
                         </button>
                       )}
                     </div>
-                    <div className="text-lg font-bold pt-3">
+                    <div className="text-lg font-bold pt-3 lg:ml-10 xl:ml-0">
                       {item.price.toLocaleString("fa")} تومان
                     </div>
                   </div>
@@ -80,7 +80,7 @@ const page = () => {
               </div>
             </div>
           ))}
-          <div className="hidden lg:block h-72 w-96 border-2 border-gray-200 dark:border-neutral-800 bg-white dark:bg-dark-user rounded-lg">
+          <div className="hidden lg:block h-72 md:w-64 lg:w-80 xl:w-96 border-2 border-gray-200 dark:border-neutral-800 bg-white dark:bg-dark-user rounded-lg">
             <div className="pt-5 flex justify-between">
               <p className="text-gray-600 pr-5">
                 قیمت کالاها ({shopping_cart.length.toLocaleString("fa")})
@@ -96,7 +96,7 @@ const page = () => {
               </p>
             </div>
             <div className="flex justify-center pt-20">
-              <Button className="text-base font-bold w-80 h-14">
+              <Button className="text-base font-bold lg:w-72 xl:w-80 h-14">
                 ثبت سفارش
               </Button>
             </div>
@@ -107,9 +107,7 @@ const page = () => {
                 <Button className="text-base font-bold">ثبت سفارش</Button>
               </div>
               <div className="flex flex-col items-center pl-5">
-                <p className="text-sm text-gray-600">
-                  جمع سبد خرید
-                </p>
+                <p className="text-sm text-gray-600">جمع سبد خرید</p>
                 <p className="text-gray-600 font-bold">
                   {total_price.toLocaleString("fa")} تومان
                 </p>
@@ -122,4 +120,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default ShoppingCart;
