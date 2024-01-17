@@ -3,7 +3,6 @@ import React from "react";
 import { LuPencilLine } from "react-icons/lu";
 import { AiOutlineHome } from "react-icons/ai";
 import { FaRegHeart } from "react-icons/fa";
-import { FaRegComment } from "react-icons/fa";
 import { BsSignpost2 } from "react-icons/bs";
 import { GoPerson } from "react-icons/go";
 import { RxExit } from "react-icons/rx";
@@ -16,7 +15,7 @@ type IconsType = {
   [key: string]: JSX.Element;
 };
 
-export let links = {
+let links = {
   "خلاصه فعالیت ها": "/profile",
   "لیست های من": "/profile/lists",
   "آدرس ها": "/profile/addresses",
@@ -24,7 +23,7 @@ export let links = {
   خروج: "/",
 };
 
-export let icons: IconsType = {
+let icons: IconsType = {
   "خلاصه فعالیت ها": <AiOutlineHome size={22} />,
   "لیست های من": <FaRegHeart size={22} />,
   "آدرس ها": <BsSignpost2 size={22} />,

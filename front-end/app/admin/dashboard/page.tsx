@@ -62,9 +62,7 @@ const Dashboard = () => {
           className="md:col-span-2 lg:col-span-2 xl:col-span-3 h-[22rem] rounded-lg bg-white dark:bg-dark-bg shadow-md flex justify-center items-center"
           dir="ltr"
         >
-          <MyResponsiveLine
-            textColor={theme == "dark" ? "#ffffff" : "#000000"}
-          />
+          <MyResponsiveLine />
         </div>
       </div>
     </div>

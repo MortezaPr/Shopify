@@ -35,7 +35,7 @@ const mydata = [
 ];
 
 // you'll often use just a few of them.
-export const MyResponsivePie = ({ textColor }) => (
+export const MyResponsivePie = ({ textColor }: { textColor: string }) => (
   <ResponsivePie
     data={mydata}
     margin={{ top: 50, right: 58, bottom: 50, left: 58 }}
@@ -331,7 +331,7 @@ const newData = [
   },
 ];
 
-export const MyResponsiveLine = ({ textColor }) => (
+export const MyResponsiveLine = ({ }) => (
   <ResponsiveLine
     data={newData}
     margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
