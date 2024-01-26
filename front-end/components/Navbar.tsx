@@ -22,7 +22,6 @@ import { TbLogin } from "react-icons/tb";
 import { RiHome2Fill } from "react-icons/ri";
 import { FaRegHeart } from "react-icons/fa";
 import { PiShoppingCartSimpleFill } from "react-icons/pi";
-import { FaRegComment } from "react-icons/fa";
 import { GoPersonFill, GoTriangleDown, GoPerson } from "react-icons/go";
 import { RxExit } from "react-icons/rx";
 import { IoPersonOutline } from "react-icons/io5";

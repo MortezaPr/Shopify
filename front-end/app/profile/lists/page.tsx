@@ -1,13 +1,23 @@
+"use client";
 import React from "react";
 import { IoArrowForward } from "react-icons/io5";
 import Link from "next/link";
 import Image from "next/image";
 import heart from "@/public/images/heart.png";
+import useLikedItems from "@/hooks/useLikedItems";
+import getPhones from "@/actions/getPhones";
 
 const lg_class =
   "shadow-sm border-[1.5px] border-gray-200 dark:border-none col-span-5 rounded-lg";
 
-const page = () => {
+const getLikedItems = (likes, phones) => {
+  return phones.filter((phone) => likes.includes(phone.id));
+};
+
+const Lists = () => {
+  const { likes } = useLikedItems();
+  const phones = getPhones();
+  let likeItems = getLikedItems(likes, phones);
   return (
     <div
       className={`h-screen lg:h-auto lg:mx-0 lg:mt-0 bg-[#f1f5f7] dark:bg-darker-user flex flex-col lg:${lg_class} lg:bg-white lg:dark:bg-dark-user`}
@@ -27,21 +37,78 @@ const page = () => {
         <div className="hidden lg:block h-[2px] w-[5.5rem] rounded-xl bg-my-purple mt-2"></div>
       </div>
 
-      <div className="hidden lg:block">
-        <div className="h-80 flex flex-col justify-center items-center">
-          <Image src={heart} alt="lists" width={120} height={120} />
-          <p>لیستی موجود نیست!</p>
+      {likes.length == 0 ? (
+        <div className="hidden lg:block">
+          <div className="h-80 flex flex-col justify-center items-center">
+            <Image src={heart} alt="lists" width={120} height={120} />
+            <p>لیستی موجود نیست!</p>
+          </div>
         </div>
-      </div>
-
+      ) : (
+        <div className="h-80 hidden lg:grid lg:grid-cols-2 xl:grid-cols-3 place-items-center">
+          {likeItems.map((likedItem) => (
+            <Link
+              href={`/product/${likedItem.slug}`}
+              className="pt-10 pr-10 flex"
+              key={likedItem.id}
+            >
+              <div className="w-64 h-[19rem] border-slate-200 dark:border-neutral-800 border-2 rounded-lg">
+                <div className="flex justify-center pt-2">
+                  <Image
+                    src={likedItem.pic}
+                    alt="image"
+                    width={160}
+                    height={160}
+                  />
+                </div>
+                <p className="pt-5 px-7 text-sm max-w-[20rem] overflow-hidden line-clamp-2">
+                  {likedItem.title}
+                </p>
+                <p className="flex justify-center text-sm pt-4">
+                  {likedItem.price.toLocaleString("fa")} تومان
+                </p>
+              </div>
+            </Link>
+          ))}
+        </div>
+      )}
       <div className="lg:hidden h-screen mt-3 bg-white dark:bg-dark-user pt-5 pr-5">
-        <div className="h-80 flex flex-col justify-center items-center">
-          <Image src={heart} alt="lists" width={120} height={120} />
-          <p>لیستی موجود نیست!</p>
-        </div>
+        {likes.length == 0 ? (
+          <div className="h-80 flex flex-col justify-center items-center">
+            <Image src={heart} alt="lists" width={120} height={120} />
+            <p>لیستی موجود نیست!</p>
+          </div>
+        ) : (
+          <div className="h-80 lg:hidden grid sm:grid-cols-1 md:grid-cols-2 place-items-center">
+            {likeItems.map((likedItem) => (
+              <Link
+                href={`/product/${likedItem.slug}`}
+                className="pt-10 pr-10 flex"
+                key={likedItem.id}
+              >
+                <div className="w-64 h-[17rem] border-slate-200 dark:border-neutral-800 border-2 rounded-lg">
+                  <div className="flex justify-center pt-2">
+                    <Image
+                      src={likedItem.pic}
+                      alt="image"
+                      width={120}
+                      height={120}
+                    />
+                  </div>
+                  <p className="pt-5 px-7 text-sm max-w-[20rem] overflow-hidden line-clamp-2">
+                    {likedItem.title}
+                  </p>
+                  <p className="flex justify-center text-sm pt-4">
+                    {likedItem.price.toLocaleString("fa")} تومان
+                  </p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
 };
 
-export default page;
+export default Lists;

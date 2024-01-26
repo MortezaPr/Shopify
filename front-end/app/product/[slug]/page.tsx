@@ -5,9 +5,13 @@ import { Button } from "@/components/ui/button";
 import useCart from "@/hooks/useCart";
 import useGetBySlug from "@/hooks/useGetBySlug";
 import { useState } from "react";
+import { FaRegHeart } from "react-icons/fa";
+import { FaHeart } from "react-icons/fa6";
+import useLikedItems from "@/hooks/useLikedItems";
 
 const Product = ({ params }: { params: { slug: string } }) => {
   const { addItem, items, removeItem } = useCart();
+  const { likes, addLikedItem, removeLikedItem } = useLikedItems();
   const itemData = useGetBySlug(params.slug);
   const item = { ...itemData, count: 1 };
   const itemToAdd = item;
@@ -15,7 +19,6 @@ const Product = ({ params }: { params: { slug: string } }) => {
   const [isItemInCart, setIsItemInCart] = useState(
     items.some((item) => item.id === itemToAdd.id)
   );
-  
 
   const addToCart = () => {
     setIsItemInCart(true);
@@ -25,6 +28,19 @@ const Product = ({ params }: { params: { slug: string } }) => {
   const remove = (id: number) => {
     setIsItemInCart(false);
     removeItem(id);
+  };
+
+  const isLiked = (id: number) => {
+    return likes.includes(id);
+  };
+
+  const handleLike = (id: number) => {
+    console.log("sad");
+    if (likes.includes(id)) {
+      removeLikedItem(id);
+    } else {
+      addLikedItem(id);
+    }
   };
 
   return (
@@ -41,27 +57,42 @@ const Product = ({ params }: { params: { slug: string } }) => {
             <p className="max-w-[30rem] overflow-hidden line-clamp-2 leading-7 text-sm font-bold">
               {item.title}
             </p>
+            <div></div>
             <div className="flex gap-3">
               <div className="w-5 h-5 rounded-full bg-black"></div>
               <p className="text-gray-500">{item.color}</p>
             </div>
-            {!isItemInCart ? (
-              <Button
-                data-testid="add-to-cart-button"
-                className="text-sm font-bold w-36"
-                onClick={() => addToCart()}
+            <div className="flex items-center justify-between">
+              <div
+                onClick={() => handleLike(item.id)}
+                className="cursor-pointer"
               >
-                افزودن به سبد خرید
-              </Button>
-            ) : (
-              <Button
-                variant="outline"
-                className="text-sm font-bold w-36"
-                onClick={() => remove(item.id)}
-              >
-                حذف از سبد خرید
-              </Button>
-            )}
+                {isLiked(item.id) ? (
+                  <div className="text-red-700">
+                    <FaHeart size={22} />
+                  </div>
+                ) : (
+                  <FaRegHeart size={22} />
+                )}
+              </div>
+              {!isItemInCart ? (
+                <Button
+                  data-testid="add-to-cart-button"
+                  className="text-sm font-bold w-36"
+                  onClick={() => addToCart()}
+                >
+                  افزودن به سبد خرید
+                </Button>
+              ) : (
+                <Button
+                  variant="outline"
+                  className="text-sm font-bold w-36"
+                  onClick={() => remove(item.id)}
+                >
+                  حذف از سبد خرید
+                </Button>
+              )}
+            </div>
           </div>
         </div>
       </div>
