@@ -1,23 +1,30 @@
 "use client";
 import React from "react";
 import Image from "next/image";
-import iphone from "@/public/images/iphone.webp";
 import { Button } from "@/components/ui/button";
 import useCart from "@/hooks/useCart";
+import useGetBySlug from "@/hooks/useGetBySlug";
+import { useState } from "react";
 
-const Product = () => {
-  const { addItem } = useCart();
-  const item = {
-    title:
-      "گوشی موبایل اپل مدل آیفون 13 پرو مکس نات اکتیو TH/A (A2643) تک سیم کارت ظرفیت 256 گیگابایت رم 6 گیگابایت",
-    price: 54400000,
-    color: "مشکی",
-    count: 1,
-    pic: iphone,
-    id: 1,
-  };
+const Product = ({ params }: { params: { slug: string } }) => {
+  const { addItem, items, removeItem } = useCart();
+  const itemData = useGetBySlug(params.slug);
+  const item = { ...itemData, count: 1 };
+  const itemToAdd = item;
+
+  const [isItemInCart, setIsItemInCart] = useState(
+    items.some((item) => item.id === itemToAdd.id)
+  );
+  
+
   const addToCart = () => {
-    addItem({ ...item, pic: item.pic.src });
+    setIsItemInCart(true);
+    addItem({ ...item });
+  };
+
+  const remove = (id: number) => {
+    setIsItemInCart(false);
+    removeItem(id);
   };
 
   return (
@@ -38,13 +45,23 @@ const Product = () => {
               <div className="w-5 h-5 rounded-full bg-black"></div>
               <p className="text-gray-500">{item.color}</p>
             </div>
-            <Button
-              data-testid="add-to-cart-button"
-              className="text-base font-bold w-36"
-              onClick={() => addToCart()}
-            >
-              افزودن به سبد خرید
-            </Button>
+            {!isItemInCart ? (
+              <Button
+                data-testid="add-to-cart-button"
+                className="text-sm font-bold w-36"
+                onClick={() => addToCart()}
+              >
+                افزودن به سبد خرید
+              </Button>
+            ) : (
+              <Button
+                variant="outline"
+                className="text-sm font-bold w-36"
+                onClick={() => remove(item.id)}
+              >
+                حذف از سبد خرید
+              </Button>
+            )}
           </div>
         </div>
       </div>

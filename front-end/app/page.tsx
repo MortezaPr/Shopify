@@ -2,63 +2,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRef } from "react";
-import iphone from "@/public/images/iphone.webp";
-import xiaomi from "@/public/images/xiaomei.webp";
-import samsung from "@/public/images/samsung.webp";
-import iphone2 from "@/public/images/iphone2.webp";
-import samsung2 from "@/public/images/samsung2.webp";
+import getPhones from "@/actions/getPhones";
+
 import { IoIosArrowForward } from "react-icons/io";
 import { IoIosArrowBack } from "react-icons/io";
 
 export default function Home() {
-  const phones = [
-    {
-      pic: iphone,
-      title: "گوشی موبایل اپل مدل آیفون 13 پرو مکس نات اکتیو TH/A (A2643) تک سیم کارت ظرفیت 256 گیگابایت رم 6 گیگابایت",
-      price: 85000000,
-      id: 1,
-      link: "/",
-    },
-    {
-      pic: xiaomi,
-      title: "گوشی موبايل شیائومی 13Ultra 5G ظرفیت 512 گیگابایت رم 16 گیگابایت",
-      price: 52351000,
-      id: 2,
-      link: "/",
-    },
-    {
-      pic: samsung,
-      title:
-        "گوشی موبايل شیائومی گوشی موبایل سامسونگ گلکسی S23 Ultra 5G ظرفیت 256 گیگابایت رم 12 گیگابایت",
-      price: 47299000,
-      id: 3,
-      link: "/",
-    },
-    {
-      pic: iphone2,
-      title:
-        "گوشی موبایل اپل مدل iPhone 13 CH/A Not Active ظرفیت 128 گیگابایت - رم 4 گیگابایت",
-      price: 35073000,
-      id: 4,
-      link: "/",
-    },
-    {
-      pic: iphone2,
-      title:
-        "گوشی موبایل اپل مدل iPhone 13 CH/A Not Active ظرفیت 128 گیگابایت - رم 4 گیگابایت",
-      price: 35073000,
-      id: 5,
-      link: "/",
-    },
-    {
-      pic: samsung2,
-      title:
-        "گوشی موبايل سامسونگ مدل Galaxy Z Fold5 5G ظرفیت 512 گیگابایت رم 12 گیگابایت",
-      price: 69300000,
-      id: 6,
-      link: "/",
-    },
-  ];
+  const phones = getPhones();
 
   const scrollContainer = useRef(null);
 
@@ -102,7 +52,7 @@ export default function Home() {
           >
             {phones.map((phone, index) => (
               <Link
-                href={phone.link}
+                href={`/product/${phone.slug}`}
                 className="pt-10 pr-10 flex"
                 key={phone.id}
               >
