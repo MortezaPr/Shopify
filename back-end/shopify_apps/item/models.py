@@ -24,3 +24,4 @@ class Laptop(Item):
     ram = models.CharField(max_length=32, null=True, blank=True)
     internal_memory = models.CharField(max_length=32, null=True, blank=True)
     GPU = models.CharField(max_length=32, null=True, blank=True)
+    description = models.TextField(max_length=128, null=True, blank=True)
