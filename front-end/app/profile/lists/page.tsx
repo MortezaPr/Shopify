@@ -7,9 +7,6 @@ import heart from "@/public/images/heart.png";
 import useLikedItems from "@/hooks/useLikedItems";
 import getPhones from "@/actions/getPhones";
 
-const lg_class =
-  "shadow-sm border-[1.5px] border-gray-200 dark:border-none col-span-5 rounded-lg";
-
 const getLikedItems = (likes, phones) => {
   return phones.filter((phone) => likes.includes(phone.id));
 };
@@ -20,7 +17,7 @@ const Lists = () => {
   let likeItems = getLikedItems(likes, phones);
   return (
     <div
-      className={`h-screen lg:h-auto lg:mx-0 lg:mt-0 bg-[#f1f5f7] dark:bg-darker-user flex flex-col lg:${lg_class} lg:bg-white lg:dark:bg-dark-user`}
+      className={`h-screen lg:h-auto lg:mx-0 lg:mt-0 bg-[#f1f5f7] dark:bg-darker-user flex flex-col lg:shadow-sm lg:border-[1.5px] lg:border-gray-200 lg:dark:border-none lg:col-span-5 lg:rounded-lg lg:bg-white lg:dark:bg-dark-user`}
     >
       <div className="lg:hidden bg-white dark:bg-dark-user flex items-center gap-3 pr-5">
         <Link href={"/profile"}>
@@ -31,12 +28,10 @@ const Lists = () => {
           <h2 className="py-5 text-base">لیست های من</h2>
         </div>
       </div>
-
       <div className="hidden lg:block pr-5">
         <h1 className="pt-5 text-lg">لیست های من</h1>
         <div className="hidden lg:block h-[2px] w-[5.5rem] rounded-xl bg-my-purple mt-2"></div>
       </div>
-
       {likes.length == 0 ? (
         <div className="hidden lg:block">
           <div className="h-80 flex flex-col justify-center items-center">
@@ -45,7 +40,7 @@ const Lists = () => {
           </div>
         </div>
       ) : (
-        <div className="h-80 hidden lg:grid lg:grid-cols-2 xl:grid-cols-3 place-items-center">
+        <div className="h-auto hidden lg:grid lg:grid-cols-2 xl:grid-cols-3 place-items-center">
           {likeItems.map((likedItem) => (
             <Link
               href={`/product/${likedItem.slug}`}
@@ -72,14 +67,14 @@ const Lists = () => {
           ))}
         </div>
       )}
-      <div className="lg:hidden h-screen mt-3 bg-white dark:bg-dark-user pt-5 pr-5">
+      <div className="lg:hidden h-auto mt-3 bg-white dark:bg-dark-user pt-5 pr-5">
         {likes.length == 0 ? (
-          <div className="h-80 flex flex-col justify-center items-center">
+          <div className="h-[40rem] flex flex-col justify-center items-center">
             <Image src={heart} alt="lists" width={120} height={120} />
             <p>لیستی موجود نیست!</p>
           </div>
         ) : (
-          <div className="h-80 lg:hidden grid sm:grid-cols-1 md:grid-cols-2 place-items-center">
+          <div className="lg:hidden grid sm:grid-cols-1 md:grid-cols-2 place-items-center">
             {likeItems.map((likedItem) => (
               <Link
                 href={`/product/${likedItem.slug}`}
@@ -106,6 +101,7 @@ const Lists = () => {
             ))}
           </div>
         )}
+        <div className="pb-28"></div>
       </div>
     </div>
   );

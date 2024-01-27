@@ -43,7 +43,7 @@ export default function ProfileLayout({
       <div
         className={`${
           pathname == "/profile" ? "" : "hidden lg:flex lg:flex-col"
-        } bg-white h-[35rem] lg:h-auto dark:bg-dark-user shadow-sm border-[1.5px] border-gray-200 dark:border-none lg:rounded-lg col-span-2`}
+        } bg-white h-[35rem] dark:bg-dark-user shadow-sm border-[1.5px] border-gray-200 dark:border-none lg:rounded-lg col-span-2`}
       >
         <div className="pt-5 px-5 flex justify-between">
           <div className="flex flex-col gap-1">
