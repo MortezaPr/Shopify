@@ -28,16 +28,6 @@ const Login = () => {
     console.log(data);
   };
 
-  const buttonStyle = {
-    backgroundColor: "#5664d2",
-    fontFamily: "VazirFont",
-    width: "320px",
-    padding: "10px",
-    fontWeight: "bold",
-    fontSize: "1.1rem",
-    borderRadius: "10px",
-  };
-
   return (
     <div>
       <div className="hidden md:flex justify-end pl-10 pt-5 ">
@@ -68,7 +58,7 @@ const Login = () => {
                 <input
                   {...field}
                   type="text"
-                  placeholder="   نام کاربری"
+                  placeholder=" ایمیل"
                   className="p-2 rounded-md border border-slate-400 dark:border-none outline-none focus:outline-my-purple focus:border-none dark:text-white dark:bg-darker-bg w-80"
                 />
               )}
