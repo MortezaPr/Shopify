@@ -4,14 +4,15 @@ import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { MdVisibility, MdVisibilityOff } from "react-icons/md";
 import DarkMode from "../components/ThemeToggle";
-import { Roboto } from "next/font/google";
+import { Poppins } from "next/font/google";
+import login from "@/actions/adminLogin";
 
 type FormData = {
-  username: string;
+  email: string;
   password: string;
 };
 
-const roboto = Roboto({
+const poppins = Poppins({
   weight: "700",
   subsets: ["latin"],
 });
@@ -25,7 +26,7 @@ const Login = () => {
   const { control, handleSubmit } = useForm<FormData>();
 
   const onSubmit: SubmitHandler<FormData> = (data) => {
-    console.log(data);
+   login(data.email, data.password)
   };
 
   return (
@@ -40,7 +41,7 @@ const Login = () => {
           </div>
           <div className="flex flex-col items-center">
             <p
-              className={`${roboto.className} pt-10 font-bold text-5xl text-my-purple`}
+              className={`${poppins.className} pt-10 font-bold text-5xl text-my-purple`}
             >
               Shopify
             </p>
@@ -51,7 +52,7 @@ const Login = () => {
             onSubmit={handleSubmit(onSubmit)}
           >
             <Controller
-              name="username"
+              name="email"
               control={control}
               defaultValue=""
               render={({ field }) => (
