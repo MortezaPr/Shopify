@@ -1,5 +1,5 @@
 async function login(email: string, password: string) {
-  const response = await fetch("http://localhost:8000/users/token", {
+  const response = await fetch("http://localhost:8000/users/token/", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -10,7 +10,6 @@ async function login(email: string, password: string) {
     throw new Error(`HTTP error! status: ${response.status}`);
   }
   const data = await response.json();
-  console.log(data);
   return data;
 }
 

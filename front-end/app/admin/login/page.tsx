@@ -6,6 +6,7 @@ import { MdVisibility, MdVisibilityOff } from "react-icons/md";
 import DarkMode from "../components/ThemeToggle";
 import { Poppins } from "next/font/google";
 import login from "@/actions/adminLogin";
+import { useRouter } from "next/navigation";
 
 type FormData = {
   email: string;
@@ -18,6 +19,7 @@ const poppins = Poppins({
 });
 
 const Login = () => {
+  const router = useRouter();
   const [isVisible, setIsVisible] = useState(false);
 
   const handleVisibility = () => {
@@ -25,8 +27,11 @@ const Login = () => {
   };
   const { control, handleSubmit } = useForm<FormData>();
 
-  const onSubmit: SubmitHandler<FormData> = (data) => {
-   login(data.email, data.password)
+  const onSubmit: SubmitHandler<FormData> = async (data) => {
+    let { refresh, access } = await login(data.email, data.password);
+    localStorage.setItem("accessToken", access);
+    localStorage.setItem("refreshToken", refresh);
+    router.push("/admin/dashboard");
   };
 
   return (
