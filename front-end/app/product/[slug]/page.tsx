@@ -15,7 +15,6 @@ const Product = ({ params }: { params: { slug: string } }) => {
   const itemData = useGetBySlug(params.slug);
   const item = { ...itemData, count: 1 };
   const itemToAdd = item;
-
   const [isItemInCart, setIsItemInCart] = useState(
     items.some((item) => item.id === itemToAdd.id)
   );
@@ -51,7 +50,12 @@ const Product = ({ params }: { params: { slug: string } }) => {
       >
         <div className="flex pt-14 lg:pr-8">
           <div>
-            <Image src={item.pic} width={150} height={150} alt="pic" />
+            <Image
+              src={item.pic ?? "/path/to/fallback-image.jpg"}
+              width={150}
+              height={150}
+              alt="pic"
+            />
           </div>
           <div className="flex flex-col gap-4 pr-5 pl-5 lg:pl-0">
             <p className="max-w-[30rem] overflow-hidden line-clamp-2 leading-7 text-sm font-bold">
@@ -68,7 +72,7 @@ const Product = ({ params }: { params: { slug: string } }) => {
                 className="cursor-pointer"
               >
                 {isLiked(item.id) ? (
-                  <div className="text-red-700">
+                  <div className="text-[#ef3a4f]">
                     <FaHeart size={22} />
                   </div>
                 ) : (

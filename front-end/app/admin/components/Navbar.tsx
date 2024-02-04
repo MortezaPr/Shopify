@@ -3,7 +3,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { CgMenuRightAlt } from "react-icons/cg";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { FiSettings } from "react-icons/fi";
-import DarkMode from "./ThemeToggle";
+import ThemeToggle from "../../../components/ThemeToggle";
 import { links, icons } from "./LinksAndIcons";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -56,7 +56,9 @@ const Navbar = () => {
                   <Link href={value}>
                     <div
                       className={`flex justify-center items-center gap-3 ${
-                        !(pathname == value) ? "hover:bg-gray-100 dark:hover:bg-darker-bg w-64 py-2 rounded-lg" : ""
+                        !(pathname == value)
+                          ? "hover:bg-gray-100 dark:hover:bg-darker-bg w-64 py-2 rounded-lg"
+                          : ""
                       }`}
                     >
                       {icons[key]}
@@ -70,7 +72,7 @@ const Navbar = () => {
         </div>
       )}
       <div className="flex items-center gap-3">
-        <DarkMode />
+        <ThemeToggle />
         <div
           onClick={() => router.push("/admin/settings")}
           className="text-darker-bg dark:text-white"

@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { MdVisibility, MdVisibilityOff } from "react-icons/md";
-import DarkMode from "../components/ThemeToggle";
+import ThemeToggle from "../../../components/ThemeToggle";
 import { Poppins } from "next/font/google";
 import login from "@/actions/adminLogin";
 import { useRouter } from "next/navigation";
@@ -37,12 +37,12 @@ const Login = () => {
   return (
     <div>
       <div className="hidden md:flex justify-end pl-10 pt-5 ">
-        <DarkMode />
+        <ThemeToggle />
       </div>
       <div className="h-screen flex justify-center items-center">
         <div className="bg-white dark:bg-dark-bg shadow-xl h-full w-full md:h-[450px] md:w-96 md:rounded-2xl flex flex-col items-center">
           <div className="md:hidden pt-3 w-full flex justify-end pl-3">
-            <DarkMode />
+            <ThemeToggle />
           </div>
           <div className="flex flex-col items-center">
             <p

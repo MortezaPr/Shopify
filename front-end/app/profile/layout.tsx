@@ -10,12 +10,13 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { IoIosArrowBack } from "react-icons/io";
 
-
 type IconsType = {
   [key: string]: JSX.Element;
 };
 
-let links = {
+type Links = Record<string, string>;
+
+let links: Links = {
   "خلاصه فعالیت ها": "/profile",
   "لیست های من": "/profile/lists",
   "آدرس ها": "/profile/addresses",
@@ -61,7 +62,11 @@ export default function ProfileLayout({
           <ul key={key}>
             <Link
               href={value}
-              className="flex justify-between items-center pl-7 hover:bg-gray-100 dark:hover:bg-darker-user"
+              className={`flex justify-between items-center pl-7 ${
+                pathname == links[key]
+                  ? "text-primary font-bold"
+                  : "hover:bg-gray-100 dark:hover:bg-darker-user"
+              } `}
             >
               <div className="flex items-center gap-3 pr-5 py-5">
                 <div className="">{icons[key]}</div>

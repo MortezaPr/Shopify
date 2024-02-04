@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Poppins } from "next/font/google";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import DarkMode from "@/app/admin/components/ThemeToggle";
+import ThemeToggle from "@/components/ThemeToggle";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -201,7 +201,7 @@ const Navbar = () => {
             >
               <FiShoppingCart size={22} />
             </Link>
-            <DarkMode />
+            <ThemeToggle />
           </div>
         </div>
       </div>

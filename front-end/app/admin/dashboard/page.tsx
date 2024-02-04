@@ -5,7 +5,7 @@ import { BsFillPeopleFill, BsFillBoxFill } from "react-icons/bs";
 import Box from "../components/Box";
 import { MyResponsivePie, MyResponsiveLine } from "../components/Charts";
 import useSidebarToggle from "@/hooks/useSidebarToggle";
-import useTheme from "@/hooks/useTheme";
+import { useTheme } from "next-themes";
 
 const Dashboard = () => {
   const earning = 120000;
@@ -14,7 +14,7 @@ const Dashboard = () => {
   const products = 4396;
 
   const { isOpen } = useSidebarToggle();
-  const { theme } = useTheme();
+  const { setTheme, resolvedTheme } = useTheme();
 
   return (
     <div className="flex flex-col justify-center items-center">
@@ -55,7 +55,7 @@ const Dashboard = () => {
           dir="ltr"
         >
           <MyResponsivePie
-            textColor={theme == "dark" ? "#ffffff" : "#000000"}
+            textColor={resolvedTheme == "dark" ? "#ffffff" : "#000000"}
           />
         </div>
         <div
