@@ -1,7 +1,7 @@
 type Laptop = {
-  title: string;
+  name: string;
   price: number;
-  picture: string;
+  image: string;
   description: string;
   processor: string;
   ram: string;

@@ -17,19 +17,19 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Textarea } from "@/components/ui/textarea";
 import useSidebarToggle from "@/hooks/useSidebarToggle";
 import { useState } from "react";
-import { useForm, Controller, SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import Forms from "./utils/Forms";
 
 const Products = () => {
   const [selectedValue, setSelectedValue] = useState("phone");
   const { isOpen } = useSidebarToggle();
   type Inputs = {
-    title: string;
+    name: string;
     price: number;
-    picture: string;
+    image: string;
     resolution: string;
-    screenTech: string;
-    osVersion: string;
+    screen_tech: string;
+    os_version: string;
     size: string;
     processor: string;
     ram: string;
@@ -93,14 +93,14 @@ const Products = () => {
               </div>
 
               <div className="flex items-center gap-5">
-                <Label htmlFor="title" className="text-right">
+                <Label htmlFor="name" className="text-right">
                   * نام محصول
                 </Label>
                 <Input
                   className="w-96"
                   // value={title}
                   // onChange={(e) => setTitle(e.target.value)}
-                  {...register("title")}
+                  {...register("name")}
                 />
               </div>
               <div className="flex items-center gap-5">
@@ -110,12 +110,12 @@ const Products = () => {
                 <Input className="w-52" {...register("price")} />
               </div>
               <div className="flex items-center gap-5">
-                <Label htmlFor="picture">تصویر محصول</Label>
+                <Label htmlFor="image">تصویر محصول</Label>
                 <Input
-                  id="picture"
+                  id="image"
                   type="file"
                   className="w-52 border cursor-pointer py-2"
-                  {...register("picture")}
+                  {...register("image")}
                 />
               </div>
               {selectedValue === "phone"

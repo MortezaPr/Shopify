@@ -2,7 +2,6 @@
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
-
 const Forms = (form: string, register: any) => {
   if (form == "phone") {
     return (
@@ -14,16 +13,20 @@ const Forms = (form: string, register: any) => {
           <Input id="resolution" className="w-64" {...register("resolution")} />
         </div>
         <div className="flex items-center gap-5">
-          <Label htmlFor="screenTech" className="text-right">
+          <Label htmlFor="screen_tech" className="text-right">
             تکنولوژی صفحه نمایش
           </Label>
-          <Input id="screenTech" className="w-64" {...register("screenTech")} />
+          <Input
+            id="screen_tech"
+            className="w-64"
+            {...register("screen_tech")}
+          />
         </div>
         <div className="flex items-center gap-5">
-          <Label htmlFor="osVersion" className="text-right">
+          <Label htmlFor="os_version" className="text-right">
             نسخه سیستم عامل
           </Label>
-          <Input id="osVersion" className="w-64" {...register("osVersion")} />
+          <Input id="os_version" className="w-64" {...register("os_version")} />
         </div>
         <div className="flex items-center gap-5">
           <Label htmlFor="size" className="text-right">

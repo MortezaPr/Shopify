@@ -6,21 +6,33 @@ import { useRef } from "react";
 
 import { IoIosArrowForward } from "react-icons/io";
 import { IoIosArrowBack } from "react-icons/io";
+import Phone from "@/types/Phone";
 
-const Card = ({ phones }) => {
+type CardProps = {
+  phones: Phone[];
+};
+
+const Card: React.FC<CardProps> = ({ phones }) => {
   const scrollContainer = useRef(null);
 
   const scrollLeft = () => {
     if (scrollContainer.current) {
-      (scrollContainer.current as HTMLDivElement).scrollLeft -= 210;
+      (scrollContainer.current as HTMLDivElement).scrollTo({
+        left: (scrollContainer.current as HTMLDivElement).scrollLeft - 210,
+        behavior: "smooth",
+      });
     }
   };
 
   const scrollRight = () => {
     if (scrollContainer.current) {
-      (scrollContainer.current as HTMLDivElement).scrollLeft += 210;
+      (scrollContainer.current as HTMLDivElement).scrollTo({
+        left: (scrollContainer.current as HTMLDivElement).scrollLeft + 210,
+        behavior: "smooth",
+      });
     }
   };
+
   return (
     <div>
       <div className="flex justify-center pt-40">
@@ -56,14 +68,14 @@ const Card = ({ phones }) => {
                 <div className="w-64 h-[19rem] border-slate-200 dark:border-neutral-800 border-2 rounded-lg">
                   <div className="flex justify-center pt-2">
                     <Image
-                      src={phone.pic}
+                      src={phone.image}
                       alt="image"
                       width={160}
                       height={160}
                     />
                   </div>
                   <p className="pt-5 px-7 text-sm max-w-[20rem] overflow-hidden line-clamp-2">
-                    {phone.title}
+                    {phone.name}
                   </p>
                   <p className="flex justify-center text-sm pt-4">
                     {phone.price.toLocaleString("fa")} تومان

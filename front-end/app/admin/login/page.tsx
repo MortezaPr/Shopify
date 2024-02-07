@@ -29,8 +29,16 @@ const Login = () => {
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     let { refresh, access } = await login(data.email, data.password);
+
     localStorage.setItem("accessToken", access);
     localStorage.setItem("refreshToken", refresh);
+
+    document.cookie = `access_token=${access}; path=/; HttpOnly; Secure; SameSite=Strict`;
+    document.cookie = `refresh_token=${refresh}; path=/; HttpOnly; Secure; SameSite=Strict`;
+
+    const access_token = localStorage.getItem("accessToken");
+    console.log(access_token);
+
     router.push("/admin/dashboard");
   };
 

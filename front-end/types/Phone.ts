@@ -1,12 +1,14 @@
 type Phone = {
-  title: string;
+  name: string;
   price: number;
-  picture: string;
+  image: string;
   description: string;
   resolution: string;
-  screenTech: string;
-  osVersion: string;
+  screen_tech: string;
+  os_version: string;
   size: string;
+  id: number;
+  slug: string;
 };
 
 export default Phone;
