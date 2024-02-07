@@ -53,6 +53,22 @@ let phones = [
     id: 6,
     slug: "samsung2-adj",
   },
+  {
+    image: samsung2,
+    name: "گوشی موبايل سامسونگ مدل Galaxy Z Fold5 5G ظرفیت 512 گیگابایت رم 12 گیگابایت",
+    price: 69300000,
+    color: "مشکی",
+    id: 6,
+    slug: "samsung2-adj",
+  },
+  {
+    image: samsung2,
+    name: "گوشی موبايل سامسونگ مدل Galaxy Z Fold5 5G ظرفیت 512 گیگابایت رم 12 گیگابایت",
+    price: 69300000,
+    color: "مشکی",
+    id: 6,
+    slug: "samsung2-adj",
+  },
 ];
 
 //TODO instead of this function we should use a server to get data

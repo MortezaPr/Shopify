@@ -1,5 +1,5 @@
 import getPhones from "@/actions/getPhones";
-import Card from "@/components/Card";
+import Box from "@/components/Box";
 
 async function getPhonesFromServer() {
   const res = await fetch("http://localhost:8000/item/mobile/list", {
@@ -16,7 +16,7 @@ export default async function Home() {
 
   return (
     <main className="h-screen w-screen">
-      <Card phones={phones} />
+      <Box title={"موبایل های پر فروش"} items={phones} />
     </main>
   );
 }

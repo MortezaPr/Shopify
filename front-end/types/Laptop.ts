@@ -7,6 +7,8 @@ type Laptop = {
   ram: string;
   internalMemory: string;
   gpu: string;
+  id: number;
+  slug: string;
 };
 
 export default Laptop;
