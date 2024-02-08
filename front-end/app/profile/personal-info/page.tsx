@@ -79,7 +79,7 @@ const PersonalInfo = () => {
           <div className="flex">
             <InfoCard
               title="ایمیل"
-              value={phone_number}
+              value={email}
               myClass="border-l-0 border-t-0"
               InfoForm={
                 Forms("email", handleSubmit, register, handleSubmitForm) || (
@@ -89,7 +89,7 @@ const PersonalInfo = () => {
             />
             <InfoCard
               title="رمز عبور"
-              value={phone_number}
+              value={password}
               myClass="border-t-0"
               InfoForm={
                 Forms("password", handleSubmit, register, handleSubmitForm) || (
