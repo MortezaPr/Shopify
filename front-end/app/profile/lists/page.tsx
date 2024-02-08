@@ -50,14 +50,14 @@ const Lists = () => {
               <div className="w-64 h-[19rem] border-slate-200 dark:border-neutral-800 border-2 rounded-lg">
                 <div className="flex justify-center pt-2">
                   <Image
-                    src={likedItem.pic}
+                    src={likedItem.image}
                     alt="image"
                     width={160}
                     height={160}
                   />
                 </div>
                 <p className="pt-5 px-7 text-sm max-w-[20rem] overflow-hidden line-clamp-2">
-                  {likedItem.title}
+                  {likedItem.name}
                 </p>
                 <p className="flex justify-center text-sm pt-4">
                   {likedItem.price.toLocaleString("fa")} تومان

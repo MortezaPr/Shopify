@@ -64,7 +64,7 @@ export default function ProfileLayout({
               href={value}
               className={`flex justify-between items-center pl-7 ${
                 pathname == links[key]
-                  ? "text-primary font-bold"
+                  ? "text-primary text-lg font-bold"
                   : "hover:bg-gray-100 dark:hover:bg-darker-user"
               } `}
             >
