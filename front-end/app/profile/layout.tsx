@@ -68,7 +68,7 @@ export default function ProfileLayout({
                   : "hover:bg-gray-100 dark:hover:bg-darker-user"
               } `}
             >
-              <div className="flex items-center gap-3 pr-5 py-5">
+              <div className="flex items-center gap-3 pr-5 py-5 transition-all">
                 <div className="">{icons[key]}</div>
                 {key}
               </div>

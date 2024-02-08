@@ -84,7 +84,7 @@ const Card: React.FC<CardProps> = ({ title, items }) => {
                   </p>
                 </div>
                 {index !== items.length - 1 ? (
-                  <div className="h-[19rem] p-[1px] bg-slate-200 dark:bg-neutral-800 mr-10 mt-10"></div>
+                  <div className="h-[19rem] p-[1px] bg-slate-200 dark:bg-neutral-800 mr-10"></div>
                 ) : (
                   <div className="ml-10"></div>
                 )}
