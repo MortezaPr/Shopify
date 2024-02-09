@@ -15,7 +15,9 @@ const InfoCard: React.FC<InfoCardProps> = ({
   InfoForm,
 }) => {
   return (
-    <div className={`w-96 h-28 border-2 border-gray-300 ${myClass}`}>
+    <div
+      className={`w-96 h-28 border-2 border-gray-300 dark:dark:border-zinc-700 ${myClass}`}
+    >
       <div className="pt-3 pr-4 flex justify-between items-center">
         <div>
           <p className="text-gray-400">{title}</p>
@@ -28,7 +30,9 @@ const InfoCard: React.FC<InfoCardProps> = ({
               <LuPencilLine size={22} />
             </div>
           </DialogTrigger>
-          <DialogContent>{InfoForm}</DialogContent>
+          <DialogContent className="dark:bg-darker-user border-zinc-700">
+            {InfoForm}
+          </DialogContent>
         </Dialog>
       </div>
     </div>

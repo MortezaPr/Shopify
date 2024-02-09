@@ -14,13 +14,19 @@ const Forms = (
             <label htmlFor="name" className="text-right">
               نام :
             </label>
-            <Input className="w-60 py-2" {...register("first_name")} />
+            <Input
+              className="w-60 py-2 dark:bg-dark-user"
+              {...register("first_name")}
+            />
           </div>
           <div className="flex items-center gap-5">
             <label htmlFor="name" className="text-right">
               نام خانوادگی :
             </label>
-            <Input className="w-60 py-2" {...register("last_name")} />
+            <Input
+              className="w-60 py-2 dark:bg-dark-user"
+              {...register("last_name")}
+            />
           </div>
           <div className="flex justify-end mt-5">
             <button
@@ -41,7 +47,10 @@ const Forms = (
             <label htmlFor="name" className="text-right">
               شماره موبایل :
             </label>
-            <Input className="w-60 py-2" {...register("phone_number")} />
+            <Input
+              className="w-60 py-2 dark:bg-dark-user"
+              {...register("phone_number")}
+            />
           </div>
           <div className="flex justify-end mt-5">
             <button
@@ -62,7 +71,10 @@ const Forms = (
             <label htmlFor="name" className="text-right">
               ایمیل :
             </label>
-            <Input className="w-60 py-2" {...register("email")} />
+            <Input
+              className="w-60 py-2 dark:bg-dark-user"
+              {...register("email")}
+            />
           </div>
           <div className="flex justify-end mt-5">
             <button
@@ -83,20 +95,26 @@ const Forms = (
             <label htmlFor="name" className="text-right">
               رمز عبور قدیمی :
             </label>
-            <Input className="w-60 py-2" {...register("old_password")} />
+            <Input
+              className="w-60 py-2 dark:bg-dark-user"
+              {...register("old_password")}
+            />
           </div>
           <div className="flex items-center gap-5">
             <label htmlFor="name" className="text-right">
               رمز عبور جدید :
             </label>
-            <Input className="w-60 py-2" {...register("new_password")} />
+            <Input
+              className="w-60 py-2 dark:bg-dark-user"
+              {...register("new_password")}
+            />
           </div>
           <div className="flex items-center gap-5">
             <label htmlFor="name" className="text-right">
               تایید رمز عبور جدید :
             </label>
             <Input
-              className="w-60 py-2"
+              className="w-60 py-2 dark:bg-dark-user"
               {...register("new_password_confirmation")}
             />
           </div>
