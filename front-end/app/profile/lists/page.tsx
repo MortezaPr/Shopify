@@ -40,14 +40,14 @@ const Lists = () => {
           </div>
         </div>
       ) : (
-        <div className="h-auto hidden lg:grid lg:grid-cols-2 xl:grid-cols-3 place-items-center">
+        <div className="h-auto hidden lg:grid lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 mx-auto">
           {likeItems.map((likedItem) => (
             <Link
               href={`/product/${likedItem.slug}`}
-              className="pt-10 pr-10 flex"
+              className="mt-10 mr-10"
               key={likedItem.id}
             >
-              <div className="w-64 h-[19rem] border-slate-200 dark:border-neutral-800 border-2 rounded-lg">
+              <div className="lg:w-[calc(100vw-80vw)] xl:w-[calc(100vw-83vw)] 2xl:w-[calc(100vw-87vw)] h-[19rem] border-slate-200 dark:border-neutral-800 border-2 rounded-lg">
                 <div className="flex justify-center pt-2">
                   <Image
                     src={likedItem.image}
@@ -74,24 +74,24 @@ const Lists = () => {
             <p>لیستی موجود نیست!</p>
           </div>
         ) : (
-          <div className="lg:hidden grid sm:grid-cols-1 md:grid-cols-2 place-items-center">
+          <div className="lg:hidden grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 place-items-center">
             {likeItems.map((likedItem) => (
               <Link
                 href={`/product/${likedItem.slug}`}
-                className="pt-10 pr-10 flex"
+                className="mt-10"
                 key={likedItem.id}
               >
-                <div className="w-64 h-[17rem] border-slate-200 dark:border-neutral-800 border-2 rounded-lg">
-                  <div className="flex justify-center pt-2">
+                <div className="w-[calc(100vw-50vw)] sm:w-[calc(100vw-65vw)] md:w-[calc(100vw-75vw)] h-[19rem] sm:h-[17rem] border-slate-200 dark:border-neutral-800 border-2 rounded-lg">
+                  <div className="flex justify-center pt-5 sm:pt-2">
                     <Image
-                      src={likedItem.pic}
+                      src={likedItem.image}
                       alt="image"
                       width={120}
                       height={120}
                     />
                   </div>
-                  <p className="pt-5 px-7 text-sm max-w-[20rem] overflow-hidden line-clamp-2">
-                    {likedItem.title}
+                  <p className="pt-10 sm:pt-5 px-7 text-sm max-w-[20rem] overflow-hidden line-clamp-2">
+                    {likedItem.name}
                   </p>
                   <p className="flex justify-center text-sm pt-4">
                     {likedItem.price.toLocaleString("fa")} تومان

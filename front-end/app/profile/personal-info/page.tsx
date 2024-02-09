@@ -37,7 +37,7 @@ const PersonalInfo = () => {
     <div
       className={`h-screen lg:h-auto lg:mx-0 lg:mt-0 bg-[#f1f5f7] dark:bg-darker-user flex flex-col lg:${lg_class} lg:bg-white lg:dark:bg-dark-user`}
     >
-      <div className="xl:hidden bg-white dark:bg-dark-user flex items-center gap-3 pr-5">
+      <div className="lg:hidden bg-white dark:bg-dark-user flex items-center gap-3 pr-5">
         <Link href={"/profile"}>
           <IoArrowForward size={22} />
         </Link>
@@ -47,7 +47,7 @@ const PersonalInfo = () => {
         </div>
       </div>
 
-      <div className="hidden xl:block pr-5">
+      <div className="hidden lg:block pr-5">
         <h1 className="pt-5 text-lg">اطلاعات حساب کاربری</h1>
         <div className="hidden lg:block h-[2px] w-[5.5rem] rounded-xl bg-my-purple mt-2"></div>
       </div>

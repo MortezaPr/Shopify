@@ -58,7 +58,7 @@ let phones = [
     name: "گوشی موبايل سامسونگ مدل Galaxy Z Fold5 5G ظرفیت 512 گیگابایت رم 12 گیگابایت",
     price: 69300000,
     color: "مشکی",
-    id: 6,
+    id: 7,
     slug: "samsung2-adj",
   },
   {
@@ -66,7 +66,7 @@ let phones = [
     name: "گوشی موبايل سامسونگ مدل Galaxy Z Fold5 5G ظرفیت 512 گیگابایت رم 12 گیگابایت",
     price: 69300000,
     color: "مشکی",
-    id: 6,
+    id: 8,
     slug: "samsung2-adj",
   },
 ];
