@@ -1,5 +1,6 @@
 "use client";
 import { use, useState } from "react";
+import localFont from "next/font/local";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { Poppins } from "next/font/google";
@@ -11,15 +12,16 @@ import {
   MdKeyboardArrowLeft,
 } from "react-icons/md";
 
+const poppins = localFont({
+  src: "../assets/fonts/Poppins-Bold.ttf",
+  weight: "700",
+  style: "bold",
+});
+
 type FormData = {
   username: string;
   password: string;
 };
-
-const poppins = Poppins({
-  weight: "700",
-  subsets: ["latin"],
-});
 
 const Login = () => {
   const { control, handleSubmit } = useForm<FormData>();

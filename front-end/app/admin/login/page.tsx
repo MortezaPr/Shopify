@@ -4,7 +4,7 @@ import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { MdVisibility, MdVisibilityOff } from "react-icons/md";
 import ThemeToggle from "../../../components/ThemeToggle";
-import { Poppins } from "next/font/google";
+import localFont from "next/font/local";
 import login from "@/actions/adminLogin";
 import { useRouter } from "next/navigation";
 
@@ -13,9 +13,10 @@ type FormData = {
   password: string;
 };
 
-const poppins = Poppins({
+const poppins = localFont({
+  src: "../../assets/fonts/Poppins-Bold.ttf",
   weight: "700",
-  subsets: ["latin"],
+  style: "bold",
 });
 
 const Login = () => {

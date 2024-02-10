@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { Poppins } from "next/font/google";
+import localFont from "next/font/local";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import ThemeToggle from "@/components/ThemeToggle";
@@ -12,7 +12,6 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
@@ -27,6 +26,12 @@ import { RxExit } from "react-icons/rx";
 import { IoPersonOutline } from "react-icons/io5";
 import { BiHomeAlt2, BiSearch } from "react-icons/bi";
 import { MdKeyboardArrowLeft } from "react-icons/md";
+
+const poppins = localFont({
+  src: "../app/assets/fonts/Poppins-Bold.ttf",
+  weight: "700",
+  style: "bold",
+});
 
 type IconsType = {
   [key: string]: JSX.Element;
@@ -53,11 +58,6 @@ let fillIcons: IconsType = {
   "سبد خرید": <PiShoppingCartSimpleFill size={25} />,
   پروفایل: <GoPersonFill size={25} />,
 };
-
-const poppins = Poppins({
-  weight: "700",
-  subsets: ["latin"],
-});
 
 const Navbar = () => {
   const [searchValue, setSearchValue] = useState("");
@@ -89,7 +89,7 @@ const Navbar = () => {
   return (
     <div onClick={handleClick}>
       <div
-        className={`fixed z-50 bg-white dark:bg-dark-user bg-opacity-60 backdrop-blur-lg h-16 lg:h-24 shadow-sm ${
+        className={`fixed z-50 bg-white dark:bg-dark-user bg-opacity-60 backdrop-blur-lg h-16 lg:h-20 shadow-sm ${
           pathname.startsWith("/profile") ? "hidden lg:block" : ""
         }`}
       >
@@ -97,7 +97,7 @@ const Navbar = () => {
           <div className="flex items-center pt-2 lg:pt-4 lg:gap-5">
             <Link href={"/"}>
               <h1
-                className={`${poppins.className} text-my-purple font-extrabold text-4xl pr-10 hidden lg:flex`}
+                className={`${poppins.className} text-my-purple font-extrabold text-3xl pr-10 hidden lg:flex`}
               >
                 Shopify
               </h1>
@@ -108,12 +108,12 @@ const Navbar = () => {
                 type="text"
                 value={searchValue}
                 onChange={(e) => setSearchValue(e.target.value)}
-                className="w-[calc(100vw-15px)] lg:w-[35rem] border-none bg-gray-100 dark:bg-darker-user pr-14 flex"
+                className="w-[calc(100vw-15px)] lg:w-[35rem] border-none bg-gray-200 dark:bg-darker-user pr-14 flex h-12 py-0 caret-cyan-600 placeholder:text-gray-500"
                 placeholder="جستجو"
                 onClick={(e) => handleSearchClick(e)}
               />
               <div
-                className="text-gray-400 absolute top-3 right-3 cursor-pointer"
+                className="text-gray-400 absolute top-[0.85rem] right-5 cursor-pointer"
                 onClick={() => handleSearch(searchValue)}
               >
                 <BiSearch size={22} />
@@ -122,7 +122,7 @@ const Navbar = () => {
             {isSearching ? (
               <div
                 onClick={(e) => e.stopPropagation()}
-                className="absolute top-[4.5rem] lg:right-[12.5rem] bg-gray-100 dark:bg-darker-user w-full lg:w-[35rem] h-60 rounded-xl flex-col pr-5 pt-5"
+                className="absolute top-[4.5rem] lg:right-[11rem] bg-gray-100 dark:bg-darker-user w-full lg:w-[35.1rem] h-60 rounded-xl flex-col pr-5 pt-5"
               >
                 search results
               </div>
@@ -144,17 +144,17 @@ const Navbar = () => {
                       <GoTriangleDown />
                     </div>
                   </DropdownMenuTrigger>
-                  <DropdownMenuContent>
+                  <DropdownMenuContent className="dark:border-neutral-800">
                     <DropdownMenuItem className="flex p-2">
                       <Link
                         href={"/profile"}
                         className="flex gap-10 items-center p-2"
                       >
                         <MdKeyboardArrowLeft size={20} />
-                        مرتضی پوررمضان
+                        <div className="font-bold">مرتضی پوررمضان</div>
                       </Link>
                     </DropdownMenuItem>
-                    <DropdownMenuSeparator />
+                    <DropdownMenuSeparator className="bg-neutral-800" />
 
                     <DropdownMenuItem>
                       <Link

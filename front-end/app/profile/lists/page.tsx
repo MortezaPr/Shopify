@@ -81,7 +81,7 @@ const Lists = () => {
                 className="mt-10"
                 key={likedItem.id}
               >
-                <div className="w-[calc(100vw-50vw)] sm:w-[calc(100vw-65vw)] md:w-[calc(100vw-75vw)] h-[19rem] sm:h-[17rem] border-slate-200 dark:border-neutral-800 border-2 rounded-lg">
+                <div className="w-[calc(100vw-50vw)] sm:w-[calc(100vw-65vw)] md:w-[calc(100vw-75vw)] h-[19rem] sm:h-[15rem] border-slate-200 dark:border-neutral-800 border-2 rounded-lg">
                   <div className="flex justify-center pt-5 sm:pt-2">
                     <Image
                       src={likedItem.image}

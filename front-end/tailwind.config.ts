@@ -110,7 +110,17 @@ module.exports = {
         "zoom-in": "zoom-in",
         pointer: "pointer",
       },
+      boxShadow: {
+        my_shadow: "0px 0px 5px rgb(185, 185, 185)",
+        "dark:my_shadow": "0px 0px 5px rgb(55, 55, 55)",
+      },
+    },
+    variants: {
+      extend: {
+        boxShadow: ["dark"],
+      },
     },
   },
+
   plugins: [require("tailwindcss-animate")],
 };

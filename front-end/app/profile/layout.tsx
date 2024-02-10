@@ -40,7 +40,7 @@ export default function ProfileLayout({
   const pathname = usePathname();
 
   return (
-    <div className="lg:h-screen w-[calc(100vw-15px)] lg:w-screen flex flex-col-reverse lg:grid lg:grid-cols-7 gap-5 lg:pt-32 pb-20 lg:pb-10 lg:px-16 justify-center">
+    <div className="lg:h-screen w-[calc(100vw-15px)] lg:w-screen flex flex-col-reverse lg:grid lg:grid-cols-7 gap-5 lg:pt-28 pb-20 lg:pb-10 lg:px-16 justify-center">
       <div
         className={`${
           pathname == "/profile" ? "" : "hidden lg:flex lg:flex-col"
@@ -64,7 +64,7 @@ export default function ProfileLayout({
               href={value}
               className={`flex justify-between items-center pl-7 ${
                 pathname == links[key]
-                  ? "text-primary text-lg font-bold"
+                  ? "text-primary font-bold"
                   : "hover:bg-gray-100 dark:hover:bg-darker-user"
               } `}
             >
