@@ -56,12 +56,12 @@ const Products = () => {
     >
       <Dialog>
         <DialogTrigger asChild>
-          <Button className="flex justify-start text-white text-lg rounded-lg">
+          <Button className="flex justify-start text-white rounded-lg">
             اضافه کردن محصول
           </Button>
         </DialogTrigger>
 
-        <DialogContent className="sm:max-w-[725px]">
+        <DialogContent className="sm:max-w-[725px] max-h-[100vh] overflow-auto">
           <DialogHeader>
             <div className="flex justify-start pr-10">
               <DialogTitle className="text-xl">اطلاعات محصول</DialogTitle>
@@ -83,18 +83,18 @@ const Products = () => {
                 >
                   <div className="flex items-center space-x-2">
                     <RadioGroupItem value="laptop" id="r3" />
-                    <Label htmlFor="r3">لپتاپ</Label>
+                    <Label htmlFor="r3">لپتاپ:</Label>
                   </div>
                   <div className="flex items-center space-x-2">
                     <RadioGroupItem value="phone" id="r2" />
-                    <Label htmlFor="r2">موبایل</Label>
+                    <Label htmlFor="r2">موبایل:</Label>
                   </div>
                 </RadioGroup>
               </div>
 
               <div className="flex items-center gap-5">
                 <Label htmlFor="name" className="text-right">
-                  * نام محصول
+                  * نام محصول:
                 </Label>
                 <Input
                   className="w-96"
@@ -105,12 +105,12 @@ const Products = () => {
               </div>
               <div className="flex items-center gap-5">
                 <Label htmlFor="price" className="text-right">
-                  * قیمت (تومان)
+                  * قیمت (تومان):
                 </Label>
                 <Input className="w-52" {...register("price")} />
               </div>
               <div className="flex items-center gap-5">
-                <Label htmlFor="image">تصویر محصول</Label>
+                <Label htmlFor="image">تصویر محصول:</Label>
                 <Input
                   id="image"
                   type="file"
@@ -123,10 +123,10 @@ const Products = () => {
                 : Forms("laptop", register)}
               <div className="flex items-center gap-5">
                 <Label htmlFor="description" className="text-right">
-                  توضیحات
+                  توضیحات:
                 </Label>
                 <Textarea
-                  className="border-gray-400"
+                  className="border-gray-400 focus:outline-none"
                   {...register("description")}
                 />
               </div>

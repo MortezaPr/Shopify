@@ -56,7 +56,7 @@ export function DataTable<TData, TValue>({
   });
 
   return (
-    <div className="bg-white dark:bg-dark-bg w-[60rem] px-12 pb-10 mr-32 rounded-xl shadow-lg flex flex-col gap-7 mb-5">
+    <div className="bg-white dark:bg-dark-bg w-[55rem] px-12 pb-10 mr-32 rounded-xl shadow-lg flex flex-col gap-7 mb-5">
       <div className="flex justify-between pb-4 pt-12">
         <Input
           placeholder="فیلتر نام..."

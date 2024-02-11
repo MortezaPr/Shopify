@@ -48,7 +48,7 @@ const Login = () => {
       <div className="hidden md:flex justify-end pl-10 pt-5 ">
         <ThemeToggle />
       </div>
-      <div className="h-screen flex justify-center items-center">
+      <div className="h-[calc(100vh-44px)] flex justify-center items-center">
         <div className="bg-white dark:bg-dark-bg shadow-xl h-full w-full md:h-[450px] md:w-96 md:rounded-2xl flex flex-col items-center">
           <div className="md:hidden pt-3 w-full flex justify-end pl-3">
             <ThemeToggle />

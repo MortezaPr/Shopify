@@ -154,7 +154,7 @@ const Navbar = () => {
                         <div className="font-bold">مرتضی پوررمضان</div>
                       </Link>
                     </DropdownMenuItem>
-                    <DropdownMenuSeparator className="bg-neutral-800" />
+                    <DropdownMenuSeparator className="dark:bg-neutral-800" />
 
                     <DropdownMenuItem>
                       <Link

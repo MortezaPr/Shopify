@@ -19,7 +19,7 @@ const Dashboard = () => {
   return (
     <div className="flex flex-col justify-center items-center">
       <div
-        className={`py-36 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 xl:ml-10 ${
+        className={`pt-28 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 xl:ml-10 ${
           isOpen ? "md:mr-32" : "md:mr-52"
         } gap-6`}
       >
