@@ -60,9 +60,13 @@ export default function RootLayout({
         <body className={`${iranSans.className} dark:bg-darker-user`}>
           <Providers>
             <Navbar />
-            <div className={`${isSearching ? "absolute bg-blackOverlay" : ""}`}>
+            <div
+              className={`${
+                isSearching ? "absolute bg-blackOverlay min-h-screen" : ""
+              }`}
+            >
               <div
-                className={`h-screen flex  ${isSearching ? "z-40" : ""} `}
+                className={`h-full flex  ${isSearching ? "z-40" : ""} `}
                 onClick={onCloseSearch}
               >
                 <div className={`${isSearching ? "-z-10" : ""}`}>

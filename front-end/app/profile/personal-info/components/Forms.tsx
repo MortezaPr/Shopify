@@ -93,7 +93,7 @@ const Forms = (
         <div className="grid gap-4 py-4 items-start">
           <div className="flex items-center gap-5">
             <label htmlFor="name" className="text-right">
-              رمز عبور قدیمی :
+              رمز عبور فعلی :
             </label>
             <Input
               className="w-60 py-2 dark:bg-dark-user"

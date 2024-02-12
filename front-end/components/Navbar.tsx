@@ -108,7 +108,7 @@ const Navbar = () => {
                 type="text"
                 value={searchValue}
                 onChange={(e) => setSearchValue(e.target.value)}
-                className="w-[calc(100vw-15px)] lg:w-[35rem] border-none bg-gray-200 dark:bg-darker-user pr-14 flex h-12 py-0 caret-cyan-600 placeholder:text-gray-500"
+                className="w-[calc(100vw-40px)] lg:w-[35rem] border-none bg-gray-200 dark:bg-darker-user pr-14 flex h-12 py-0 caret-cyan-600 placeholder:text-gray-500"
                 placeholder="جستجو"
                 onClick={(e) => handleSearchClick(e)}
               />
@@ -122,7 +122,7 @@ const Navbar = () => {
             {isSearching ? (
               <div
                 onClick={(e) => e.stopPropagation()}
-                className="absolute top-[4.5rem] lg:right-[11rem] bg-gray-100 dark:bg-darker-user w-full lg:w-[35.1rem] h-60 rounded-xl flex-col pr-5 pt-5"
+                className="absolute top-[4.5rem] right-[0.5rem] lg:right-[11rem] bg-gray-100 dark:bg-darker-user w-[calc(100vw-40px)] lg:w-[35.1rem] h-60 rounded-xl flex-col pr-5 pt-5"
               >
                 search results
               </div>
@@ -144,7 +144,7 @@ const Navbar = () => {
                       <GoTriangleDown />
                     </div>
                   </DropdownMenuTrigger>
-                  <DropdownMenuContent className="dark:border-neutral-800">
+                  <DropdownMenuContent className="dark:border-neutral-800 bg-opacity-60 backdrop-blur-lg">
                     <DropdownMenuItem className="flex p-2">
                       <Link
                         href={"/profile"}
@@ -205,7 +205,7 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-      <div className="fixed flex items-center justify-center gap-24 sm:gap-30 md:gap-44 lg:hidden bottom-0 bg-white dark:bg-dark-user bg-opacity-30 backdrop-blur-lg h-16 w-screen shadow-sm border-gray-300 dark:border-gray-950 border-t-2 text-gray-700 dark:text-white">
+      <div className="fixed z-50 flex items-center justify-center gap-24 sm:gap-30 md:gap-44 lg:hidden bottom-0 bg-white dark:bg-dark-user bg-opacity-30 backdrop-blur-lg h-16 w-full shadow-sm border-gray-300 dark:border-gray-950 border-t-2 text-gray-700 dark:text-white">
         {Object.entries(icons).map(([key]) => (
           <Link
             href={links[key]}

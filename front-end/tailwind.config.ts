@@ -8,6 +8,28 @@ module.exports = {
     "./src/**/*.{ts,tsx}",
   ],
   theme: {
+    screens: {
+      sm: "640px",
+      // => @media (min-width: 640px) { ... }
+
+      md: "768px",
+      // => @media (min-width: 768px) { ... }
+
+      lg: "1024px",
+      // => @media (min-width: 1024px) { ... }
+
+      desktop0: "1100px", // 1242px
+
+      desktop1: "1242px",
+
+      desktop2: "1484px",
+
+      xl: "1280px",
+      // => @media (min-width: 1280px) { ... }
+
+      "2xl": "1800px",
+      // => @media (min-width: 1536px) { ... }
+    },
     container: {
       center: true,
       padding: "2rem",

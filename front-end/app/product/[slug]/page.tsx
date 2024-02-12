@@ -55,6 +55,7 @@ const Product = ({ params }: { params: { slug: string } }) => {
               width={150}
               height={150}
               alt="pic"
+              priority
             />
           </div>
           <div className="flex flex-col gap-4 pr-5 pl-5 lg:pl-0">
@@ -82,7 +83,7 @@ const Product = ({ params }: { params: { slug: string } }) => {
               {!isItemInCart ? (
                 <Button
                   data-testid="add-to-cart-button"
-                  className="text-sm font-bold w-36"
+                  className="text-xs font-semibold"
                   onClick={() => addToCart()}
                 >
                   افزودن به سبد خرید
@@ -90,7 +91,7 @@ const Product = ({ params }: { params: { slug: string } }) => {
               ) : (
                 <Button
                   variant="outline"
-                  className="text-sm font-bold w-36"
+                  className="text-xs font-semibold text-[#ed5464] border-gray-300 dark:border-neutral-800 bg-white dark:bg-darker-user hover:bg-[#fff5f5] hover:text-[#ed5464] dark:text-white dark:hover:text-white dark:hover:bg-"
                   onClick={() => remove(item.id)}
                 >
                   حذف از سبد خرید

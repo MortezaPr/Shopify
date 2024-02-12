@@ -9,12 +9,12 @@ import { IoIosArrowBack } from "react-icons/io";
 import Phone from "@/types/Phone";
 import Laptop from "@/types/Laptop";
 
-type CardProps = {
+type BoxProps = {
   title: string;
   items: Phone[] | Laptop[];
 };
 
-const Card: React.FC<CardProps> = ({ title, items }) => {
+const Box: React.FC<BoxProps> = ({ title, items }) => {
   const scrollContainer = useRef(null);
 
   const scrollLeft = () => {
@@ -76,6 +76,7 @@ const Card: React.FC<CardProps> = ({ title, items }) => {
                       alt="image"
                       width={160}
                       height={160}
+                      priority
                     />
                   </div>
                   <p className="pt-5 px-5 text-sm max-w-[20rem] overflow-hidden line-clamp-2">
@@ -102,4 +103,4 @@ const Card: React.FC<CardProps> = ({ title, items }) => {
   );
 };
 
-export default Card;
+export default Box;
