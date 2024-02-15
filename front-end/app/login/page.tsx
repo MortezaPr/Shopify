@@ -13,7 +13,7 @@ import {
 } from "react-icons/md";
 
 const poppins = localFont({
-  src: "../assets/fonts/Poppins-Bold.ttf",
+  src: "../../../public/fonts/Poppins-Bold.ttf",
   weight: "700",
   style: "bold",
 });

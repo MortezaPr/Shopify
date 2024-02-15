@@ -15,7 +15,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-
+import { Poppins } from "next/font/google";
 import { FiShoppingCart } from "react-icons/fi";
 import { TbLogin } from "react-icons/tb";
 import { RiHome2Fill } from "react-icons/ri";
@@ -27,10 +27,9 @@ import { IoPersonOutline } from "react-icons/io5";
 import { BiHomeAlt2, BiSearch } from "react-icons/bi";
 import { MdKeyboardArrowLeft } from "react-icons/md";
 
-const poppins = localFont({
-  src: "../app/assets/fonts/Poppins-Bold.ttf",
+const poppins = Poppins({
   weight: "700",
-  style: "bold",
+  subsets: ["latin"],
 });
 
 type IconsType = {

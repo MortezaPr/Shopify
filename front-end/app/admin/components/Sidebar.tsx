@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { Poppins } from "next/font/google";
 import useSidebarToggle from "@/hooks/useSidebarToggle";
 
-const pacifico = Poppins({
+const poppins = Poppins({
   weight: "700",
   subsets: ["latin"],
 });
@@ -20,7 +20,7 @@ const Sidebar = () => {
     >
       <div className="flex justify-center py-[18px] px-2">
         <h1
-          className={`${pacifico.className} text-my-purple font-bold text-2xl`}
+          className={`${poppins.className} text-my-purple font-bold text-2xl`}
         >
           Shopify
         </h1>

@@ -122,5 +122,5 @@ body {
 
 @font-face {
   font-family: "IranSans";
-  src: url("./assets/fonts/IRANSansX-4-Regular.woff2") format("woff2");
+  src: url("../public/fonts/IRANSansX-4-Regular.woff2") format("woff2");
 }
