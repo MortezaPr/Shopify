@@ -1,13 +1,13 @@
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.permissions import IsAuthenticated
 
-from .serializers import CartItemSerializer, ShoppingCartSerializer
-from.models import CartItem, ShoppingCart
+from .serializers import CartItemSerializer, shopping_cartSerializer
+from.models import CartItem, shopping_cart
 
 
-class ShoppingCartView(ListCreateAPIView):
-    serializer_class = ShoppingCartSerializer
-    queryset = ShoppingCart.objects.all()
+class shopping_cartView(ListCreateAPIView):
+    serializer_class = shopping_cartSerializer
+    queryset = shopping_cart.objects.all()
     permission_classes = [IsAuthenticated,]
     
     def perform_create(self, serializer):

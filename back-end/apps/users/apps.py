@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class ItemConfig(AppConfig):
+class UsersConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'shopify_apps.item'
+    name = 'apps.users'
