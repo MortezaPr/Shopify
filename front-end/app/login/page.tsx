@@ -1,6 +1,5 @@
 "use client";
-import { use, useState } from "react";
-import localFont from "next/font/local";
+import { useState } from "react";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { Poppins } from "next/font/google";
@@ -12,20 +11,20 @@ import {
   MdKeyboardArrowLeft,
 } from "react-icons/md";
 
-const poppins = localFont({
-  src: "../../../public/fonts/Poppins-Bold.ttf",
-  weight: "700",
-  style: "bold",
+const poppins = Poppins({
+  weight: "600",
+  subsets: ["latin"],
 });
 
 type FormData = {
-  username: string;
+  phone_number: string;
   password: string;
+  otp_code: string;
 };
 
 const Login = () => {
   const { control, handleSubmit } = useForm<FormData>();
-  const [userExists, setUserExists] = useState(true);
+  const [userExists, setUserExists] = useState(false);
   const [formState, setFormState] = useState("initial");
   const [isVisible, setIsVisible] = useState(false);
 
@@ -60,12 +59,81 @@ const Login = () => {
       } else {
         // If the user doesn't exist, set the form state to sign-up
         setFormState("signUp");
-        // Send a verification code to the email
+        // Send a verification code to the phone number
       }
     } else if (formState === "signIn") {
       // check password
     } else {
       // check verification code
+    }
+  };
+
+  const showInput = () => {
+    if (formState === "initial") {
+      return (
+        <Controller
+          name="phone_number"
+          control={control}
+          defaultValue=""
+          render={({ field }) => (
+            <input
+              {...field}
+              type="text"
+              className="p-2 rounded-md border border-slate-400 dark:border-none outline-none focus:outline-my-purple focus:border-none dark:text-white dark:bg-[#141517] w-96"
+            />
+          )}
+        />
+      );
+    } else if (formState === "signIn") {
+      return (
+        <div className="relative">
+          <Controller
+            name="password"
+            control={control}
+            defaultValue=""
+            render={({ field }) => (
+              <input
+                {...field}
+                type={isVisible ? "text" : "password"}
+                placeholder="   کلمه عبور"
+                className="p-2 rounded-md border border-slate-400 dark:border-none dark:text-white outline-none focus:outline-my-purple focus:border-none w-full dark:bg-[#141517]"
+              />
+            )}
+          />
+          <div
+            className="absolute top-2 left-3 cursor-pointer"
+            onClick={handleVisibility}
+          >
+            {isVisible ? (
+              <MdVisibilityOff size={20} />
+            ) : (
+              <MdVisibility size={20} />
+            )}
+          </div>
+          <p className="flex items-center text-cyan-700 text-sm cursor-pointer mt-5">
+            فراموشی رمز
+            <MdKeyboardArrowLeft />
+          </p>
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          {" "}
+          <Controller
+            name="otp_code"
+            control={control}
+            defaultValue=""
+            render={({ field }) => (
+              <input
+                {...field}
+                type="text"
+                className="p-2 rounded-md border border-slate-400 dark:border-none outline-none focus:outline-my-purple focus:border-none dark:text-white dark:bg-[#141517] w-96"
+              />
+            )}
+          />
+        </div>
+      );
     }
   };
 
@@ -100,7 +168,7 @@ const Login = () => {
               {formState === "initial" && (
                 <div>
                   <p>سلام!</p>
-                  <p>لطفا ایمیل خود را وارد کنید</p>
+                  <p>لطفا شماره موبایل خود را وارد کنید</p>
                 </div>
               )}
               {formState === "signUp" && (
@@ -115,58 +183,7 @@ const Login = () => {
               className="flex flex-col gap-8 pt-3"
               onSubmit={handleSubmit(onSubmit)}
             >
-              {
-                // we should check if the user has signed up or not if user
-                // have signed up we should show the password input if not we should send verification code
-              }
-
-              {formState === "signIn" ? (
-                <div className="relative">
-                  <Controller
-                    name="password"
-                    control={control}
-                    defaultValue=""
-                    render={({ field }) => (
-                      <input
-                        {...field}
-                        type={isVisible ? "text" : "password"}
-                        placeholder="   کلمه عبور"
-                        className="p-2 rounded-md border border-slate-400 dark:border-none dark:text-white outline-none focus:outline-my-purple focus:border-none w-full dark:bg-[#141517]"
-                      />
-                    )}
-                  />
-                  <div
-                    className="absolute top-2 left-3 cursor-pointer"
-                    onClick={handleVisibility}
-                  >
-                    {isVisible ? (
-                      <MdVisibilityOff size={20} />
-                    ) : (
-                      <MdVisibility size={20} />
-                    )}
-                  </div>
-                </div>
-              ) : (
-                <Controller
-                  name="username"
-                  control={control}
-                  defaultValue=""
-                  render={({ field }) => (
-                    <input
-                      {...field}
-                      type="text"
-                      className="p-2 rounded-md border border-slate-400 dark:border-none outline-none focus:outline-my-purple focus:border-none dark:text-white dark:bg-[#141517] w-96"
-                    />
-                  )}
-                />
-              )}
-
-              {formState === "signIn" && (
-                <p className="flex items-center text-cyan-700 text-sm cursor-pointer">
-                  فراموشی رمز
-                  <MdKeyboardArrowLeft />
-                </p>
-              )}
+              {showInput()}
 
               <div>
                 <Button className="text-base font-bold w-96">ورود</Button>

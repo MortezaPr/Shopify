@@ -1,6 +1,6 @@
 "use client";
-import Navbar from "./components/Navbar";
-import Sidebar from "./components/Sidebar";
+import Navbar from "./Navbar";
+import Sidebar from "./Sidebar";
 import { usePathname } from "next/navigation";
 
 // here first we should check if the user is authenticated or not if not we must navigate user to admin login screen

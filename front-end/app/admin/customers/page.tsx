@@ -1,6 +1,6 @@
 import React from "react";
 import { Customer, columns } from "./columns";
-import { DataTable } from "@/components/DataTable";
+import { DataTable } from "../components/DataTable";
 
 async function getUsers(): Promise<Customer[]> {
   const res = await fetch(

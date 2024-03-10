@@ -1,5 +1,5 @@
 import getPhones from "@/actions/getPhones";
-import Box from "@/components/Box";
+import Box from "@/app/Box";
 
 // async function getPhonesFromServer() {
 //   const res = await fetch("http://localhost:8000/item/mobile/list", {

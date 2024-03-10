@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { links, icons } from "./LinksAndIcons";
+import { links, icons } from "./components/LinksAndIcons";
 import { usePathname } from "next/navigation";
 import { Poppins } from "next/font/google";
 import useSidebarToggle from "@/hooks/useSidebarToggle";

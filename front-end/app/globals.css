@@ -124,3 +124,7 @@ body {
   font-family: "IranSans";
   src: url("../public/fonts/IRANSansX-4-Regular.woff2") format("woff2");
 }
+
+html {
+  scroll-behavior: smooth;
+}

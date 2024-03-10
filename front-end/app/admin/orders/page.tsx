@@ -1,6 +1,6 @@
 import React from "react";
 import { Orders, columns } from "./columns";
-import { DataTable } from "@/components/DataTable";
+import { DataTable } from "../components/DataTable";
 
 async function getUsers(): Promise<Orders[]> {
   const res = await fetch("https://65551c5e63cafc694fe7722e.mockapi.io/orders");

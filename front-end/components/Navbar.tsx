@@ -88,7 +88,7 @@ const Navbar = () => {
   return (
     <div onClick={handleClick}>
       <div
-        className={`fixed z-50 bg-white dark:bg-dark-user bg-opacity-60 backdrop-blur-lg h-16 lg:h-20 shadow-sm ${
+        className={`fixed z-50 bg-white dark:bg-dark-user bg-opacity-85 backdrop-blur-lg h-16 lg:h-20 shadow-sm ${
           pathname.startsWith("/profile") ? "hidden lg:block" : ""
         }`}
       >

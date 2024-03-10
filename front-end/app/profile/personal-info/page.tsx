@@ -1,12 +1,10 @@
 "use client";
 
-import React from "react";
-import { useForm } from "react-hook-form";
 import Link from "next/link";
+import { useForm } from "react-hook-form";
 import { IoArrowForward } from "react-icons/io5";
-import { LuPencilLine } from "react-icons/lu";
-import InfoCard from "./components/InfoCard";
 import Forms from "./components/Forms";
+import InfoCard from "./components/InfoCard";
 
 const lg_class =
   "shadow-sm border-[1.5px] border-gray-200 dark:border-none col-span-5 rounded-lg";

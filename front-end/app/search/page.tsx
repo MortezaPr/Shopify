@@ -13,7 +13,7 @@ import Checkbox from "@mui/material/Checkbox";
 import TextField from "@mui/material/TextField";
 import { useTheme } from "next-themes";
 
-import Card from "@/components/Card";
+import Card from "./Card";
 import { useEffect, useState } from "react";
 
 const Search = () => {

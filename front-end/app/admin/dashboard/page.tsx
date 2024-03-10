@@ -2,8 +2,8 @@
 import { MdAssignment } from "react-icons/md";
 import { RiMoneyDollarCircleFill } from "react-icons/ri";
 import { BsFillPeopleFill, BsFillBoxFill } from "react-icons/bs";
-import Box from "../components/Box";
-import { MyResponsivePie, MyResponsiveLine } from "../components/Charts";
+import Box from "./Box";
+import { MyResponsivePie, MyResponsiveLine } from "./Charts";
 import useSidebarToggle from "@/hooks/useSidebarToggle";
 import { useTheme } from "next-themes";
 
