@@ -1,20 +1,19 @@
 # Use the official Python image as the base image
-FROM python:3.9
+FROM python:3.12
 
 # Set environment variables
-ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
-# Set the working directory in the container
-WORKDIR /app
+# sets the working directory
+WORKDIR /usr/src/app
 
 # Copy the requirements file to the working directory
-COPY requirements.txt .
+COPY requirements.txt ./
 
-# Install the project dependencies
-RUN pip install --no-cache-dir -r requirements.txt
+# install pipenv on the container
+RUN pip install -r requirements.txt
 
-# Copy the project files to the working directory
+# copy all files and directories from <src> to <dest>
 COPY . .
 
 # Expose the port on which the Django development server will run
@@ -23,5 +22,5 @@ EXPOSE 8000
 ENV DJANGO_SETTINGS_MODULE=Shopify.product_settings
 
 
-# Run the Django development server
+# Command to run
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]

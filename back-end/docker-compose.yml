@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 
 services:
   web:
@@ -8,12 +8,16 @@ services:
     ports:
       - 8000:8000
     volumes:
-      - .:/app
+      - .:/usr/src/app
     command: python manage.py runserver 0.0.0.0:8000
     networks:
       - shopify_network
+      - redis_network
     depends_on:
       - shopify_pg
+      - redis
+    links:
+      - redis
 
   shopify_pg:
     image: postgres
@@ -22,13 +26,23 @@ services:
       - env/.env
     restart: always
     ports:
-      - "5432:5432"
+      - "5433:5432"
     volumes:
       - shopify_data:/var/lib/postgresql/data/
     networks:
       - shopify_network
 
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+    networks:
+      - shopify_network
+
 volumes:
   shopify_data:
+
 networks:
   shopify_network:
+  redis_network:
+
