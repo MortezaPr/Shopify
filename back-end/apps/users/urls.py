@@ -2,6 +2,7 @@ from django.urls import path
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 from .views import (
+    CheckPassword,
     CheckUserStatusView,
     CreateUserView,
     DeleteUserView,
@@ -22,11 +23,12 @@ urlpatterns = [
     path(r"signup/", view=CreateUserView.as_view(), name="user_create"),
     path(r"login/", view=TokenObtainPairView.as_view(), name="user_token"),
     path(
-        r"check_user/<str:phone_number>/",
+        r"check-user/<str:phone_number>/",
         view=CheckUserStatusView.as_view(),
         name="check_user",
     ),
-    path(r"verify_user/", view=VerifyUserView.as_view(), name="verify_user"),
-    path(r"set_new_otp/", view=SetNewOTPView.as_view(), name="set_new_otp"),
+    path(r"verify-user/", view=VerifyUserView.as_view(), name="verify_user"),
+    path(r"check-password/", view=VerifyUserView.as_view(), name="verify_user"),
+    path(r"set-new-otp/", view=SetNewOTPView.as_view(), name="set_new_otp"),
     path(r"token/refresh/", view=TokenRefreshView.as_view(), name="user_token_refresh"),
 ]
