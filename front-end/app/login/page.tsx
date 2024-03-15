@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { use, useState } from "react";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { Poppins } from "next/font/google";
@@ -28,16 +28,15 @@ type FormData = {
 
 const Login = () => {
   const { control, handleSubmit } = useForm<FormData>();
-  const [userExists, setUserExists] = useState(false);
   const [formState, setFormState] = useState("initial");
   const [isVisible, setIsVisible] = useState(false);
 
   const showCase = () => {
     if (formState === "initial") {
       return "ورود | ثبت نام";
-    } else if (formState === "signIn") {
+    } else if (formState === "signInWithPassword") {
       return "رمز عبور را وارد کنید";
-    } else if (formState === "signUp") {
+    } else if (formState === "signUp" || formState === "signInWithOTP") {
       return "کد تایید را وارد کنید";
     }
   };
@@ -52,25 +51,27 @@ const Login = () => {
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     if (formState === "initial") {
-      const user = await checkUser(data.phone_number);
-      console.log(user);
-      console.log(user.is_verified);
+      const userStatus = await checkUser(data.phone_number);
+      console.log(userStatus);
 
-      if (!user.exists) {
+      if (!userStatus.exists) {
         await createUser(data.phone_number);
         setFormState("signUp");
       } else {
-        if (!user.is_verified) {
+        if (!userStatus.is_verified) {
           setFormState("signUp");
         } else {
-          //TODO the user wants to login
-          setFormState("signIn");
+          if (userStatus.password_set) {
+            console.log("here");
+            setFormState("signInWithPassword");
+          } else {
+            setFormState("signInWithOTP");
+          }
         }
       }
-    } else if (formState === "signIn") {
+    } else if (formState === "signInWithPassword") {
       // check password
     } else {
-      // check verification code
       await verifyUser(data.phone_number, data.otp_code);
     }
   };
@@ -91,7 +92,7 @@ const Login = () => {
           )}
         />
       );
-    } else if (formState === "signIn") {
+    } else if (formState === "signInWithPassword") {
       return (
         <div className="relative">
           <Controller

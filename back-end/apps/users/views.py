@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.contrib.auth.hashers import is_password_usable
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import JsonResponse
 from redis import Redis
@@ -56,10 +57,17 @@ class CheckUserStatusView(APIView):
     def get(self, request, phone_number):
         exists = Customer.objects.filter(phone_number=phone_number).exists()
         is_verified = False
+        password_set = False
         if exists:
             customer = Customer.objects.get(phone_number=phone_number)
             is_verified = customer.is_verified
-        return JsonResponse({"exists": exists, "is_verified": is_verified})
+            user = customer.user
+            password_set = user.password is not None and is_password_usable(
+                user.password
+            )
+        return JsonResponse(
+            {"exists": exists, "is_verified": is_verified, "password_set": password_set}
+        )
 
 
 class VerifyUserView(APIView):
@@ -105,3 +113,21 @@ class SetNewOTPView(APIView):
 
         otp = set_otp(customer)
         return JsonResponse({"status": "OTP set", "otp": otp})
+
+
+class CheckPassword(APIView):
+    permission_classes = [AllowAny]
+
+    def post(self, request, *args, **kwargs):
+        phone_number = request.data.get("phone_number")
+        password = request.data.get("password")
+        try:
+            customer = Customer.objects.get(phone_number=phone_number)
+        except Customer.DoesNotExist:
+            return JsonResponse({"error": "Customer does not exist"}, status=400)
+
+        user = customer.user
+        if user.check_password(password):
+            return JsonResponse({"status": True})
+        else:
+            return JsonResponse({"error": False}, status=400)
