@@ -14,6 +14,7 @@ from rest_framework.views import APIView
 
 from .models import Customer, User
 from .serializers import UserSerializer
+from .utils import set_otp
 
 
 class CreateUserView(CreateAPIView):
@@ -91,3 +92,18 @@ class VerifyUserView(APIView):
                 return JsonResponse({"error": "Customer does not exist"}, status=400)
         else:
             return JsonResponse({"error": "Invalid OTP"}, status=400)
+
+
+class SetNewOTPView(APIView):
+    permission_classes = [AllowAny]
+
+    def post(self, request, *args, **kwargs):
+        phone_number = request.data.get("phone_number")
+        print(phone_number)
+        try:
+            customer = Customer.objects.get(phone_number=phone_number)
+        except Customer.DoesNotExist:
+            return JsonResponse({"error": "Customer does not exist"}, status=400)
+
+        otp = set_otp(customer)
+        return JsonResponse({"status": "OTP set", "otp": otp})

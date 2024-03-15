@@ -1,11 +1,9 @@
-import random
 import uuid
 
-import redis
-from django.conf import settings
 from rest_framework import serializers
 
 from .models import Customer, User
+from .utils import set_otp
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -24,19 +22,8 @@ class UserSerializer(serializers.ModelSerializer):
         customer = Customer(user=user, phone_number=validate_data["phone_number"])
         customer.save()
 
-        # Create a Redis connection
-        r = redis.Redis(
-            host=settings.REDIS_HOST, port=settings.REDIS_PORT, db=settings.REDIS_DB
-        )
-
-        # Generate a 6-digit OTP
-        otp = random.randint(100000, 999999)
-
-        # Store the OTP in Redis, associated with the user's phone number
-        # Set it to expire after 60 seconds
-        r.setex(customer.phone_number, 60, otp)
-
-        print(f"Your OTP is: {otp}")
+        # Set the OTP
+        otp = set_otp(customer)
 
         return customer
 
