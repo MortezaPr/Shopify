@@ -69,8 +69,6 @@ class VerifyUserView(APIView):
         phone_number = request.data.get("phone_number")
         otp = request.data.get("otp")
 
-        print(type(otp))
-
         # Connect to Redis
         redis_conn = Redis(
             host=settings.REDIS_HOST, port=settings.REDIS_PORT, db=settings.REDIS_DB

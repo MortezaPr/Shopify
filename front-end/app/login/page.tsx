@@ -11,6 +11,10 @@ import {
   MdKeyboardArrowLeft,
 } from "react-icons/md";
 
+import checkUser from "@/actions/checkUser";
+import createUser from "@/actions/createUser";
+import verifyUser from "@/actions/verifyUser";
+
 const poppins = Poppins({
   weight: "600",
   subsets: ["latin"],
@@ -46,25 +50,28 @@ const Login = () => {
     setIsVisible(!isVisible);
   };
 
-  const onSubmit: SubmitHandler<FormData> = (data) => {
-    // we should check if user exists or not
-    console.log(data);
-
+  const onSubmit: SubmitHandler<FormData> = async (data) => {
     if (formState === "initial") {
-      // here we check if user exists or not
+      const user = await checkUser(data.phone_number);
+      console.log(user);
+      console.log(user.is_verified);
 
-      if (userExists) {
-        // If the user exists, set the form state to sign-in
-        setFormState("signIn");
-      } else {
-        // If the user doesn't exist, set the form state to sign-up
+      if (!user.exists) {
+        await createUser(data.phone_number);
         setFormState("signUp");
-        // Send a verification code to the phone number
+      } else {
+        if (!user.is_verified) {
+          setFormState("signUp");
+        } else {
+          //TODO the user wants to login
+          setFormState("signIn");
+        }
       }
     } else if (formState === "signIn") {
       // check password
     } else {
       // check verification code
+      await verifyUser(data.phone_number, data.otp_code);
     }
   };
 

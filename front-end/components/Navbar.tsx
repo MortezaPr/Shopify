@@ -62,7 +62,7 @@ const Navbar = () => {
   const [searchValue, setSearchValue] = useState("");
   const pathname = usePathname();
   const { isSearching, onSearch, onCloseSearch } = useSearching();
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const router = useRouter();
 
@@ -187,7 +187,10 @@ const Navbar = () => {
                 variant="outline"
                 className="bg-white dark:bg-darker-user border-gray-300 dark:border-darker-user"
               >
-                <div className="flex gap-2">
+                <div
+                  className="flex gap-2"
+                  onClick={() => router.push("/login")}
+                >
                   <TbLogin size={22} />
                   ورود | ثبت نام
                 </div>

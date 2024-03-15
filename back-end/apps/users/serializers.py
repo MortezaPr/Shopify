@@ -23,7 +23,7 @@ class UserSerializer(serializers.ModelSerializer):
         customer.save()
 
         # Set the OTP
-        otp = set_otp(customer)
+        set_otp(customer)
 
         return customer
 
