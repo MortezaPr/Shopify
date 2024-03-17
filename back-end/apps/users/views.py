@@ -84,8 +84,6 @@ class VerifyUserView(APIView):
 
         # Get the OTP stored in Redis
         redis_otp = redis_conn.get(phone_number)
-        print(type(redis_otp))
-        print(f"this is otp stored in redis {redis_otp}")
 
         if redis_otp is not None and otp == redis_otp.decode():
             try:
@@ -121,6 +119,8 @@ class CheckPassword(APIView):
     def post(self, request, *args, **kwargs):
         phone_number = request.data.get("phone_number")
         password = request.data.get("password")
+        print(password)
+        print(phone_number)
         try:
             customer = Customer.objects.get(phone_number=phone_number)
         except Customer.DoesNotExist:
@@ -131,3 +131,72 @@ class CheckPassword(APIView):
             return JsonResponse({"status": True})
         else:
             return JsonResponse({"error": False}, status=400)
+
+
+from django.conf import settings
+from redis import Redis
+from rest_framework import exceptions
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from rest_framework_simplejwt.views import TokenObtainPairView
+
+from .models import Customer, User
+
+
+class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
+    def validate(self, attrs):
+        data = super().validate(attrs)
+
+        # Check if the user is logging in with a phone number
+        if "phone_number" in self.initial_data:
+            phone_number = self.initial_data["phone_number"]
+            customer = Customer.objects.filter(phone_number=phone_number).first()
+
+            if customer is None:
+                raise exceptions.AuthenticationFailed("User not found")
+
+            user = customer.user
+
+            # Check if the user has a password
+            if user.password:
+                # If the user has a password, check if it's correct
+                if not user.check_password(self.initial_data.get("password", "")):
+                    raise exceptions.AuthenticationFailed("Incorrect password")
+            else:
+                # If the user doesn't have a password, check the OTP
+                otp = self.initial_data.get("otp")
+                if otp is None or not check_otp(
+                    phone_number, otp
+                ):  # You need to implement the check_otp function
+                    raise exceptions.AuthenticationFailed("Incorrect OTP")
+        else:
+            # If the user is logging in with a username, they must be an admin
+            username = self.initial_data.get("username")
+            user = User.objects.filter(username=username).first()
+
+            if user is None or not user.is_staff:
+                raise exceptions.AuthenticationFailed("Admin user not found")
+
+            # Check if the password is correct
+            if not user.check_password(self.initial_data.get("password", "")):
+                raise exceptions.AuthenticationFailed("Incorrect password")
+
+        return data
+
+
+def check_otp(self, phone_number, otp):
+    # Connect to Redis
+    redis_conn = Redis(
+        host=settings.REDIS_HOST, port=settings.REDIS_PORT, db=settings.REDIS_DB
+    )
+    # Get the OTP stored in Redis
+    redis_otp = redis_conn.get(phone_number)
+
+    # Check if the OTP is correct
+    if redis_otp is not None and otp == redis_otp.decode():
+        return True
+
+    return False
+
+
+class CustomTokenObtainPairView(TokenObtainPairView):
+    serializer_class = CustomTokenObtainPairSerializer

@@ -9,7 +9,7 @@ import login from "@/actions/adminLogin";
 import { useRouter } from "next/navigation";
 
 type FormData = {
-  email: string;
+  username: string;
   password: string;
 };
 
@@ -29,7 +29,7 @@ const Login = () => {
   const { control, handleSubmit } = useForm<FormData>();
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
-    let { refresh, access } = await login(data.email, data.password);
+    let { refresh, access } = await login(data.username, data.password);
 
     localStorage.setItem("accessToken", access);
     localStorage.setItem("refreshToken", refresh);
@@ -66,14 +66,14 @@ const Login = () => {
             onSubmit={handleSubmit(onSubmit)}
           >
             <Controller
-              name="email"
+              name="username"
               control={control}
               defaultValue=""
               render={({ field }) => (
                 <input
                   {...field}
                   type="text"
-                  placeholder=" ایمیل"
+                  placeholder=" نام کاربری"
                   className="p-2 rounded-md border border-slate-400 dark:border-none outline-none focus:outline-my-purple focus:border-none dark:text-white dark:bg-darker-bg w-80"
                 />
               )}

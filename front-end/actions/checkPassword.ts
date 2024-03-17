@@ -1,17 +1,19 @@
-async function checkPassword(phone_number: string) {
-    const response = await fetch("http://localhost:8000/api/users/signup/", {
+async function checkPassword(phone_number: string, password: string) {
+  const response = await fetch(
+    "http://localhost:8000/api/users/check-password/",
+    {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ phone_number }),
-    });
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+      body: JSON.stringify({ phone_number, password }),
     }
-    const data = await response.json();
-    return data;
+  );
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
   }
-  
-  export default checkPassword;
-  
+  const data = await response.json();
+  return data;
+}
+
+export default checkPassword;

@@ -14,6 +14,7 @@ import {
 import checkUser from "@/actions/checkUser";
 import createUser from "@/actions/createUser";
 import verifyUser from "@/actions/verifyUser";
+import checkPassword from "@/actions/checkPassword";
 
 const poppins = Poppins({
   weight: "600",
@@ -71,6 +72,8 @@ const Login = () => {
       }
     } else if (formState === "signInWithPassword") {
       // check password
+      const result = await checkPassword(data.phone_number, data.password);
+      console.log(result);
     } else {
       await verifyUser(data.phone_number, data.otp_code);
     }
