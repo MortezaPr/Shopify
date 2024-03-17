@@ -133,9 +133,11 @@ class CheckPassword(APIView):
             return JsonResponse({"error": False}, status=400)
 
 
+# Token
+
 from django.conf import settings
 from redis import Redis
-from rest_framework import exceptions
+from rest_framework import exceptions, fields
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 
@@ -148,6 +150,7 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
 
         # Check if the user is logging in with a phone number
         if "phone_number" in self.initial_data:
+            print("ssssss")
             phone_number = self.initial_data["phone_number"]
             customer = Customer.objects.filter(phone_number=phone_number).first()
 

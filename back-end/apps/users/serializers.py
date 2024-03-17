@@ -16,7 +16,7 @@ class UserSerializer(serializers.ModelSerializer):
         # Generate a unique username
         username = uuid.uuid4().hex
 
-        user = User(username=username)
+        user = User(username=validate_data["phone_number"])
         user.save()
 
         customer = Customer(user=user, phone_number=validate_data["phone_number"])
