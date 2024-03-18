@@ -1,8 +1,13 @@
+import datetime
+from tokenize import TokenError
+
+import jwt
 from django.conf import settings
 from django.contrib.auth.hashers import is_password_usable
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import JsonResponse
 from redis import Redis
+from rest_framework import exceptions
 from rest_framework.generics import (
     CreateAPIView,
     DestroyAPIView,
@@ -11,42 +16,50 @@ from rest_framework.generics import (
     UpdateAPIView,
 )
 from rest_framework.permissions import AllowAny, IsAdminUser
+from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework_simplejwt.tokens import RefreshToken
 
+from .authentication import (
+    create_access_token,
+    create_refresh_token,
+    decode_access_token,
+    decode_refresh_token,
+)
 from .models import Customer, User
-from .serializers import UserSerializer
+from .serializers import CustomerSerializer, UserSerializer
 from .utils import set_otp
 
 
 class CreateUserView(CreateAPIView):
-    serializer_class = UserSerializer
+    serializer_class = CustomerSerializer
     queryset = User.objects.all()
     permission_classes = []
 
 
 class UserListView(ListAPIView):
-    serializer_class = UserSerializer
+    serializer_class = CustomerSerializer
     queryset = User.objects.all()
     permission_classes = [IsAdminUser]
 
 
 class UserDetailView(RetrieveAPIView):
     lookup_field = "id"
-    serializer_class = UserSerializer
+    serializer_class = CustomerSerializer
     queryset = User.objects.all()
     permission_classes = [IsAdminUser]
 
 
 class UpdateUserView(UpdateAPIView):
     lookup_field = "id"
-    serializer_class = UserSerializer
+    serializer_class = CustomerSerializer
     queryset = User.objects.all()
     permission_classes = [IsAdminUser]
 
 
 class DeleteUserView(DestroyAPIView):
     lookup_field = "id"
-    serializer_class = UserSerializer
+    serializer_class = CustomerSerializer
     queryset = User.objects.all()
     permission_classes = [IsAdminUser]
 
@@ -135,71 +148,90 @@ class CheckPassword(APIView):
 
 # Token
 
-from django.conf import settings
-from redis import Redis
-from rest_framework import exceptions, fields
-from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-from rest_framework_simplejwt.views import TokenObtainPairView
 
-from .models import Customer, User
+class LoginView(APIView):
+    permission_classes = [AllowAny]
 
+    def generate_tokens(self, user):
 
-class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
-    def validate(self, attrs):
-        data = super().validate(attrs)
+        refresh = create_refresh_token(user.id)
 
-        # Check if the user is logging in with a phone number
-        if "phone_number" in self.initial_data:
-            print("ssssss")
-            phone_number = self.initial_data["phone_number"]
+        access_token = create_access_token(user.id)
+
+        return {"access": access_token, "refresh": str(refresh)}
+
+    def post(self, request):
+        phone_number = request.data.get("phone_number")
+        if phone_number is not None:
+            # Customer
             customer = Customer.objects.filter(phone_number=phone_number).first()
-
             if customer is None:
                 raise exceptions.AuthenticationFailed("User not found")
 
             user = customer.user
-
-            # Check if the user has a password
             if user.password:
-                # If the user has a password, check if it's correct
-                if not user.check_password(self.initial_data.get("password", "")):
+                if not user.check_password(request.data.get("password", "")):
                     raise exceptions.AuthenticationFailed("Incorrect password")
             else:
-                # If the user doesn't have a password, check the OTP
-                otp = self.initial_data.get("otp")
-                if otp is None or not check_otp(
-                    phone_number, otp
-                ):  # You need to implement the check_otp function
+                otp = request.data.get("otp")
+                if otp is None or not self.check_otp(phone_number, otp):
                     raise exceptions.AuthenticationFailed("Incorrect OTP")
+
         else:
-            # If the user is logging in with a username, they must be an admin
-            username = self.initial_data.get("username")
+            # Admin
+            username = request.data.get("username")
             user = User.objects.filter(username=username).first()
 
             if user is None or not user.is_staff:
                 raise exceptions.AuthenticationFailed("Admin user not found")
 
             # Check if the password is correct
-            if not user.check_password(self.initial_data.get("password", "")):
+            if not user.check_password(request.data.get("password", "")):
                 raise exceptions.AuthenticationFailed("Incorrect password")
 
-        return data
+        tokens = self.generate_tokens(user)
+        return Response(tokens)
+
+    def check_otp(self, phone_number, otp):
+        # Connect to Redis
+        redis_conn = Redis(
+            host=settings.REDIS_HOST, port=settings.REDIS_PORT, db=settings.REDIS_DB
+        )
+        # Get the OTP stored in Redis
+        redis_otp = redis_conn.get(phone_number)
+
+        # Check if the OTP is correct
+        if redis_otp is not None and otp == redis_otp.decode():
+            return True
+
+        return False
 
 
-def check_otp(self, phone_number, otp):
-    # Connect to Redis
-    redis_conn = Redis(
-        host=settings.REDIS_HOST, port=settings.REDIS_PORT, db=settings.REDIS_DB
-    )
-    # Get the OTP stored in Redis
-    redis_otp = redis_conn.get(phone_number)
+class RefreshTokenView(APIView):
+    permission_classes = [AllowAny]
 
-    # Check if the OTP is correct
-    if redis_otp is not None and otp == redis_otp.decode():
-        return True
+    def post(self, request):
+        refresh_token = request.data.get("refresh")
+        if refresh_token is None:
+            return Response({"error": "No refresh token provided"}, status=400)
 
-    return False
+        try:
+            id = decode_refresh_token(refresh_token)
+            access_token = create_access_token(id)
+            return Response({"access": access_token})
+
+        except TokenError:
+            return Response({"error": "Invalid refresh token"}, status=400)
 
 
-class CustomTokenObtainPairView(TokenObtainPairView):
-    serializer_class = CustomTokenObtainPairSerializer
+# this is a test view to check if the token is working
+class TestView(APIView):
+    permission_classes = [AllowAny]
+
+    def get(self, request):
+        access_token = request.data.get("access_token")
+        user_id = decode_access_token(access_token)
+        print(user_id)
+        user = User.objects.get(id=user_id)
+        serializer = UserSerializer(user)
+        return Response(serializer.data)

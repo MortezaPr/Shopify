@@ -6,10 +6,13 @@ from .models import Customer, User
 from .utils import set_otp
 
 
-class UserSerializer(serializers.ModelSerializer):
+class CustomerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Customer
-        fields = ["phone_number"]
+        fields = [
+            "id",
+            "phone_number",
+        ]
 
     # set_password use to save password hashed in db
     def create(self, validate_data):
@@ -42,3 +45,15 @@ class UserSerializer(serializers.ModelSerializer):
 
         instance.save()
         return instance
+
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = [
+            "id",
+            "username",
+            "email",
+            "first_name",
+            "last_name",
+        ]
