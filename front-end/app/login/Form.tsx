@@ -1,4 +1,4 @@
-import { formInputs } from "./formInputs";
+import { FormInputs } from "./FormInputs";
 import { Button } from "@/components/ui/button";
 
 import checkUser from "@/actions/checkUser";
@@ -23,13 +23,10 @@ interface FormProps {
 }
 
 const Form: React.FC<FormProps> = ({ formState, setFormState }) => {
-  const [isVisible, setIsVisible] = useState(false);
   const { control, handleSubmit } = useForm<FormData>();
   const [phoneNumber, setPhoneNumber] = useState("");
 
-  const handleVisibility = () => setIsVisible(!isVisible);
-
-  const input = formInputs(formState, control, isVisible, handleVisibility);
+  const input = FormInputs(formState, control);
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     if (formState === "initial") {

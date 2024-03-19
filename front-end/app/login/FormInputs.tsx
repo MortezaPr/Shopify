@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Controller, Control } from "react-hook-form";
 import {
   MdVisibility,
@@ -13,12 +13,12 @@ type FormData = {
   otp_code: string;
 };
 
-export const formInputs = (
+export const FormInputs = (
   formState: FormState,
-  control: Control<FormData>,
-  isVisible: boolean,
-  handleVisibility: () => void
+  control: Control<FormData>
 ) => {
+  const [isVisible, setIsVisible] = useState(false);
+  const handleVisibility = () => setIsVisible(!isVisible);
   if (formState === "initial") {
     return (
       <Controller
