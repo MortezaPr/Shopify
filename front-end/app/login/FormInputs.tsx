@@ -5,7 +5,7 @@ import {
   MdVisibilityOff,
   MdKeyboardArrowLeft,
 } from "react-icons/md";
-import { FormState } from "./formStates";
+import { FormState, INITIAL, SIGN_IN_WITH_PASSWORD } from "./formStates";
 
 type FormData = {
   phone_number: string;
@@ -19,7 +19,7 @@ export const FormInputs = (
 ) => {
   const [isVisible, setIsVisible] = useState(false);
   const handleVisibility = () => setIsVisible(!isVisible);
-  if (formState === "initial") {
+  if (formState === INITIAL) {
     return (
       <Controller
         name="phone_number"
@@ -34,7 +34,7 @@ export const FormInputs = (
         )}
       />
     );
-  } else if (formState === "signInWithPassword") {
+  } else if (formState === SIGN_IN_WITH_PASSWORD) {
     return (
       <div className="relative">
         <Controller

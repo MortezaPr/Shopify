@@ -5,7 +5,7 @@ import ThemeToggle from "../../components/ThemeToggle";
 import { IoMdArrowForward } from "react-icons/io";
 import Form from "./Form";
 
-import { FormState, INITIAL, SIGN_UP, MESSAGES } from "./formStates";
+import { FormState, INITIAL, MESSAGES } from "./formStates";
 
 const poppins = Poppins({
   weight: "600",

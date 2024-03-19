@@ -9,7 +9,13 @@ import checkPassword from "@/actions/checkPassword";
 import { useForm, SubmitHandler } from "react-hook-form";
 
 import { useState, Dispatch, SetStateAction } from "react";
-import { FormState } from "./formStates";
+import {
+  FormState,
+  INITIAL,
+  SIGN_UP,
+  SIGN_IN_WITH_PASSWORD,
+  SIGN_IN_WITH_OTP,
+} from "./formStates";
 
 type FormData = {
   phone_number: string;
@@ -29,26 +35,26 @@ const Form: React.FC<FormProps> = ({ formState, setFormState }) => {
   const input = FormInputs(formState, control);
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
-    if (formState === "initial") {
+    if (formState === INITIAL) {
       const userStatus = await checkUser(data.phone_number);
       setPhoneNumber(data.phone_number);
       console.log(userStatus);
 
       if (!userStatus.exists) {
         await createUser(data.phone_number);
-        setFormState("signUp");
+        setFormState(SIGN_UP);
       } else {
         if (!userStatus.is_verified) {
-          setFormState("signUp");
+          setFormState(SIGN_UP);
         } else {
           if (userStatus.password_set) {
-            setFormState("signInWithPassword");
+            setFormState(SIGN_IN_WITH_PASSWORD);
           } else {
-            setFormState("signInWithOTP");
+            setFormState(SIGN_IN_WITH_OTP);
           }
         }
       }
-    } else if (formState === "signInWithPassword") {
+    } else if (formState === SIGN_IN_WITH_PASSWORD) {
       // check password
       const result = await checkPassword(data.phone_number, data.password);
       console.log(result);
@@ -60,19 +66,19 @@ const Form: React.FC<FormProps> = ({ formState, setFormState }) => {
   return (
     <div>
       <div className="py-5 flex flex-col justify-start gap-2 text-sm text-slate-500">
-        {formState === "initial" && (
+        {formState === INITIAL && (
           <div>
             <p>سلام!</p>
             <p>لطفا شماره موبایل خود را وارد کنید</p>
           </div>
         )}
-        {formState === "signUp" && (
+        {formState === SIGN_UP && (
           <div>
             <p>حساب کاربری وجود ندارد.</p>
             <p> برای ساخت حساب جدید، کد تایید ارسال گردید.</p>
           </div>
         )}
-        {formState === "signInWithOTP" && (
+        {formState === SIGN_IN_WITH_OTP && (
           <div>
             <p>{`کد تایید برای شماره ${phoneNumber} پیامک شد`}</p>
           </div>
