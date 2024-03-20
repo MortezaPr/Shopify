@@ -5,10 +5,11 @@ import checkUser from "@/actions/checkUser";
 import createUser from "@/actions/createUser";
 import verifyUser from "@/actions/verifyUser";
 import checkPassword from "@/actions/checkPassword";
+import getNewOTP from "@/actions/getNewOTP";
 
 import { useForm, SubmitHandler } from "react-hook-form";
 
-import { useState, Dispatch, SetStateAction } from "react";
+import { useState, Dispatch, SetStateAction, useEffect } from "react";
 import {
   FormState,
   INITIAL,
@@ -31,6 +32,20 @@ interface FormProps {
 const Form: React.FC<FormProps> = ({ formState, setFormState }) => {
   const { control, handleSubmit } = useForm<FormData>();
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [isDisabled, setIsDisabled] = useState(false);
+  const [timeLeft, setTimeLeft] = useState(60);
+
+  useEffect(() => {
+    if (isDisabled) {
+      const timer = setInterval(() => {
+        setTimeLeft((prevTime) => prevTime - 1);
+      }, 1000);
+
+      return () => clearInterval(timer);
+    } else {
+      setTimeLeft(60);
+    }
+  }, [isDisabled]);
 
   const input = FormInputs(formState, control);
 
@@ -42,6 +57,7 @@ const Form: React.FC<FormProps> = ({ formState, setFormState }) => {
 
       if (!userStatus.exists) {
         await createUser(data.phone_number);
+        setIsDisabled(true);
         setFormState(SIGN_UP);
       } else {
         if (!userStatus.is_verified) {
@@ -50,6 +66,9 @@ const Form: React.FC<FormProps> = ({ formState, setFormState }) => {
           if (userStatus.password_set) {
             setFormState(SIGN_IN_WITH_PASSWORD);
           } else {
+            const res = await getNewOTP(data.phone_number);
+            console.log(res.otp);
+            setIsDisabled(true);
             setFormState(SIGN_IN_WITH_OTP);
           }
         }
@@ -76,6 +95,13 @@ const Form: React.FC<FormProps> = ({ formState, setFormState }) => {
           <div>
             <p>حساب کاربری وجود ندارد.</p>
             <p> برای ساخت حساب جدید، کد تایید ارسال گردید.</p>
+            <button
+              className="text-blue-400 font-semibold mt-5 disabled:opacity-50"
+              disabled={isDisabled}
+            >
+              دریافت مجدد کد
+            </button>
+            {isDisabled && <p>Time left: {timeLeft}s</p>}
           </div>
         )}
         {formState === SIGN_IN_WITH_OTP && (

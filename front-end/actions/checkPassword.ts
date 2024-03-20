@@ -1,18 +1,10 @@
+import apiCall from "./apiCall";
+
 async function checkPassword(phone_number: string, password: string) {
-  const response = await fetch(
-    "http://localhost:8000/api/users/check-password/",
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ phone_number, password }),
-    }
-  );
-  if (!response.ok) {
-    throw new Error(`HTTP error! status: ${response.status}`);
-  }
-  const data = await response.json();
+  const url = "http://localhost:8000/api/users/check-password/";
+  const method = "POST";
+  const body = { phone_number, password };
+  const data = await apiCall(url, method, body);
   return data;
 }
 
