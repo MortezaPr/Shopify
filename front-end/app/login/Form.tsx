@@ -1,11 +1,13 @@
 import { FormInputs } from "./FormInputs";
 import { Button } from "@/components/ui/button";
 
-import checkUser from "@/actions/checkUser";
-import createUser from "@/actions/createUser";
-import verifyUser from "@/actions/verifyUser";
-import checkPassword from "@/actions/checkPassword";
-import getNewOTP from "@/actions/getNewOTP";
+import {
+  checkUser,
+  createUser,
+  verifyUser,
+  checkPassword,
+  getNewOTP,
+} from "@/actions";
 
 import { useForm, SubmitHandler } from "react-hook-form";
 
