@@ -31,7 +31,7 @@ urlpatterns = [
     ),
     path(r"verify-user/", view=VerifyUserView.as_view(), name="verify_user"),
     path(r"check-password/", view=CheckPassword.as_view(), name="check_password"),
-    path(r"set-new-otp/", view=SetNewOTPView.as_view(), name="set_new_otp"),
+    path(r"get-new-otp/", view=SetNewOTPView.as_view(), name="set_new_otp"),
     path(r"token/refresh/", view=RefreshTokenView.as_view(), name="user_token_refresh"),
     path(r"test/", view=TestView.as_view(), name="test_view"),
 ]

@@ -38,18 +38,42 @@ const Form: React.FC<FormProps> = ({ formState, setFormState }) => {
   const [timeLeft, setTimeLeft] = useState(60);
 
   useEffect(() => {
-    if (isDisabled) {
-      const timer = setInterval(() => {
-        setTimeLeft((prevTime) => prevTime - 1);
+    if (timeLeft > 0) {
+      const timerId = setInterval(() => {
+        setTimeLeft((timeLeft) => timeLeft - 1);
       }, 1000);
 
-      return () => clearInterval(timer);
+      return () => clearInterval(timerId);
     } else {
+      setIsDisabled(false);
       setTimeLeft(60);
     }
-  }, [isDisabled]);
+  }, [timeLeft, setIsDisabled]);
+
+  const handleOTPRequest = async (phone_number: string) => {
+    setIsDisabled(true);
+    const res = await getNewOTP(phone_number);
+    console.log(res.otp);
+  };
 
   const input = FormInputs(formState, control);
+
+  const OTPRequestButton = (
+    <div className="flex items-center mt-5 justify-between pl-5">
+      <button
+        className="text-blue-400 font-semibold disabled:opacity-50"
+        disabled={isDisabled}
+        onClick={() => handleOTPRequest(phoneNumber)}
+      >
+        دریافت مجدد کد
+      </button>
+      {isDisabled && (
+        <p className="text-gray-800 dark:text-gray-200">
+          {timeLeft.toLocaleString("fa")} مانده تا دریافت مجدد کد
+        </p>
+      )}
+    </div>
+  );
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     if (formState === INITIAL) {
@@ -59,24 +83,22 @@ const Form: React.FC<FormProps> = ({ formState, setFormState }) => {
 
       if (!userStatus.exists) {
         await createUser(data.phone_number);
-        setIsDisabled(true);
         setFormState(SIGN_UP);
+        setIsDisabled(true);
       } else {
         if (!userStatus.is_verified) {
           setFormState(SIGN_UP);
+          handleOTPRequest(data.phone_number);
         } else {
           if (userStatus.password_set) {
             setFormState(SIGN_IN_WITH_PASSWORD);
           } else {
-            const res = await getNewOTP(data.phone_number);
-            console.log(res.otp);
-            setIsDisabled(true);
             setFormState(SIGN_IN_WITH_OTP);
+            handleOTPRequest(data.phone_number);
           }
         }
       }
     } else if (formState === SIGN_IN_WITH_PASSWORD) {
-      // check password
       const result = await checkPassword(data.phone_number, data.password);
       console.log(result);
     } else {
@@ -97,18 +119,13 @@ const Form: React.FC<FormProps> = ({ formState, setFormState }) => {
           <div>
             <p>حساب کاربری وجود ندارد.</p>
             <p> برای ساخت حساب جدید، کد تایید ارسال گردید.</p>
-            <button
-              className="text-blue-400 font-semibold mt-5 disabled:opacity-50"
-              disabled={isDisabled}
-            >
-              دریافت مجدد کد
-            </button>
-            {isDisabled && <p>Time left: {timeLeft}s</p>}
+            {OTPRequestButton}
           </div>
         )}
         {formState === SIGN_IN_WITH_OTP && (
           <div>
             <p>{`کد تایید برای شماره ${phoneNumber} پیامک شد`}</p>
+            {OTPRequestButton}
           </div>
         )}
       </div>
