@@ -169,13 +169,18 @@ class LoginView(APIView):
                 raise exceptions.AuthenticationFailed("User not found")
 
             user = customer.user
-            if user.password:
-                if not user.check_password(request.data.get("password", "")):
-                    raise exceptions.AuthenticationFailed("Incorrect password")
-            else:
-                otp = request.data.get("otp")
-                if otp is None or not self.check_otp(phone_number, otp):
-                    raise exceptions.AuthenticationFailed("Incorrect OTP")
+            password = request.data.get("password")
+            otp = request.data.get("otp")
+            if password and user.password and not user.check_password(password):
+                raise exceptions.AuthenticationFailed("Incorrect password")
+
+            if otp and not self.check_otp(phone_number, otp):
+                raise exceptions.AuthenticationFailed("Incorrect OTP")
+
+            if not password and not otp:
+                raise exceptions.AuthenticationFailed(
+                    "Either password or OTP must be provided"
+                )
 
         else:
             # Admin

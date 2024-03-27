@@ -5,8 +5,8 @@ import {
   checkUser,
   createUser,
   verifyUser,
-  checkPassword,
   getNewOTP,
+  customerLogin,
 } from "@/actions";
 
 import { useForm, SubmitHandler } from "react-hook-form";
@@ -23,7 +23,7 @@ import {
 type FormData = {
   phone_number: string;
   password: string;
-  otp_code: string;
+  otp: string;
 };
 
 interface FormProps {
@@ -99,10 +99,17 @@ const Form: React.FC<FormProps> = ({ formState, setFormState }) => {
         }
       }
     } else if (formState === SIGN_IN_WITH_PASSWORD) {
-      const result = await checkPassword(data.phone_number, data.password);
-      console.log(result);
+      const tokens = await customerLogin(
+        data.phone_number,
+        data.password,
+      );
+      console.log(tokens);
     } else {
-      await verifyUser(data.phone_number, data.otp_code);
+      const tokens = await customerLogin(
+        data.phone_number,
+        data.otp
+      );
+      console.log(tokens);
     }
   };
 

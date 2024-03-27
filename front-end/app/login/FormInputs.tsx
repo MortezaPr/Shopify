@@ -10,7 +10,7 @@ import { FormState, INITIAL, SIGN_IN_WITH_PASSWORD } from "./formStates";
 type FormData = {
   phone_number: string;
   password: string;
-  otp_code: string;
+  otp: string;
 };
 
 export const FormInputs = (
@@ -71,7 +71,7 @@ export const FormInputs = (
       <div>
         {" "}
         <Controller
-          name="otp_code"
+          name="otp"
           control={control}
           defaultValue=""
           render={({ field }) => (
