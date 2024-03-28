@@ -161,21 +161,31 @@ class LoginView(APIView):
         return {"access": access_token, "refresh": str(refresh)}
 
     def post(self, request):
+        print("here1")
         phone_number = request.data.get("phone_number")
         if phone_number is not None:
+            print("here2")
             # Customer
             customer = Customer.objects.filter(phone_number=phone_number).first()
             if customer is None:
                 raise exceptions.AuthenticationFailed("User not found")
 
             user = customer.user
+            print(request.data)
             password = request.data.get("password")
             otp = request.data.get("otp")
+            print(otp)
+            print("here3")
             if password and user.password and not user.check_password(password):
                 raise exceptions.AuthenticationFailed("Incorrect password")
 
             if otp and not self.check_otp(phone_number, otp):
                 raise exceptions.AuthenticationFailed("Incorrect OTP")
+            print(otp)
+            if otp and not customer.is_verified:
+                print("here4")
+                customer.is_verified = True
+                customer.save()
 
             if not password and not otp:
                 raise exceptions.AuthenticationFailed(

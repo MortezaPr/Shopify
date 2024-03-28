@@ -38,6 +38,11 @@ const Form: React.FC<FormProps> = ({ formState, setFormState }) => {
   const [timeLeft, setTimeLeft] = useState(60);
 
   useEffect(() => {
+    setTimeLeft(60);
+  }, [phoneNumber]);
+
+  useEffect(() => {
+    console.log("starts");
     if (timeLeft > 0) {
       const timerId = setInterval(() => {
         setTimeLeft((timeLeft) => timeLeft - 1);
@@ -48,12 +53,11 @@ const Form: React.FC<FormProps> = ({ formState, setFormState }) => {
       setIsDisabled(false);
       setTimeLeft(60);
     }
-  }, [timeLeft, setIsDisabled]);
+  }, [setIsDisabled]);
 
   const handleOTPRequest = async (phone_number: string) => {
     setIsDisabled(true);
     const res = await getNewOTP(phone_number);
-    console.log(res.otp);
   };
 
   const input = FormInputs(formState, control);
@@ -102,11 +106,13 @@ const Form: React.FC<FormProps> = ({ formState, setFormState }) => {
       const tokens = await customerLogin(
         data.phone_number,
         data.password,
+        data.otp
       );
       console.log(tokens);
     } else {
       const tokens = await customerLogin(
         data.phone_number,
+        data.password,
         data.otp
       );
       console.log(tokens);

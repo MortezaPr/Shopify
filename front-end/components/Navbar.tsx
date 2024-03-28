@@ -197,10 +197,7 @@ const Navbar = () => {
               </Button>
             )}
 
-            <Link
-              href={"/shoppingCart"}
-              className="text-gray-700 dark:text-white"
-            >
+            <Link href={"/shoppingCart"} className="dark:text-white">
               <FiShoppingCart size={22} />
             </Link>
             <ThemeToggle />
