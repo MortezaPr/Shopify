@@ -14,7 +14,7 @@ const Dashboard = () => {
   const products = 4396;
 
   const { isOpen } = useSidebarToggle();
-  const { setTheme, resolvedTheme } = useTheme();
+  const { resolvedTheme } = useTheme();
 
   return (
     <div className="flex flex-col justify-center items-center">

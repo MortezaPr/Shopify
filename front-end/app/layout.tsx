@@ -36,7 +36,7 @@ export default function RootLayout({
 }) {
   const { isSearching, onCloseSearch } = useSearching();
   const pathname = usePathname();
-  const { setTheme, resolvedTheme } = useTheme();
+  const { setTheme } = useTheme();
 
   useEffect(() => {
     // Get the theme from local storage
