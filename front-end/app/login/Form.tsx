@@ -35,25 +35,44 @@ const Form: React.FC<FormProps> = ({ formState, setFormState }) => {
   const { control, handleSubmit } = useForm<FormData>();
   const [phoneNumber, setPhoneNumber] = useState("");
   const [isDisabled, setIsDisabled] = useState(false);
-  const [timeLeft, setTimeLeft] = useState(60);
+  const [timeLeft, setTimeLeft] = useState(1);
 
   useEffect(() => {
-    setTimeLeft(60);
-  }, [phoneNumber]);
+    // Log for debugging purposes
+    console.log("Timer starts or timeLeft has changed");
 
-  useEffect(() => {
-    console.log("starts");
+    // The timer should only start if timeLeft is greater than 0
     if (timeLeft > 0) {
+      // Establish the interval
       const timerId = setInterval(() => {
-        setTimeLeft((timeLeft) => timeLeft - 1);
+        // Update timeLeft by decrementing it
+        setTimeLeft((currentValue) => {
+          // Check if the currentValue is already at its minimum (1)
+          // If so, disable the button, reset the time for the next round, and clear the interval
+          if (currentValue === 1) {
+            setIsDisabled(false);
+            // Optionally, if you do not wish to reset the timer automatically, remove the next line
+            // and handle the reset through some user action (e.g., a button click).
+            // setTimeLeft(60);
+            clearInterval(timerId);
+            return 0; // Ensures we do not go negative
+          } else {
+            // Continue decrementing
+            return currentValue - 1;
+          }
+        });
       }, 1000);
 
+      // Cleanup function to clear the interval when the component unmounts or timeLeft changes
       return () => clearInterval(timerId);
-    } else {
-      setIsDisabled(false);
-      setTimeLeft(60);
     }
-  }, [setIsDisabled]);
+
+    // If timeLeft is not greater than 0, ensure the button is enabled
+    // This part of the logic will run when timeLeft reaches 0 and the component re-renders
+    if (timeLeft === 0) {
+      setIsDisabled(false);
+    }
+  }, [timeLeft]);
 
   const handleOTPRequest = async (phone_number: string) => {
     setIsDisabled(true);
@@ -148,7 +167,12 @@ const Form: React.FC<FormProps> = ({ formState, setFormState }) => {
       >
         {input}
         <div>
-          <Button className="text-base font-bold w-96">ورود</Button>
+          <Button
+            className="text-base font-bold w-96"
+            onClick={() => setTimeLeft(60)}
+          >
+            ورود
+          </Button>
         </div>
       </form>
     </div>
