@@ -15,8 +15,6 @@ type FormData = {
 
 const poppins = localFont({
   src: "../../../public/fonts/Poppins-Bold.ttf",
-  weight: "700",
-  style: "bold",
 });
 
 const Login = () => {
@@ -54,11 +52,11 @@ const Login = () => {
             <ThemeToggle />
           </div>
           <div className="flex flex-col items-center">
-            <p
+            <h1
               className={`${poppins.className} pt-10 font-bold text-5xl text-my-purple`}
             >
               Shopify
-            </p>
+            </h1>
             <p className="text-slate-500 pt-2">لطفا اطلاعات خود را وارد کنید</p>
           </div>
           <form

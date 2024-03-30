@@ -1,13 +1,6 @@
 "use client";
-import React, { useState } from "react";
-import localFont from "next/font/local";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import ThemeToggle from "@/components/ThemeToggle";
-import { usePathname } from "next/navigation";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import useSearching from "@/hooks/useSearching";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -15,48 +8,29 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Poppins } from "next/font/google";
-import { FiShoppingCart } from "react-icons/fi";
-import { TbLogin } from "react-icons/tb";
-import { RiHome2Fill } from "react-icons/ri";
+import { Input } from "@/components/ui/input";
+import useSearching from "@/hooks/useSearching";
+import localFont from "next/font/local";
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
+import React, { useState } from "react";
+import { BiSearch } from "react-icons/bi";
 import { FaRegHeart } from "react-icons/fa";
-import { PiShoppingCartSimpleFill } from "react-icons/pi";
-import { GoPersonFill, GoTriangleDown, GoPerson } from "react-icons/go";
-import { RxExit } from "react-icons/rx";
+import { FiShoppingCart } from "react-icons/fi";
+import { GoTriangleDown } from "react-icons/go";
 import { IoPersonOutline } from "react-icons/io5";
-import { BiHomeAlt2, BiSearch } from "react-icons/bi";
 import { MdKeyboardArrowLeft } from "react-icons/md";
+import { ICONS, LINKS, FILL_ICONS } from "@/components/NavbarConstants";
+import { RxExit } from "react-icons/rx";
+import { TbLogin } from "react-icons/tb";
 
-const poppins = Poppins({
-  weight: "700",
-  subsets: ["latin"],
+const poppins = localFont({
+  src: [
+    {
+      path: "../public/fonts/Poppins-Medium.ttf",
+    },
+  ],
 });
-
-type IconsType = {
-  [key: string]: JSX.Element;
-};
-
-type LinksType = {
-  [key: string]: string;
-};
-
-let icons: IconsType = {
-  خانه: <BiHomeAlt2 size={25} />,
-  "سبد خرید": <FiShoppingCart size={25} />,
-  پروفایل: <GoPerson size={25} />,
-};
-
-let links: LinksType = {
-  خانه: "/",
-  "سبد خرید": "/shoppingCart",
-  پروفایل: "/profile",
-};
-
-let fillIcons: IconsType = {
-  خانه: <RiHome2Fill size={25} />,
-  "سبد خرید": <PiShoppingCartSimpleFill size={25} />,
-  پروفایل: <GoPersonFill size={25} />,
-};
 
 const Navbar = () => {
   const [searchValue, setSearchValue] = useState("");
@@ -205,13 +179,13 @@ const Navbar = () => {
         </div>
       </div>
       <div className="fixed z-50 flex items-center justify-center gap-24 sm:gap-30 md:gap-44 lg:hidden bottom-0 bg-white dark:bg-dark-user bg-opacity-30 backdrop-blur-lg h-16 w-full shadow-sm border-gray-300 dark:border-gray-950 border-t-2 text-gray-700 dark:text-white">
-        {Object.entries(icons).map(([key]) => (
+        {Object.entries(ICONS).map(([key]) => (
           <Link
-            href={links[key]}
+            href={LINKS[key]}
             key={key}
             className="flex flex-col gap-2 items-center justify-center cursor-pointer"
           >
-            {pathname == links[key] ? fillIcons[key] : icons[key]}
+            {pathname == LINKS[key] ? FILL_ICONS[key] : ICONS[key]}
 
             <span className="text-xs">{key}</span>
           </Link>

@@ -1,15 +1,14 @@
 "use client";
 import { useState } from "react";
-import { Poppins } from "next/font/google";
+import localFont from "next/font/local";
 import ThemeToggle from "../../components/ThemeToggle";
 import { IoMdArrowForward } from "react-icons/io";
 import Form from "./Form";
 
 import { FormState, INITIAL, MESSAGES } from "./formStates";
 
-const poppins = Poppins({
-  weight: "600",
-  subsets: ["latin"],
+const poppins = localFont({
+  src: "../../public/fonts/Poppins-Bold.ttf",
 });
 
 const Login = () => {
