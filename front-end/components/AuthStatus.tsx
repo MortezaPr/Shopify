@@ -16,6 +16,8 @@ import { RxExit } from "react-icons/rx";
 import { TbLogin } from "react-icons/tb";
 import { FaRegHeart } from "react-icons/fa";
 import { FiShoppingCart } from "react-icons/fi";
+import { jwtDecode } from "jwt-decode";
+import refreshToken from "@/actions/refreshToken";
 
 import Link from "next/link";
 
@@ -26,7 +28,28 @@ const AuthStatus = () => {
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
     if (token != null) {
-      setStatus("authenticated");
+      const decodedToken = jwtDecode(token);
+      console.log(decodedToken);
+      const currentTime = Math.floor(Date.now() / 1000); // get current time in seconds
+      if (
+        currentTime >= decodedToken.exp! ||
+        decodedToken.exp! - currentTime <= 600
+      ) {
+        // token is expired or token is near to expire, refresh it
+        const refresh = async () => {
+          try {
+            const response = await refreshToken();
+            localStorage.setItem("accessToken", response.token);
+            console.log(response.token);
+            setStatus("authenticated");
+          } catch (error) {
+            setStatus("unauthenticated");
+          }
+        };
+        refresh();
+      } else {
+        setStatus("authenticated");
+      }
     } else {
       setStatus("unauthenticated");
     }

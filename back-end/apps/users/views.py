@@ -1,7 +1,5 @@
-import datetime
 from tokenize import TokenError
 
-import jwt
 from django.conf import settings
 from django.contrib.auth.hashers import is_password_usable
 from django.core.exceptions import ObjectDoesNotExist
@@ -161,29 +159,24 @@ class LoginView(APIView):
         return {"access": access_token, "refresh": str(refresh)}
 
     def post(self, request):
-        print("here1")
         phone_number = request.data.get("phone_number")
         if phone_number is not None:
-            print("here2")
+
             # Customer
             customer = Customer.objects.filter(phone_number=phone_number).first()
             if customer is None:
                 raise exceptions.AuthenticationFailed("User not found")
 
             user = customer.user
-            print(request.data)
             password = request.data.get("password")
             otp = request.data.get("otp")
-            print(otp)
-            print("here3")
             if password and user.password and not user.check_password(password):
                 raise exceptions.AuthenticationFailed("Incorrect password")
 
             if otp and not self.check_otp(phone_number, otp):
                 raise exceptions.AuthenticationFailed("Incorrect OTP")
-            print(otp)
+
             if otp and not customer.is_verified:
-                print("here4")
                 customer.is_verified = True
                 customer.save()
 
@@ -204,8 +197,11 @@ class LoginView(APIView):
             if not user.check_password(request.data.get("password", "")):
                 raise exceptions.AuthenticationFailed("Incorrect password")
 
-        tokens = self.generate_tokens(user)
-        return Response(tokens)
+        access_token, refresh_token = self.generate_tokens(user).values()
+        response = Response()
+        response.set_cookie(key="refreshToken", value=refresh_token, httponly=True)
+        response.data = {"token": access_token}
+        return response
 
     def check_otp(self, phone_number, otp):
         # Connect to Redis
@@ -226,17 +222,10 @@ class RefreshTokenView(APIView):
     permission_classes = [AllowAny]
 
     def post(self, request):
-        refresh_token = request.data.get("refresh")
-        if refresh_token is None:
-            return Response({"error": "No refresh token provided"}, status=400)
-
-        try:
-            id = decode_refresh_token(refresh_token)
-            access_token = create_access_token(id)
-            return Response({"access": access_token})
-
-        except TokenError:
-            return Response({"error": "Invalid refresh token"}, status=400)
+        refresh_token = request.COOKIES.get("refreshToken")
+        id = decode_refresh_token(refresh_token)
+        access_token = create_access_token(id)
+        return Response({"token": access_token})
 
 
 # this is a test view to check if the token is working

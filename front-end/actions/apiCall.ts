@@ -1,12 +1,18 @@
 import axios from "axios";
 
-async function apiCall(url: string, method: string, body?: any) {
+async function apiCall(
+  url: string,
+  method: string,
+  body?: any,
+  credentials?: boolean
+) {
   const options = {
     method,
     headers: {
       "Content-Type": "application/json",
     },
     data: body,
+    withCredentials: credentials || false,
   };
   try {
     const response = await axios(url, options);

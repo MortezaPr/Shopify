@@ -1,13 +1,9 @@
 import { FormInputs } from "./FormInputs";
 import { Button } from "@/components/ui/button";
+import toast, { Toaster } from "react-hot-toast";
 
-import {
-  checkUser,
-  createUser,
-  verifyUser,
-  getNewOTP,
-  customerLogin,
-} from "@/actions";
+import { checkUser, createUser, getNewOTP, customerLogin } from "@/actions";
+import { useRouter } from "next/navigation";
 
 import { useForm, SubmitHandler } from "react-hook-form";
 
@@ -35,7 +31,9 @@ const Form: React.FC<FormProps> = ({ formState, setFormState }) => {
   const { control, handleSubmit } = useForm<FormData>();
   const [phoneNumber, setPhoneNumber] = useState("");
   const [isDisabled, setIsDisabled] = useState(false);
+  const [error, setError] = useState("");
   const [timeLeft, setTimeLeft] = useState(1);
+  const router = useRouter();
 
   useEffect(() => {
     // Log for debugging purposes
@@ -122,19 +120,26 @@ const Form: React.FC<FormProps> = ({ formState, setFormState }) => {
         }
       }
     } else if (formState === SIGN_IN_WITH_PASSWORD) {
-      const tokens = await customerLogin(
+      const response = await customerLogin(
         data.phone_number,
         data.password,
         data.otp
       );
-      console.log(tokens);
+      localStorage.setItem("accessToken", response.token);
+      router.push("/");
     } else {
-      const tokens = await customerLogin(
-        data.phone_number,
-        data.password,
-        data.otp
-      );
-      console.log(tokens);
+      try {
+        const response = await customerLogin(
+          data.phone_number,
+          data.password,
+          data.otp
+        );
+        console.log(response.token);
+        localStorage.setItem("accessToken", response.token);
+        router.push("/");
+      } catch (error) {
+        toast.error("کد وارد شده اشتباه است");
+      }
     }
   };
 
@@ -165,7 +170,11 @@ const Form: React.FC<FormProps> = ({ formState, setFormState }) => {
         className="flex flex-col gap-8 pt-3"
         onSubmit={handleSubmit(onSubmit)}
       >
-        {input}
+        <div className="flex flex-col gap-2">
+          {input}
+          {error !== "" ? <p className="text-sm text-red-500">{error}</p> : ""}
+        </div>
+
         <div>
           <Button
             className="text-base font-bold w-96"
@@ -175,6 +184,7 @@ const Form: React.FC<FormProps> = ({ formState, setFormState }) => {
           </Button>
         </div>
       </form>
+      <Toaster />
     </div>
   );
 };
