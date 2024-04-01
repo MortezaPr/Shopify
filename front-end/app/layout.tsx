@@ -3,11 +3,8 @@
 import localFont from "next/font/local";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
-import useSearching from "@/hooks/useSearching";
 import { usePathname } from "next/navigation";
-import { useEffect } from "react";
 import { Providers } from "./providers";
-import { useTheme } from "next-themes";
 
 const iranSans = localFont({
   src: [
@@ -34,21 +31,7 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const { isSearching, onCloseSearch } = useSearching();
   const pathname = usePathname();
-  const { setTheme } = useTheme();
-
-  useEffect(() => {
-    // Get the theme from local storage
-    const theme = localStorage.getItem("theme");
-
-    // If the theme in local storage is 'dark', add the 'dark' class to the body
-    if (theme === "dark") {
-      setTheme("dark");
-    } else {
-      setTheme("light");
-    }
-  }, [setTheme]);
 
   return (
     <html lang="en" dir="rtl" suppressHydrationWarning>
@@ -60,20 +43,7 @@ export default function RootLayout({
         <body className={`${iranSans.className} dark:bg-darker-user`}>
           <Providers>
             <Navbar />
-            <div
-              className={`${
-                isSearching ? "absolute bg-blackOverlay min-h-screen" : ""
-              }`}
-            >
-              <div
-                className={`h-full flex  ${isSearching ? "z-40" : ""} `}
-                onClick={onCloseSearch}
-              >
-                <div className={`${isSearching ? "-z-10" : ""}`}>
-                  {children}
-                </div>
-              </div>
-            </div>
+            {children}
           </Providers>
         </body>
       )}

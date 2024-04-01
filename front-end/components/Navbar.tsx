@@ -1,33 +1,20 @@
 "use client";
 import ThemeToggle from "@/components/ThemeToggle";
-import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+
 import { Input } from "@/components/ui/input";
-import useSearching from "@/hooks/useSearching";
 import localFont from "next/font/local";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import React, { useState } from "react";
+import { useState } from "react";
 import { BiSearch } from "react-icons/bi";
-import { FaRegHeart } from "react-icons/fa";
 import { FiShoppingCart } from "react-icons/fi";
-import { GoTriangleDown } from "react-icons/go";
-import { IoPersonOutline } from "react-icons/io5";
-import { MdKeyboardArrowLeft } from "react-icons/md";
 import { ICONS, LINKS, FILL_ICONS } from "@/components/NavbarConstants";
-import { RxExit } from "react-icons/rx";
-import { TbLogin } from "react-icons/tb";
+import AuthStatus from "./AuthStatus";
 
 const poppins = localFont({
   src: [
     {
-      path: "../public/fonts/Poppins-Medium.ttf",
+      path: "../public/fonts/Poppins-Bold.ttf",
     },
   ],
 });
@@ -35,32 +22,15 @@ const poppins = localFont({
 const Navbar = () => {
   const [searchValue, setSearchValue] = useState("");
   const pathname = usePathname();
-  const { isSearching, onSearch, onCloseSearch } = useSearching();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const router = useRouter();
-
-  const handleSearchClick = (
-    e: React.MouseEvent<HTMLInputElement, MouseEvent>
-  ) => {
-    e.stopPropagation();
-    if (isSearching) {
-      onCloseSearch();
-    } else {
-      onSearch();
-    }
-  };
-
-  const handleClick = () => {
-    onCloseSearch();
-  };
 
   const handleSearch = (value: string) => {
     router.push(`/search?query=${value}`);
   };
 
   return (
-    <div onClick={handleClick}>
+    <div>
       <div
         className={`fixed z-50 bg-white dark:bg-dark-user bg-opacity-85 backdrop-blur-lg h-16 lg:h-20 shadow-sm ${
           pathname.startsWith("/profile") ? "hidden lg:block" : ""
@@ -83,7 +53,6 @@ const Navbar = () => {
                 onChange={(e) => setSearchValue(e.target.value)}
                 className="w-[calc(100vw-40px)] lg:w-[35rem] border-none bg-gray-200 dark:bg-darker-user pr-14 flex h-12 py-0 caret-cyan-600 placeholder:text-gray-500"
                 placeholder="جستجو"
-                onClick={(e) => handleSearchClick(e)}
               />
               <div
                 className="text-gray-400 absolute top-[0.85rem] right-5 cursor-pointer"
@@ -92,85 +61,9 @@ const Navbar = () => {
                 <BiSearch size={22} />
               </div>
             </div>
-            {isSearching ? (
-              <div
-                onClick={(e) => e.stopPropagation()}
-                className="absolute top-[4.5rem] right-[0.5rem] lg:right-[11rem] bg-gray-100 dark:bg-darker-user w-[calc(100vw-40px)] lg:w-[35.1rem] h-60 rounded-xl flex-col pr-5 pt-5"
-              >
-                search results
-              </div>
-            ) : (
-              ""
-            )}
           </div>
           <div className="hidden lg:flex pl-12 items-center pt-4 gap-5">
-            {isLoggedIn ? (
-              <div className="border-l-2 border-gray-200 dark:border-gray-700 pl-5 flex items-center">
-                <DropdownMenu>
-                  <DropdownMenuTrigger
-                    style={{
-                      outline: "none",
-                    }}
-                  >
-                    <div className="flex gap-1">
-                      <IoPersonOutline size={22} />
-                      <GoTriangleDown />
-                    </div>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent className="dark:border-neutral-800 bg-opacity-60 backdrop-blur-lg">
-                    <DropdownMenuItem className="flex p-2">
-                      <Link
-                        href={"/profile"}
-                        className="flex gap-10 items-center p-2"
-                      >
-                        <MdKeyboardArrowLeft size={20} />
-                        <div className="font-bold">مرتضی پوررمضان</div>
-                      </Link>
-                    </DropdownMenuItem>
-                    <DropdownMenuSeparator className="dark:bg-neutral-800" />
-
-                    <DropdownMenuItem>
-                      <Link
-                        href={"/profile"}
-                        className="flex gap-2 items-center p-2"
-                      >
-                        سفارش ها
-                        <FiShoppingCart />
-                      </Link>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem className="gap-2">
-                      <Link
-                        href={"/profile/lists"}
-                        className="flex gap-2 items-center p-2"
-                      >
-                        لیست ها
-                        <FaRegHeart />
-                      </Link>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem className="gap-2">
-                      <button className="flex gap-2 items-center p-2">
-                        خروج از حساب کاربری
-                        <RxExit />
-                      </button>
-                    </DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              </div>
-            ) : (
-              <Button
-                variant="outline"
-                className="bg-white dark:bg-darker-user border-gray-300 dark:border-darker-user"
-              >
-                <div
-                  className="flex gap-2"
-                  onClick={() => router.push("/login")}
-                >
-                  <TbLogin size={22} />
-                  ورود | ثبت نام
-                </div>
-              </Button>
-            )}
-
+            <AuthStatus />
             <Link href={"/shoppingCart"} className="dark:text-white">
               <FiShoppingCart size={22} />
             </Link>

@@ -3,6 +3,7 @@ import { MdOutlineLightMode } from "react-icons/md";
 import { MdOutlineDarkMode } from "react-icons/md";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
+import Skeleton from "@/components/Skeleton";
 
 const ThemeToggle: React.FC = () => {
   const { setTheme, resolvedTheme } = useTheme();
@@ -12,7 +13,7 @@ const ThemeToggle: React.FC = () => {
     setIsMounted(true);
   }, []);
 
-  if (!isMounted) return null;
+  if (!isMounted) return <Skeleton width="2rem" />;
 
   return (
     <button
