@@ -1,5 +1,3 @@
-from tokenize import TokenError
-
 from django.conf import settings
 from django.contrib.auth.hashers import is_password_usable
 from django.core.exceptions import ObjectDoesNotExist
@@ -24,7 +22,7 @@ from .authentication import (
     decode_access_token,
     decode_refresh_token,
 )
-from .models import Customer, User
+from ...Domain.user.models import Customer, User
 from .serializers import CustomerSerializer, UserSerializer
 from .utils import set_otp
 

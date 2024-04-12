@@ -43,9 +43,9 @@ THIRD_PARTY_APPS = [
 ]
 
 LOCAL_APPS = [
-    "apps.users",
-    "apps.item",
-    "apps.shopping_cart",
+    "IAM.users",
+    "IAM.item",
+    "IAM.shopping_cart",
 ]
 
 

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Laptop, Mobile
+from ...Domain.item.models import Laptop, Mobile
 
 class MobileSerializer(serializers.ModelSerializer):
     class Meta:

@@ -2,7 +2,7 @@ from rest_framework.generics import CreateAPIView,UpdateAPIView, ListAPIView, Re
 from rest_framework.mixins import UpdateModelMixin, DestroyModelMixin
 from rest_framework.permissions import IsAdminUser, AllowAny
 
-from .models import Mobile, Laptop
+from ...Domain.item.models import Mobile, Laptop
 from .serializers import MobileSerializer, LaptopSerializer
 
 class CreateMobileView(CreateAPIView):

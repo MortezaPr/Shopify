@@ -2,7 +2,7 @@ from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIV
 from rest_framework.permissions import IsAuthenticated
 
 from .serializers import CartItemSerializer, shopping_cartSerializer
-from.models import CartItem, shopping_cart
+from ...Domain.shopping_cart.models import CartItem, shopping_cart
 
 
 class shopping_cartView(ListCreateAPIView):
