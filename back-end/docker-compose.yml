@@ -38,6 +38,12 @@ services:
       - "6379:6379"
     networks:
       - shopify_network
+  nginx:
+    build: ./webserver/.
+    ports:
+      - "80:80"
+    depends_on:
+      - web
 
 volumes:
   shopify_data:
@@ -45,4 +51,3 @@ volumes:
 networks:
   shopify_network:
   redis_network:
-
