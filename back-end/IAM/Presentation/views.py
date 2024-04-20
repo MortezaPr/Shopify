@@ -16,15 +16,15 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
 
-from .authentication import (
+from ..Application.jwt_services import (
     create_access_token,
     create_refresh_token,
     decode_access_token,
     decode_refresh_token,
 )
-from ...Domain.user.models import Customer, User
+from ..Domain.models import Customer, User
+from ..Infrastructure.utils import set_otp
 from .serializers import CustomerSerializer, UserSerializer
-from .utils import set_otp
 
 
 class CreateUserView(CreateAPIView):

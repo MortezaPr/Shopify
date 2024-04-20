@@ -21,9 +21,9 @@ from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, Spec
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("api/users/", include("apps.users.urls")),
-    path("api/item/", include("apps.item.urls")),
-    path("api/shopping-cart/", include("apps.shopping_cart.urls")),
+    path("auth/", include("IAM.Presentation.urls")),
+    # path("api/item/", include("apps.item.urls")),
+    # path("api/shopping-cart/", include("apps.shopping_cart.urls")),
     path('docs/schema', SpectacularAPIView.as_view(), name='schema'),
     path('docs/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
     path('redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),

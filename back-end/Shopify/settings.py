@@ -19,7 +19,7 @@ import environ
 env = environ.Env()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-APPS_DIR = BASE_DIR / "apps"
+# APPS_DIR = BASE_DIR / "apps"
 
 env.read_env(os.path.join(BASE_DIR, "env/dev.env"))
 # Quick-start development settings - unsuitable for production
@@ -42,11 +42,11 @@ THIRD_PARTY_APPS = [
     "corsheaders",
 ]
 
-LOCAL_APPS = [
-    "IAM.users",
-    "IAM.item",
-    "IAM.shopping_cart",
-]
+# LOCAL_APPS = [
+#     "IAM.users",
+#     "IAM.item",
+#     "IAM.shopping_cart",
+# ]
 
 
 INSTALLED_APPS = [
@@ -57,7 +57,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     *THIRD_PARTY_APPS,
-    *LOCAL_APPS,
+    "IAM",
 ]
 
 MIDDLEWARE = [
@@ -77,7 +77,7 @@ CORS_ORIGIN_WHITELIST = [
 
 ROOT_URLCONF = "Shopify.urls"
 
-MEDIA_ROOT = str(APPS_DIR / "media")
+# MEDIA_ROOT = str(APPS_DIR / "media")
 # https://docs.djangoproject.com/en/dev/ref/settings/#media-url
 MEDIA_URL = "/media/"
 
@@ -145,7 +145,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-AUTH_USER_MODEL = "users.User"
+AUTH_USER_MODEL = "IAM.User"
 
 
 # Internationalization

@@ -2,8 +2,8 @@ import uuid
 
 from rest_framework import serializers
 
-from ...Domain.user.models import Customer, User
-from .utils import set_otp
+from ..Domain.models import Customer, User
+from ..Infrastructure.utils import set_otp
 
 
 class CustomerSerializer(serializers.ModelSerializer):
