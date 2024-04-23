@@ -1,1 +1,1 @@
-from .Domain.models import User
+from .Domain.user import User

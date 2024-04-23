@@ -22,7 +22,8 @@ from ..Application.jwt_services import (
     decode_access_token,
     decode_refresh_token,
 )
-from ..Domain.models import Customer, User
+from ..Domain.user import User
+from ..Domain.customer import Customer
 from ..Infrastructure.utils import set_otp
 from .serializers import CustomerSerializer, UserSerializer
 

@@ -2,7 +2,8 @@ import uuid
 
 from rest_framework import serializers
 
-from ..Domain.models import Customer, User
+from ..Domain.customer import Customer
+from ..Domain.user import User
 from ..Infrastructure.utils import set_otp
 
 
