@@ -60,6 +60,10 @@ INSTALLED_APPS = [
     "IAM",
 ]
 
+MIGRATION_MODULES = {
+    "IAM": "IAM.Infrastructure.migrations",
+}
+
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
