@@ -4,7 +4,7 @@ from rest_framework import serializers
 
 from ..Domain.customer import Customer
 from ..Domain.user import User
-from ..Infrastructure.utils import set_otp
+from ..Infrastructure.redis.generateOTP import generate_otp
 
 
 class CustomerSerializer(serializers.ModelSerializer):
@@ -27,7 +27,7 @@ class CustomerSerializer(serializers.ModelSerializer):
         customer.save()
 
         # Set the OTP
-        set_otp(customer)
+        generate_otp(customer.phone_number)
 
         return customer
 

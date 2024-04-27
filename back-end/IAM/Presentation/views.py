@@ -22,9 +22,11 @@ from ..Application.jwt_services import (
     decode_access_token,
     decode_refresh_token,
 )
-from ..Domain.user import User
 from ..Domain.customer import Customer
-from ..Infrastructure.utils import set_otp
+from ..Domain.user import User
+from ..Infrastructure.redis.generateOTP import generate_otp
+from ..Infrastructure.redis.redis import RedisClient
+from ..Infrastructure.redis.verifyOTP import verify_otp
 from .serializers import CustomerSerializer, UserSerializer
 
 
@@ -87,25 +89,7 @@ class VerifyUserView(APIView):
         phone_number = request.data.get("phone_number")
         otp = request.data.get("otp")
 
-        # Connect to Redis
-        redis_conn = Redis(
-            host=settings.REDIS_HOST, port=settings.REDIS_PORT, db=settings.REDIS_DB
-        )
-
-        # Get the OTP stored in Redis
-        redis_otp = redis_conn.get(phone_number)
-
-        if redis_otp is not None and otp == redis_otp.decode():
-            try:
-                # If OTP is correct, set is_verified to True
-                customer = Customer.objects.get(phone_number=phone_number)
-                customer.is_verified = True
-                customer.save()
-                return JsonResponse({"status": "verified"})
-            except ObjectDoesNotExist:
-                return JsonResponse({"error": "Customer does not exist"}, status=400)
-        else:
-            return JsonResponse({"error": "Invalid OTP"}, status=400)
+        return verify_otp(phone_number, otp)
 
 
 class SetNewOTPView(APIView):
@@ -119,7 +103,7 @@ class SetNewOTPView(APIView):
         except Customer.DoesNotExist:
             return JsonResponse({"error": "Customer does not exist"}, status=400)
 
-        otp = set_otp(customer)
+        otp = generate_otp(customer.phone_number)
         return JsonResponse({"status": "OTP set", "otp": otp})
 
 
@@ -203,12 +187,11 @@ class LoginView(APIView):
         return response
 
     def check_otp(self, phone_number, otp):
-        # Connect to Redis
-        redis_conn = Redis(
-            host=settings.REDIS_HOST, port=settings.REDIS_PORT, db=settings.REDIS_DB
-        )
+        # Get the Redis client
+        redis_client = RedisClient().r
+
         # Get the OTP stored in Redis
-        redis_otp = redis_conn.get(phone_number)
+        redis_otp = redis_client.get(phone_number)
 
         # Check if the OTP is correct
         if redis_otp is not None and otp == redis_otp.decode():
