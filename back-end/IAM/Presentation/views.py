@@ -42,13 +42,6 @@ class UserListView(ListAPIView):
     permission_classes = [IsAdminUser]
 
 
-class UserDetailView(RetrieveAPIView):
-    lookup_field = "id"
-    serializer_class = CustomerSerializer
-    queryset = User.objects.all()
-    permission_classes = [IsAdminUser]
-
-
 class UpdateUserView(UpdateAPIView):
     lookup_field = "id"
     serializer_class = CustomerSerializer
@@ -92,7 +85,7 @@ class VerifyUserView(APIView):
         return verify_otp(phone_number, otp)
 
 
-class SetNewOTPView(APIView):
+class GenerateOTPView(APIView):
     permission_classes = [AllowAny]
 
     def post(self, request, *args, **kwargs):
@@ -211,13 +204,13 @@ class RefreshTokenView(APIView):
 
 
 # this is a test view to check if the token is working
-class TestView(APIView):
-    permission_classes = [AllowAny]
+# class TestView(APIView):
+#     permission_classes = [AllowAny]
 
-    def get(self, request):
-        access_token = request.data.get("access_token")
-        user_id = decode_access_token(access_token)
-        print(user_id)
-        user = User.objects.get(id=user_id)
-        serializer = UserSerializer(user)
-        return Response(serializer.data)
+#     def get(self, request):
+#         access_token = request.data.get("access_token")
+#         user_id = decode_access_token(access_token)
+#         print(user_id)
+#         user = User.objects.get(id=user_id)
+#         serializer = UserSerializer(user)
+#         return Response(serializer.data)
