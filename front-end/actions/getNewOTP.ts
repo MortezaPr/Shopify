@@ -1,5 +1,5 @@
 async function getNewOTP(phone_number: string) {
-  const response = await fetch(`http://localhost:8000/api/users/get-new-otp/`, {
+  const response = await fetch(`http://localhost:8000/auth/generate-otp/`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

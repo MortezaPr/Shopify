@@ -5,7 +5,7 @@ async function customerLogin(
   password?: string,
   otp?: string
 ) {
-  const url = "http://localhost:8000/api/users/login/";
+  const url = "http://localhost:8000/auth/login/";
   const method = "POST";
   const body = { phone_number, password, otp };
   const data = await apiCall(url, method, body);
