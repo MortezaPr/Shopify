@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import (
+from .views import (  # TestView,
     CheckPassword,
     CheckUserStatusView,
     CreateUserView,
@@ -8,7 +8,6 @@ from .views import (
     GenerateOTPView,
     LoginView,
     RefreshTokenView,
-    TestView,
     UpdateUserView,
     UserListView,
     VerifyUserView,
