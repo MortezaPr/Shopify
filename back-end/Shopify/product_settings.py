@@ -19,9 +19,9 @@ import environ
 env = environ.Env()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-APPS_DIR = BASE_DIR / "apps"
+# APPS_DIR = BASE_DIR / "apps"
 
-env.read_env(os.path.join(BASE_DIR, "env/.env"))
+env.read_env(os.path.join(BASE_DIR, "env/dev.env"))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
@@ -43,9 +43,9 @@ THIRD_PARTY_APPS = [
 ]
 
 # LOCAL_APPS = [
-#     "apps.users",
-#     "apps.item",
-#     "apps.shopping_cart",
+#     "IAM.users",
+#     "IAM.item",
+#     "IAM.shopping_cart",
 # ]
 
 
@@ -58,9 +58,16 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     *THIRD_PARTY_APPS,
     "IAM",
+    "Media",
 ]
 
+MIGRATION_MODULES = {
+    "IAM": "IAM.Infrastructure.migrations",
+    "Media": "Media.Infrastructure.migrations",
+}
+
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -68,17 +75,15 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "corsheaders.middleware.CorsMiddleware",
 ]
 
-CORS_ALLOWED_ORIGINS = [
+CORS_ORIGIN_WHITELIST = [
     "http://localhost:3000",
 ]
 
 ROOT_URLCONF = "Shopify.urls"
 
-
-MEDIA_ROOT = str(APPS_DIR / "media")
+# MEDIA_ROOT = str(APPS_DIR / "media")
 # https://docs.djangoproject.com/en/dev/ref/settings/#media-url
 MEDIA_URL = "/media/"
 
@@ -113,8 +118,19 @@ DATABASES = {
         "PASSWORD": env("POSTGRES_PASSWORD"),
         "HOST": env("POSTGRES_HOST"),
         "PORT": env("POSTGRES_PORT"),
-    }
+    },
+    "media": {
+        "ENGINE": "django",
+        "NAME": os.environ.get("MONGO_DB_NAME"),
+        "CLIENT": {
+            "host": os.environ.get("MONGO_DB_HOST"),
+            "port": int(os.environ.get("MONGO_DB_PORT")),
+            "username": os.environ.get("MONGO_DB_USERNAME"),
+            "password": os.environ.get("MONGO_DB_PASSWORD"),
+        },
+    },
 }
+
 
 # Rest_framework configuration
 REST_FRAMEWORK = {
@@ -145,7 +161,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+
 AUTH_USER_MODEL = "IAM.User"
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
@@ -184,6 +202,6 @@ SIMPLE_JWT = {
 #     }
 # }
 
-REDIS_HOST = "redis"  # Or 'localhost' if not using Docker
+REDIS_HOST = "localhost"  # Or 'localhost' if not using Docker
 REDIS_PORT = 6379
 REDIS_DB = 0

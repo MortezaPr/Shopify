@@ -58,10 +58,12 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     *THIRD_PARTY_APPS,
     "IAM",
+    "Media",
 ]
 
 MIGRATION_MODULES = {
     "IAM": "IAM.Infrastructure.migrations",
+    "Media": "Media.Infrastructure.migrations",
 }
 
 MIDDLEWARE = [
@@ -116,7 +118,17 @@ DATABASES = {
         "PASSWORD": env("POSTGRES_PASSWORD"),
         "HOST": env("POSTGRES_HOST"),
         "PORT": env("POSTGRES_PORT"),
-    }
+    },
+    "media": {
+        "ENGINE": "djongo",
+        "NAME": os.environ.get("MONGO_DB_NAME"),
+        "CLIENT": {
+            "host": os.environ.get("MONGO_DB_HOST"),
+            "port": int(os.environ.get("MONGO_DB_PORT")),
+            "username": os.environ.get("MONGO_DB_USERNAME"),
+            "password": os.environ.get("MONGO_DB_PASSWORD"),
+        },
+    },
 }
 
 # Rest_framework configuration
