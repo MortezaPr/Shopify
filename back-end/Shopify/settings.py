@@ -50,6 +50,8 @@ THIRD_PARTY_APPS = [
 
 
 INSTALLED_APPS = [
+    "IAM",
+    "Media",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -57,8 +59,6 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     *THIRD_PARTY_APPS,
-    "IAM",
-    "Media",
 ]
 
 MIGRATION_MODULES = {
@@ -119,16 +119,16 @@ DATABASES = {
         "HOST": env("POSTGRES_HOST"),
         "PORT": env("POSTGRES_PORT"),
     },
-    "media": {
-        "ENGINE": "djongo",
-        "NAME": os.environ.get("MONGO_DB_NAME"),
-        "CLIENT": {
-            "host": os.environ.get("MONGO_DB_HOST"),
-            "port": int(os.environ.get("MONGO_DB_PORT")),
-            "username": os.environ.get("MONGO_DB_USERNAME"),
-            "password": os.environ.get("MONGO_DB_PASSWORD"),
-        },
-    },
+    # "media": {
+    #     "ENGINE": "djongo",
+    #     "NAME": os.environ.get("MONGO_DB_NAME"),
+    #     "CLIENT": {
+    #         "host": os.environ.get("MONGO_DB_HOST"),
+    #         "port": int(os.environ.get("MONGO_DB_PORT")),
+    #         "username": os.environ.get("MONGO_DB_USERNAME"),
+    #         "password": os.environ.get("MONGO_DB_PASSWORD"),
+    #     },
+    # },
 }
 
 # Rest_framework configuration
