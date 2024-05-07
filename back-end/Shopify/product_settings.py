@@ -119,7 +119,7 @@ DATABASES = {
         "HOST": env("POSTGRES_HOST"),
         "PORT": env("POSTGRES_PORT"),
     },
-    "media": {
+    "media_db": {
         "ENGINE": "django",
         "NAME": os.environ.get("MONGO_DB_NAME"),
         "CLIENT": {
@@ -202,6 +202,6 @@ SIMPLE_JWT = {
 #     }
 # }
 
-REDIS_HOST = "localhost"  # Or 'localhost' if not using Docker
+REDIS_HOST = "redis"  # Or 'localhost' if not using Docker
 REDIS_PORT = 6379
 REDIS_DB = 0

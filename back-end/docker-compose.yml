@@ -47,8 +47,21 @@ services:
     networks:
       - shopify_network
 
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=password
+    volumes:
+      - mongo-data:/data/db
+
 volumes:
   shopify_data:
+    driver: local
+  mongo-data:
+    driver: local
 
 networks:
   shopify_network:

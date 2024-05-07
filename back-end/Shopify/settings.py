@@ -201,6 +201,6 @@ SIMPLE_JWT = {
 #     }
 # }
 
-REDIS_HOST = "localhost"  # Or 'localhost' if not using Docker
+REDIS_HOST = "redis"  # Or 'localhost' if not using Docker
 REDIS_PORT = 6379
 REDIS_DB = 0
