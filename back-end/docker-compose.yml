@@ -6,10 +6,10 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - 3000:3000
+      - 8000:8000
     volumes:
       - .:/usr/src/app
-    command: python manage.py runserver 0.0.0.0:3000
+    command: python manage.py runserver 0.0.0.0:8000
     networks:
       - shopify_network
       - redis_network
@@ -26,7 +26,7 @@ services:
       - env/.env
     restart: always
     ports:
-      - "5433:5432"
+      - "5432:5432"
     volumes:
       - shopify_data:/var/lib/postgresql/data/
     networks:
