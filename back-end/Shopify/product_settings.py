@@ -63,6 +63,7 @@ INSTALLED_APPS = [
 
 MIGRATION_MODULES = {
     "IAM": "IAM.Infrastructure.migrations",
+    "Media": "Media.Infrastructure.migrations",
 }
 
 MIDDLEWARE = [

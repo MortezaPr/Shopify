@@ -6,4 +6,4 @@ from ..Domain.media import Media
 class MediaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Media
-        fields = ["file_type", "file_size", "upload_date"]
+        fields = ["file_type", "upload_date"]

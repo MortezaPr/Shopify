@@ -9,10 +9,13 @@ class GetMediaView(APIView):
 
     def get(self, request, *args, **kwargs):
         client = MongoClient(
-            "mongodb://root:root@mongodb:27017"
+            "mongodb://admin:password@mongodb:27017"
         )  # replace with your MongoDB connection string
-        db = client["mongoDb"]
+        print(client.list_database_names())
+        db = client["mediaDb"]
         collection = db["pictures"]
+        document = {"name": "Picture1", "size": "500KB"}
+        collection.insert_one(document)
         try:
             collection.find_one()  # try to fetch one document from the collection
             return Response({"message": "Connected to MongoDB"})

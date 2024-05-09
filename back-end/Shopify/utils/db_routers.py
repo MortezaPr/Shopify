@@ -1,22 +1,25 @@
 class NonRelRouter:
     """
-    A router to control if database should use
-    primary database or non-relational one.
+    A router to control all database operations on models in the Media application.
     """
 
-    nonrel_models = {"Media"}
-
-    def db_for_read(self, model, **_hints):
-        if model._meta.model_name in self.nonrel_models:
+    def db_for_read(self, model, **hints):
+        if model._meta.app_label == "Media":
             return "nonrel"
-        return "default"
+        return None
 
-    def db_for_write(self, model, **_hints):
-        if model._meta.model_name in self.nonrel_models:
+    def db_for_write(self, model, **hints):
+        print(model._meta.app_label)
+        if model._meta.app_label == "Media":
             return "nonrel"
-        return "default"
+        return None
 
-    def allow_migrate(self, _db, _app_label, model_name=None, **_hints):
-        if _db == "nonrel" or model_name in self.nonrel_models:
-            return False
-        return True
+    def allow_relation(self, obj1, obj2, **hints):
+        if obj1._meta.app_label == "Media" or obj2._meta.app_label == "Media":
+            return True
+        return None
+
+    def allow_migrate(self, db, app_label, model_name=None, **hints):
+        if app_label == "Media":
+            return db == "nonrel"
+        return None
