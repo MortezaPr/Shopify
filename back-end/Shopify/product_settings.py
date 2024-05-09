@@ -63,7 +63,6 @@ INSTALLED_APPS = [
 
 MIGRATION_MODULES = {
     "IAM": "IAM.Infrastructure.migrations",
-    "Media": "Media.Infrastructure.migrations",
 }
 
 MIDDLEWARE = [
@@ -85,7 +84,7 @@ ROOT_URLCONF = "Shopify.urls"
 
 # MEDIA_ROOT = str(APPS_DIR / "media")
 # https://docs.djangoproject.com/en/dev/ref/settings/#media-url
-MEDIA_URL = "/media/"
+# MEDIA_URL = "/media/"
 
 
 TEMPLATES = [
@@ -119,8 +118,8 @@ DATABASES = {
         "HOST": env("POSTGRES_HOST"),
         "PORT": env("POSTGRES_PORT"),
     },
-    "media_db": {
-        "ENGINE": "django",
+    "nonrel": {
+        "ENGINE": "djongo",
         "NAME": os.environ.get("MONGO_DB_NAME"),
         "CLIENT": {
             "host": os.environ.get("MONGO_DB_HOST"),
@@ -128,8 +127,15 @@ DATABASES = {
             "username": os.environ.get("MONGO_DB_USERNAME"),
             "password": os.environ.get("MONGO_DB_PASSWORD"),
         },
+        "TEST": {
+            "MIRROR": "default",
+        },
     },
 }
+
+DATABASE_ROUTERS = [
+    "Shopify.utils.db_routers.NonRelRouter",
+]
 
 
 # Rest_framework configuration
@@ -191,6 +197,7 @@ SIMPLE_JWT = {
     "REFRESH_TOKEN_LIFETIME": timedelta(days=30),
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=5),
 }
+
 
 # CACHES = {
 #     'default': {

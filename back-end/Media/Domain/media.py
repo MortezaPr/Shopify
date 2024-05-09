@@ -1,7 +1,11 @@
-from django.db import models
+from djongo import models as mongo_models
 
 
-class Media(models.Model):
-    file_type = models.CharField(max_length=50)
-    file_size = models.IntegerField()
-    upload_date = models.DateTimeField(auto_now_add=True)
+class Media(mongo_models.Model):
+    file_type = mongo_models.CharField(max_length=50)
+    file_size = mongo_models.IntegerField()
+    upload_date = mongo_models.DateTimeField(auto_now_add=True)
+    size = mongo_models.IntegerField(default=0)
+
+    class Meta:
+        _use_db = "nonrel"

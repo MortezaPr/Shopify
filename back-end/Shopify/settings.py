@@ -119,7 +119,7 @@ DATABASES = {
         "HOST": env("POSTGRES_HOST"),
         "PORT": env("POSTGRES_PORT"),
     },
-    "media": {
+    "nonrel": {
         "ENGINE": "djongo",
         "NAME": os.environ.get("MONGO_DB_NAME"),
         "CLIENT": {
@@ -128,8 +128,15 @@ DATABASES = {
             "username": os.environ.get("MONGO_DB_USERNAME"),
             "password": os.environ.get("MONGO_DB_PASSWORD"),
         },
+        "TEST": {
+            "MIRROR": "default",
+        },
     },
 }
+
+DATABASE_ROUTERS = [
+    "Shopify.utils.db_routers.NonRelRouter",
+]
 
 # Rest_framework configuration
 REST_FRAMEWORK = {
@@ -190,6 +197,7 @@ SIMPLE_JWT = {
     "REFRESH_TOKEN_LIFETIME": timedelta(days=30),
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=5),
 }
+
 
 # CACHES = {
 #     'default': {
