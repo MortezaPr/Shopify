@@ -4,7 +4,7 @@ class NonRelRouter:
     primary database or non-relational one.
     """
 
-    nonrel_models = {"log"}
+    nonrel_models = {"Media"}
 
     def db_for_read(self, model, **_hints):
         if model._meta.model_name in self.nonrel_models:

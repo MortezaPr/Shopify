@@ -5,7 +5,6 @@ class Media(mongo_models.Model):
     file_type = mongo_models.CharField(max_length=50)
     file_size = mongo_models.IntegerField()
     upload_date = mongo_models.DateTimeField(auto_now_add=True)
-    size = mongo_models.IntegerField(default=0)
 
     class Meta:
         _use_db = "nonrel"

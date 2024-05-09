@@ -44,7 +44,7 @@ services:
   nginx:
     build: ./webserver/.
     ports:
-      - "80:80"
+      - "81:80"
     depends_on:
       - web
     networks:
