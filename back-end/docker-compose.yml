@@ -25,8 +25,6 @@ services:
   shopify_pg:
     image: postgres
     container_name: shopify_pg
-    env_file:
-      - env/.env
     restart: always
     ports:
       - "5432:5432"
@@ -54,16 +52,17 @@ services:
     image: mongo:latest
     ports:
       - "27017:27017"
+    env_file:
+      - dev.env
     environment:
-      - MONGO_INITDB_ROOT_USERNAME=root
-      - MONGO_INITDB_ROOT_PASSWORD=root
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_DB_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_DB_PASSWORD}
       - MONGO_INITDB_DATABASE=${MONGO_DB_NAME}
-      - MONGO_INITDB_USERNAME=${MONGO_DB_USERNAME}
-      - MONGO_INITDB_PASSWORD=${MONGO_DB_PASSWORD}
     volumes:
       - mongo-data:/data/db
     networks:
       - shopify_network
+
 
 volumes:
   shopify_data:

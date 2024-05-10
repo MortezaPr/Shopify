@@ -21,7 +21,7 @@ env = environ.Env()
 BASE_DIR = Path(__file__).resolve().parent.parent
 # APPS_DIR = BASE_DIR / "apps"
 
-env.read_env(os.path.join(BASE_DIR, "env/dev.env"))
+env.read_env(os.path.join(BASE_DIR, "dev.env"))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
@@ -121,12 +121,12 @@ DATABASES = {
     },
     "nonrel": {
         "ENGINE": "djongo",
-        "NAME": os.environ.get("MONGO_DB_NAME"),
+        "NAME": env("MONGO_DB_NAME"),
         "CLIENT": {
-            "host": os.environ.get("MONGO_DB_HOST"),
-            "port": int(os.environ.get("MONGO_DB_PORT")),
-            "username": os.environ.get("MONGO_DB_USERNAME"),
-            "password": os.environ.get("MONGO_DB_PASSWORD"),
+            "host": env("MONGO_DB_HOST"),
+            "port": int(env("MONGO_DB_PORT")),
+            "username": env("MONGO_DB_USERNAME"),
+            "password": env("MONGO_DB_PASSWORD"),
         },
         "TEST": {
             "MIRROR": "default",
