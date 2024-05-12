@@ -25,6 +25,8 @@ services:
   shopify_pg:
     image: postgres
     container_name: shopify_pg
+    env_file:
+      - ./dev.env
     restart: always
     ports:
       - "5432:5432"
