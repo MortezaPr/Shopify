@@ -63,7 +63,6 @@ INSTALLED_APPS = [
 
 MIGRATION_MODULES = {
     "IAM": "IAM.Infrastructure.migrations",
-    "Media": "Media.Infrastructure.migrations",
 }
 
 MIDDLEWARE = [
@@ -119,24 +118,7 @@ DATABASES = {
         "HOST": env("POSTGRES_HOST"),
         "PORT": env("POSTGRES_PORT"),
     },
-    "nonrel": {
-        "ENGINE": "djongo",
-        "NAME": os.environ.get("MONGO_DB_NAME"),
-        "CLIENT": {
-            "host": os.environ.get("MONGO_DB_HOST"),
-            "port": int(os.environ.get("MONGO_DB_PORT")),
-            "username": os.environ.get("MONGO_DB_USERNAME"),
-            "password": os.environ.get("MONGO_DB_PASSWORD"),
-        },
-        "TEST": {
-            "MIRROR": "default",
-        },
-    },
 }
-
-DATABASE_ROUTERS = [
-    "Shopify.utils.db_routers.NonRelRouter",
-]
 
 # Rest_framework configuration
 REST_FRAMEWORK = {
