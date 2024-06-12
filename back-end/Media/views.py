@@ -26,7 +26,7 @@ class GetMediaView(APIView):
     
         except Media.DoesNotExist:
             return Response({
-                'error': 'Salon not found'
+                'error': 'Product not found'
                 }, status=404)
 
 
@@ -72,8 +72,8 @@ class DeleteMediaView(APIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-def serve_image(request, picture_id):
-    picture_data = get_picture_from_mongodb(picture_id)
+def serve_image(request, media_id):
+    picture_data = get_picture_from_mongodb(media_id)
 
     if picture_data:
         response = HttpResponse(picture_data, content_type='image/jpeg')

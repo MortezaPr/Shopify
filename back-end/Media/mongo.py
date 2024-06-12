@@ -14,10 +14,10 @@ def save_picture_to_mongodb(picture_data):
 
     
 def get_picture_from_mongodb(picture_data):
-    salon_picture = collection.find_one({'_id': ObjectId(picture_data)})
+    product_picture = collection.find_one({'_id': ObjectId(picture_data)})
 
-    if salon_picture:
-        return salon_picture['picture_data']
+    if product_picture:
+        return product_picture['picture_data']
     
     return None
 
