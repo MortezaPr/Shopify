@@ -1,4 +1,3 @@
-
 from rest_framework.permissions import AllowAny
 from django.http import HttpResponse
 from rest_framework.response import Response
@@ -7,7 +6,6 @@ from rest_framework.views import APIView
 from .mongo import save_picture_to_mongodb, get_picture_from_mongodb, delete_picture_from_mongodb
 from .models import Media
 from rest_framework import status
-
 
 
 class GetMediaView(APIView):
@@ -22,12 +20,12 @@ class GetMediaView(APIView):
                 'title': media.title,
                 'pic_id': media.pic_id,
                 'image_url': request.build_absolute_uri(reverse('serve_image', args=[media.pic_id])),
-                })
-    
+            })
+
         except Media.DoesNotExist:
             return Response({
                 'error': 'Product not found'
-                }, status=404)
+            }, status=404)
 
 
 class UploadMediaView(APIView):
@@ -37,14 +35,12 @@ class UploadMediaView(APIView):
         title = request.data.get('title')
         picture_data = request.data.get('picture').read() if 'picture' in request.data else None
 
-
         picture_id = save_picture_to_mongodb(picture_data)
 
         media = Media(title=title, pic_id=str(picture_id))
         media.save()
 
         image_url = request.build_absolute_uri(reverse('serve_image', args=[media.pic_id]))
-            
 
         return Response({
             'message': 'Media created successfully',
@@ -56,7 +52,7 @@ class UploadMediaView(APIView):
 
 class DeleteMediaView(APIView):
     permission_classes = [AllowAny]
-    
+
     def delete(self, request, media_id, format=None):
         try:
             media = Media.objects.get(id=media_id)

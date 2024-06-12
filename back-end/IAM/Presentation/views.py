@@ -1,20 +1,15 @@
-from django.conf import settings
 from django.contrib.auth.hashers import is_password_usable
-from django.core.exceptions import ObjectDoesNotExist
 from django.http import JsonResponse
-from redis import Redis
 from rest_framework import exceptions
 from rest_framework.generics import (
     CreateAPIView,
     DestroyAPIView,
     ListAPIView,
-    RetrieveAPIView,
     UpdateAPIView,
 )
 from rest_framework.permissions import AllowAny, IsAdminUser
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework_simplejwt.tokens import RefreshToken
 
 from ..Application.jwt_services import (
     create_access_token,
