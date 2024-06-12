@@ -53,6 +53,8 @@ THIRD_PARTY_APPS = [
 INSTALLED_APPS = [
     "IAM",
     "Media",
+    "Store.Product",
+    "Store.Cart",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",

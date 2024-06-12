@@ -59,6 +59,8 @@ INSTALLED_APPS = [
     *THIRD_PARTY_APPS,
     "IAM",
     "Media",
+    "Store.Product",
+    "Store.Cart",
 ]
 
 MIGRATION_MODULES = {
