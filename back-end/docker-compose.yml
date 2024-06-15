@@ -6,13 +6,13 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - 8000:8000
+      - 9000:9000
     volumes:
       - .:/usr/src/app
     command: >
       sh -c "
              python manage.py migrate &&
-             python manage.py runserver 0.0.0.0:8000"
+             python manage.py runserver 0.0.0.0:9000"
     networks:
       - shopify_network
       - redis_network
