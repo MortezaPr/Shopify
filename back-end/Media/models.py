@@ -2,8 +2,11 @@ from django.db import models
 
 
 class Media(models.Model):
-    title = models.CharField(max_length=100)
-    pic_id = models.CharField(max_length=200)
+    pic_id = models.CharField(max_length=200, null=False, blank=False)
+    product_type = models.CharField(
+        max_length=100, default="laptop", null=False, blank=False
+    )
+    product_id = models.BigIntegerField(null=False, blank=False)
 
     def __str__(self):
-        return self.title
+        return self.pic_id
