@@ -13,7 +13,7 @@ class CreateMobileView(CreateAPIView):
 class CreateLaptopView(CreateAPIView):
     queryset = Laptop.objects.all()
     serializer_class = LaptopSerializer
-    permission_classes = [IsAdminUser]
+    permission_classes = []
     
 class ListMobileView(ListAPIView):
     queryset = Mobile.objects.all()

@@ -16,12 +16,9 @@ from .mongo import (
 class GetMediaView(APIView):
     permission_classes = [AllowAny]
 
-    def get(self, request, product_id, product_type, *args, **kwargs):
-        print(product_id, product_type)
+    def get(self, request, product_id, *args, **kwargs):
         try:
-            media = Media.objects.filter(
-                product_id=product_id, product_type=product_type
-            ).first()
+            media = Media.objects.get(product_id=product_id)
 
             return Response(
                 {
@@ -43,7 +40,6 @@ class UploadMediaView(APIView):
 
     def post(self, request, *args, **kwargs):
         product_id = request.data.get("product_id")
-        product_type = request.data.get("product_type")
         picture_data = (
             request.data.get("picture").read() if "picture" in request.data else None
         )
@@ -51,7 +47,7 @@ class UploadMediaView(APIView):
         picture_id = save_picture_to_mongodb(picture_data)
 
         media = Media(
-            pic_id=str(picture_id), product_type=product_type, product_id=product_id
+            pic_id=str(picture_id), product_id=product_id
         )
         media.save()
 
@@ -73,12 +69,9 @@ class UploadMediaView(APIView):
 class DeleteMediaView(APIView):
     permission_classes = [AllowAny]
 
-    def delete(self, request, product_id, product_type, format=None):
-        print(product_id, product_type)
+    def delete(self, request, product_id, format=None):
         try:
-            media = Media.objects.filter(
-                product_id=product_id, product_type=product_type
-            ).first()
+            media = Media.objects.get(product_id=product_id)
         except Media.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
