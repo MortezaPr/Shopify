@@ -4,35 +4,54 @@ import Phone from "../types/Phone";
 async function addPhone({
   name,
   price,
+  image,
   resolution,
   screen_tech,
   os_version,
   size,
   description,
 }: Phone) {
-  const access_token = localStorage.getItem("accessToken");
+  // const access_token = localStorage.getItem("accessToken");
 
-  const formData = new FormData();
-  formData.append("name", name);
-  formData.append("price", price.toString());
-  formData.append("description", description);
-  formData.append("resolution", resolution);
-  formData.append("screen_tech", screen_tech);
-  formData.append("os_version", os_version);
-  formData.append("size", size);
+  const formData1 = new FormData();
+  formData1.append("name", name);
+  formData1.append("price", price.toString());
+  formData1.append("description", description);
+  formData1.append("resolution", resolution);
+  formData1.append("screen_tech", screen_tech);
+  formData1.append("os_version", os_version);
+  formData1.append("size", size);
+
+  const formData2 = new FormData();
 
   try {
     const response = await axios.post(
-      "http://localhost:8000/store/mobile/create/",
-      formData,
-      {
-        headers: {
-          Authorization: `Bearer ${access_token}`,
-        },
-      }
+      "http://localhost:8000/store/product/mobile/create/",
+      formData1
+      // {
+      //   headers: {
+      //     Authorization: `Bearer ${access_token}`,
+      //   },
+      // }
     );
+    console.log(image)
+    const phoneId = response.data.id;
+    formData2.append("product_id", phoneId);
+    formData2.append("picture", image[0]);
 
-    console.log(response.data);
+    try {
+      const response2 = await axios.post(
+        "http://localhost:8000/media/upload-media/",
+        formData2
+        // {
+        //   headers: {
+        //     Authorization: `Bearer ${access_token}`,
+        //   },
+        // }
+      );
+    } catch (error: any) {
+      console.log("error in uploading image");
+    }
   } catch (error: any) {
     if (error.response) {
       if (error.response.status === 400) {

@@ -8,7 +8,7 @@ from .serializers import MobileSerializer, LaptopSerializer
 class CreateMobileView(CreateAPIView):
     queryset = Mobile.objects.all()
     serializer_class = MobileSerializer
-    permission_classes = [IsAdminUser]
+    permission_classes = []
     
 class CreateLaptopView(CreateAPIView):
     queryset = Laptop.objects.all()

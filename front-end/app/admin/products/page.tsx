@@ -26,7 +26,7 @@ const Products = () => {
   type Inputs = {
     name: string;
     price: number;
-    image: string;
+    image: File;
     resolution: string;
     screen_tech: string;
     os_version: string;

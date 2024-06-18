@@ -23,7 +23,6 @@ class GetMediaView(APIView):
             return Response(
                 {
                     "pic_id": media.pic_id,
-                    "product_type": media.product_type,
                     "product_id": media.product_id,
                     "image_url": request.build_absolute_uri(
                         reverse("serve_image", args=[media.pic_id])
@@ -41,14 +40,12 @@ class UploadMediaView(APIView):
     def post(self, request, *args, **kwargs):
         product_id = request.data.get("product_id")
         picture_data = (
-            request.data.get("picture").read() if "picture" in request.data else None
+            request.FILES.get("picture").read() if "picture" in request.data else None
         )
 
         picture_id = save_picture_to_mongodb(picture_data)
 
-        media = Media(
-            pic_id=str(picture_id), product_id=product_id
-        )
+        media = Media(pic_id=str(picture_id), product_id=product_id)
         media.save()
 
         image_url = request.build_absolute_uri(
