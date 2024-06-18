@@ -34,7 +34,6 @@ async function addPhone({
       //   },
       // }
     );
-    console.log(image)
     const phoneId = response.data.id;
     formData2.append("product_id", phoneId);
     formData2.append("picture", image[0]);
