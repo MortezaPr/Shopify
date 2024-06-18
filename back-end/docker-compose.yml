@@ -6,13 +6,16 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - 9000:9000
+      - 8000:8000
     volumes:
       - .:/usr/src/app
     command: >
       sh -c "
-             python manage.py migrate &&
-             python manage.py runserver 0.0.0.0:9000"
+             until python manage.py migrate; do
+               echo 'Waiting for postgres...'
+               sleep 3
+             done &&
+             python manage.py runserver 0.0.0.0:8000"
     networks:
       - shopify_network
       - redis_network
@@ -41,6 +44,7 @@ services:
       - "6379:6379"
     networks:
       - shopify_network
+
   nginx:
     build: ./webserver/.
     ports:

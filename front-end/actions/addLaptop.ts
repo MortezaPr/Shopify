@@ -1,9 +1,8 @@
 import Laptop from "../types/Laptop";
 
 async function addLaptop({
-  title,
+  name,
   price,
-  picture,
   description,
   processor,
   ram,
@@ -17,9 +16,8 @@ async function addLaptop({
       authorization: `Bearer ${localStorage.getItem("token")}`,
     },
     body: JSON.stringify({
-      title,
+      name,
       price,
-      picture,
       description,
       processor,
       ram,

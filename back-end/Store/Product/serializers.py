@@ -4,10 +4,10 @@ from .models import Laptop, Mobile
 class MobileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Mobile
-        fields = "__all__"
+        exclude = ['slug']
 
 
 class LaptopSerializer(serializers.ModelSerializer):
     class Meta:
         model = Laptop
-        fields = "__all__"
+        exclude = ['slug']
