@@ -27,15 +27,11 @@ const Login = () => {
   const { control, handleSubmit } = useForm<FormData>();
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
-    let { refresh, access } = await login(data.username, data.password);
+    let { token } = await login(data.username, data.password);
 
-    localStorage.setItem("accessToken", access);
-    localStorage.setItem("refreshToken", refresh);
+    localStorage.setItem("adminAccessToken", token);
 
-    document.cookie = `access_token=${access}; path=/; HttpOnly; Secure; SameSite=Strict`;
-    document.cookie = `refresh_token=${refresh}; path=/; HttpOnly; Secure; SameSite=Strict`;
-
-    const access_token = localStorage.getItem("accessToken");
+    const access_token = localStorage.getItem("adminAccessToken");
     console.log(access_token);
 
     router.push("/admin/dashboard");
