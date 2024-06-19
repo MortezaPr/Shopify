@@ -1,18 +1,30 @@
-import getPhones from "@/actions/getPhones";
+"use client";
+import fetchPhones from "@/actions/fetchPhones";
+import fetchProductImages from "@/actions/fetchProductImages";
+import React, { useEffect, useState } from "react";
 import Box from "@/app/Box";
 
-// async function getPhonesFromServer() {
-//   const res = await fetch("http://localhost:8000/item/mobile/list", {
-//     method: "GET",
-//   });
-//   const data = await res.json();
-//   return data;
-// }
+export default function Home() {
+  const [phones, setPhones] = useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      const fetchedPhones = await fetchPhones();
 
-export default async function Home() {
-  const phones = getPhones();
-  // const phones2 = await getPhonesFromServer();
-  // console.log(phones2);
+      // Fetch images for each phone and add to its object
+      const phonesWithImages = await Promise.all(
+        fetchedPhones.map(async (phone) => {
+          const image = await fetchProductImages(phone.id); // Assuming fetchProductImages returns the image URL
+          return { ...phone, image }; // Add the image URL to the phone object
+        })
+      );
+
+      console.log(phonesWithImages);
+
+      setPhones(phonesWithImages);
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <main className="h-screen w-screen">

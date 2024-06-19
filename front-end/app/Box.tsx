@@ -15,6 +15,7 @@ type BoxProps = {
 };
 
 const Box: React.FC<BoxProps> = ({ title, items }) => {
+  console.log(items);
   const scrollContainer = useRef(null);
 
   const scrollLeft = () => {
@@ -72,7 +73,7 @@ const Box: React.FC<BoxProps> = ({ title, items }) => {
                 <div className="w-52 h-[19rem]">
                   <div className="flex justify-center pt-2">
                     <Image
-                      src={item.image}
+                      src={item.image.image_url}
                       alt="image"
                       width={160}
                       height={160}

@@ -3,7 +3,7 @@ from django.utils.text import slugify
 
 
 class Product(models.Model):
-    name = models.CharField(max_length=10, blank=True, null=False)
+    name = models.TextField(max_length=60, blank=True, null=False)
     price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=False)
     slug = models.SlugField(unique=True)
     description = models.TextField(max_length=128, null=True, blank=True)
