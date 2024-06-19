@@ -25,6 +25,6 @@ urlpatterns = [
     path("store/product/", include("Store.Product.urls")),
     path("store/shopping-cart/", include("Store.Cart.urls")),
     path('docs/schema', SpectacularAPIView.as_view(), name='schema'),
-    path('docs/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
+    path('', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
     path('redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
 ]
