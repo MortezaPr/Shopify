@@ -97,6 +97,12 @@ const Form: React.FC<FormProps> = ({ formState, setFormState }) => {
   );
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
+    const phoneNumberPattern = /^09\d{9}$/;
+    if (!phoneNumberPattern.test(data.phone_number)) {
+      toast.error("شماره موبایل وارد شده صحیح نیست");
+      return; // Stop the submission process
+    }
+
     if (formState === INITIAL) {
       const userStatus = await checkUser(data.phone_number);
       setPhoneNumber(data.phone_number);

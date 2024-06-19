@@ -28,6 +28,7 @@ export const FormInputs = (
         render={({ field }) => (
           <input
             {...field}
+            dir="ltr"
             type="text"
             className="p-2 rounded-md border border-slate-400 dark:border-none outline-none focus:outline-my-purple focus:border-none dark:text-white dark:bg-[#141517] w-96"
           />
@@ -44,6 +45,7 @@ export const FormInputs = (
           render={({ field }) => (
             <input
               {...field}
+              dir="ltr"
               type={isVisible ? "text" : "password"}
               placeholder="   کلمه عبور"
               className="p-2 rounded-md border border-slate-400 dark:border-none dark:text-white outline-none focus:outline-my-purple focus:border-none w-full dark:bg-[#141517]"
@@ -77,6 +79,7 @@ export const FormInputs = (
           render={({ field }) => (
             <input
               {...field}
+              dir="ltr"
               type="text"
               className="p-2 rounded-md border border-slate-400 dark:border-none outline-none focus:outline-my-purple focus:border-none dark:text-white dark:bg-[#141517] w-96"
             />
