@@ -24,8 +24,9 @@ const Products = () => {
   const [selectedValue, setSelectedValue] = useState("phone");
   const { isOpen } = useSidebarToggle();
   type Inputs = {
-    name: string;
+    title: string;
     price: number;
+    color: string;
     image: File;
     resolution: string;
     screen_tech: string;
@@ -94,13 +95,13 @@ const Products = () => {
 
               <div className="flex items-center gap-5">
                 <Label htmlFor="name" className="text-right">
-                  * نام محصول:
+                  * عنوان:
                 </Label>
-                <Input
-                  className="w-96"
+                <Textarea
+                  className="border-gray-400 focus:outline-none w-96"
                   // value={title}
                   // onChange={(e) => setTitle(e.target.value)}
-                  {...register("name")}
+                  {...register("title")}
                 />
               </div>
               <div className="flex items-center gap-5">
@@ -121,6 +122,12 @@ const Products = () => {
               {selectedValue === "phone"
                 ? Forms("phone", register)
                 : Forms("laptop", register)}
+              <div className="flex items-center gap-5">
+                <Label htmlFor="price" className="text-right">
+                  رنگ:
+                </Label>
+                <Input className="w-40" {...register("color")} />
+              </div>
               <div className="flex items-center gap-5">
                 <Label htmlFor="description" className="text-right">
                   توضیحات:

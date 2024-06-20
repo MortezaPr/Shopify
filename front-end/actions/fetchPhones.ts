@@ -1,7 +1,7 @@
 import apiCall from "./apiCall";
 
 async function fetchPhones() {
-  const url = "http://localhost:8000/store/product/mobile/list";
+  const url = "http://localhost:8000/store/product/phone/list";
   const method = "GET";
   return apiCall(url, method);
 }

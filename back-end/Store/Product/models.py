@@ -2,13 +2,14 @@ from django.db import models
 
 
 class Product(models.Model):
-    name = models.TextField(max_length=60, blank=True, null=False)
+    title = models.TextField(max_length=250, blank=True, null=False)
     price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=False)
     slug = models.SlugField(unique=True, blank=True, null=True)
-    description = models.TextField(max_length=128, null=True, blank=True)
+    description = models.TextField(max_length=450, null=True, blank=True)
+    color = models.CharField(max_length=32, null=True, blank=True)
 
 
-class Mobile(Product):
+class Phone(Product):
     resolution = models.CharField(max_length=128, null=True, blank=True)
     screen_tech = models.TextField(max_length=128, null=True, blank=True)
     os_version = models.CharField(max_length=128, null=True, blank=True)

@@ -1,35 +1,50 @@
-from rest_framework.generics import CreateAPIView,UpdateAPIView, ListAPIView, RetrieveAPIView, DestroyAPIView, GenericAPIView
-from rest_framework.mixins import UpdateModelMixin, DestroyModelMixin
-from rest_framework.permissions import IsAdminUser, AllowAny
+from rest_framework.generics import (
+    CreateAPIView,
+    DestroyAPIView,
+    GenericAPIView,
+    ListAPIView,
+    RetrieveAPIView,
+    UpdateAPIView,
+)
+from rest_framework.mixins import DestroyModelMixin, UpdateModelMixin
+from rest_framework.permissions import AllowAny, IsAdminUser
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
-from .models import Mobile, Laptop
-from .serializers import MobileSerializer, LaptopSerializer
+from .models import Laptop, Phone
+from .serializers import LaptopSerializer, PhoneSerializer
 
-class CreateMobileView(CreateAPIView):
-    queryset = Mobile.objects.all()
-    serializer_class = MobileSerializer
+
+class CreatePhoneView(CreateAPIView):
+    queryset = Phone.objects.all()
+    serializer_class = PhoneSerializer
     permission_classes = []
-    
+
+
 class CreateLaptopView(CreateAPIView):
     queryset = Laptop.objects.all()
     serializer_class = LaptopSerializer
     permission_classes = []
-    
-class ListMobileView(ListAPIView):
-    queryset = Mobile.objects.all()
-    serializer_class = MobileSerializer
+
+
+class ListPhoneView(ListAPIView):
+    queryset = Phone.objects.all()
+    serializer_class = PhoneSerializer
     permission_classes = [AllowAny]
-    
+
+
 class ListLaptopView(ListAPIView):
     queryset = Laptop.objects.all()
     serializer_class = LaptopSerializer
     permission_classes = [AllowAny]
 
-class DeleteMobileView(DestroyAPIView):
+
+class DeletePhoneView(DestroyAPIView):
     lookup_field = "slug"
-    queryset = Mobile.objects.all()
-    serializer_class = MobileSerializer
+    queryset = Phone.objects.all()
+    serializer_class = PhoneSerializer
     permission_classes = [IsAdminUser]
+
 
 class DeleteLaptopView(DestroyAPIView):
     lookup_field = "slug"
@@ -37,11 +52,13 @@ class DeleteLaptopView(DestroyAPIView):
     serializer_class = LaptopSerializer
     permission_classes = [IsAdminUser]
 
-class GetMobileView(RetrieveAPIView):
+
+class GetPhoneView(RetrieveAPIView):
     lookup_field = "slug"
-    queryset = Mobile.objects.all()
-    serializer_class = MobileSerializer
+    queryset = Phone.objects.all()
+    serializer_class = PhoneSerializer
     permission_classes = [AllowAny]
+
 
 class GetLaptopView(RetrieveAPIView):
     lookup_field = "slug"
@@ -49,14 +66,34 @@ class GetLaptopView(RetrieveAPIView):
     serializer_class = LaptopSerializer
     permission_classes = [AllowAny]
 
-class UpdateMobileView(UpdateAPIView):
+
+class UpdatePhoneView(UpdateAPIView):
     lookup_field = "slug"
-    queryset = Mobile.objects.all()
-    serializer_class = MobileSerializer
+    queryset = Phone.objects.all()
+    serializer_class = PhoneSerializer
     permission_classes = [IsAdminUser]
+
 
 class UpdateLaptopView(UpdateAPIView):
     lookup_field = "slug"
     queryset = Laptop.objects.all()
     serializer_class = LaptopSerializer
     permission_classes = [IsAdminUser]
+
+
+class GetProductBySlug(APIView):
+    permission_classes = [AllowAny]
+
+    def get(self, request, slug):
+        print("this is slug view")
+        print(slug)
+        phone = Phone.objects.filter(slug=slug).first()
+        laptop = Laptop.objects.filter(slug=slug).first()
+        if phone:
+            serializer = PhoneSerializer(phone)
+            return Response(serializer.data)
+        elif laptop:
+            serializer = LaptopSerializer(laptop)
+            return Response(serializer.data)
+        else:
+            return Response({"error": "Product not found"}, status=404)

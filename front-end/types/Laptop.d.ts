@@ -1,7 +1,11 @@
 type Laptop = {
   name: string;
   price: number;
-  image: string;
+  image: {
+    image_url: string;
+    pic_id: string;
+    product_id: number;
+  };
   description: string;
   processor: string;
   ram: string;
@@ -9,6 +13,7 @@ type Laptop = {
   gpu: string;
   id: number;
   slug: string;
+  color: string;
 };
 
 export default Laptop;

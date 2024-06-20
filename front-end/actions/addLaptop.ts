@@ -2,8 +2,9 @@ import Laptop from "../types/Laptop";
 import axios from "axios";
 
 async function addLaptop({
-  name,
+  title,
   price,
+  color,
   image,
   description,
   processor,
@@ -14,8 +15,9 @@ async function addLaptop({
   // const access_token = localStorage.getItem("accessToken");
 
   const formData1 = new FormData();
-  formData1.append("name", name);
+  formData1.append("title", title);
   formData1.append("price", price.toString());
+  formData1.append("color", color);
   formData1.append("description", description);
   formData1.append("processor", processor);
   formData1.append("ram", ram);

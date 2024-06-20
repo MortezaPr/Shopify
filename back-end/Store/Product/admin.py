@@ -1,7 +1,9 @@
 from django.contrib import admin
-from .models import Product, Laptop, Mobile
+
+from .models import Laptop, Phone, Product
+
 # Register your models here.
 
 admin.site.register(Product)
 admin.site.register(Laptop)
-admin.site.register(Mobile)
+admin.site.register(Phone)

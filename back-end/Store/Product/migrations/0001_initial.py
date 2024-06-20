@@ -8,41 +8,88 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Product',
+            name="Product",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(blank=True, max_length=10)),
-                ('price', models.DecimalField(blank=True, decimal_places=2, max_digits=10)),
-                ('image', models.ImageField(blank=True, null=True, upload_to='item_image')),
-                ('slug', models.SlugField(unique=True)),
-                ('description', models.TextField(blank=True, max_length=128, null=True)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(blank=True, max_length=10)),
+                (
+                    "price",
+                    models.DecimalField(blank=True, decimal_places=2, max_digits=10),
+                ),
+                (
+                    "image",
+                    models.ImageField(blank=True, null=True, upload_to="item_image"),
+                ),
+                ("slug", models.SlugField(unique=True)),
+                (
+                    "description",
+                    models.TextField(blank=True, max_length=128, null=True),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Laptop',
+            name="Laptop",
             fields=[
-                ('product_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='Product.product')),
-                ('processor', models.CharField(blank=True, max_length=32, null=True)),
-                ('ram', models.CharField(blank=True, max_length=32, null=True)),
-                ('internal_memory', models.CharField(blank=True, max_length=32, null=True)),
-                ('GPU', models.CharField(blank=True, max_length=32, null=True)),
+                (
+                    "product_ptr",
+                    models.OneToOneField(
+                        auto_created=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        parent_link=True,
+                        primary_key=True,
+                        serialize=False,
+                        to="Product.product",
+                    ),
+                ),
+                ("processor", models.CharField(blank=True, max_length=32, null=True)),
+                ("ram", models.CharField(blank=True, max_length=32, null=True)),
+                (
+                    "internal_memory",
+                    models.CharField(blank=True, max_length=32, null=True),
+                ),
+                ("GPU", models.CharField(blank=True, max_length=32, null=True)),
             ],
-            bases=('Product.product',),
+            bases=("Product.product",),
         ),
         migrations.CreateModel(
-            name='Mobile',
+            name="Phone",
             fields=[
-                ('product_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='Product.product')),
-                ('resolution', models.CharField(blank=True, max_length=128, null=True)),
-                ('screen_tech', models.TextField(blank=True, max_length=128, null=True)),
-                ('os_version', models.CharField(blank=True, max_length=128, null=True)),
-                ('size', models.DecimalField(blank=True, decimal_places=1, max_digits=3, null=True)),
+                (
+                    "product_ptr",
+                    models.OneToOneField(
+                        auto_created=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        parent_link=True,
+                        primary_key=True,
+                        serialize=False,
+                        to="Product.product",
+                    ),
+                ),
+                ("resolution", models.CharField(blank=True, max_length=128, null=True)),
+                (
+                    "screen_tech",
+                    models.TextField(blank=True, max_length=128, null=True),
+                ),
+                ("os_version", models.CharField(blank=True, max_length=128, null=True)),
+                (
+                    "size",
+                    models.DecimalField(
+                        blank=True, decimal_places=1, max_digits=3, null=True
+                    ),
+                ),
             ],
-            bases=('Product.product',),
+            bases=("Product.product",),
         ),
     ]

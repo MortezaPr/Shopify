@@ -81,7 +81,7 @@ const Box: React.FC<BoxProps> = ({ title, items }) => {
                     />
                   </div>
                   <p className="pt-5 px-5 text-sm max-w-[20rem] overflow-hidden line-clamp-2">
-                    {item.name}
+                    {item.title}
                   </p>
                   <p className="flex justify-center text-sm pt-4">
                     {item.price.toLocaleString("fa")} تومان

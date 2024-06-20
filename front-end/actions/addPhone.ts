@@ -2,8 +2,9 @@ import axios from "axios";
 import Phone from "../types/Phone";
 
 async function addPhone({
-  name,
+  title,
   price,
+  color,
   image,
   resolution,
   screen_tech,
@@ -14,8 +15,9 @@ async function addPhone({
   // const access_token = localStorage.getItem("accessToken");
 
   const formData1 = new FormData();
-  formData1.append("name", name);
+  formData1.append("title", title);
   formData1.append("price", price.toString());
+  formData1.append("color", color);
   formData1.append("description", description);
   formData1.append("resolution", resolution);
   formData1.append("screen_tech", screen_tech);
@@ -26,7 +28,7 @@ async function addPhone({
 
   try {
     const response = await axios.post(
-      "http://localhost:8000/store/product/mobile/create/",
+      "http://localhost:8000/store/product/phone/create/",
       formData1
       // {
       //   headers: {
