@@ -9,7 +9,7 @@ import fetchPhones from "@/actions/fetchPhones";
 import fetchProductImages from "@/actions/fetchProductImages";
 import { useEffect, useState } from "react";
 
-const getLikedItems = (likes, phones) => {
+let getLikedItems = (likes, phones) => {
   return phones.filter((phone) => likes.includes(phone.id));
 };
 
