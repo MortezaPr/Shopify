@@ -72,3 +72,13 @@ class LaptopSerializer(serializers.ModelSerializer):
                 num += 1
             validated_data["slug"] = unique_slug
         return super().update(instance, validated_data)
+
+
+class ProductSerializer(serializers.Serializer):
+    def to_representation(self, instance):
+        if isinstance(instance, Phone):
+            return PhoneSerializer(instance).data
+        elif isinstance(instance, Laptop):
+            return LaptopSerializer(instance).data
+        else:
+            raise Exception("Unexpected type of tagged object")

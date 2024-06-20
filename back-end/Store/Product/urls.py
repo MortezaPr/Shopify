@@ -40,4 +40,5 @@ urlpatterns = [
         view=GetProductBySlug.as_view(),
         name="get_product_by_slug",
     ),
+    path("product-list/", ListAllProductsView.as_view(), name="list-products"),
 ]

@@ -1,7 +1,9 @@
 "use client";
 
 import { BsSortUpAlt } from "react-icons/bs";
-import getPhones from "@/actions/getPhones";
+import React, { useEffect, useState } from "react";
+import fetchProducts from "@/actions/fetchProducts";
+import fetchProductImages from "@/actions/fetchProductImages";
 import Link from "next/link";
 import {
   Accordion,
@@ -14,10 +16,29 @@ import TextField from "@mui/material/TextField";
 import { useTheme } from "next-themes";
 
 import Card from "./Card";
-import { useEffect, useState } from "react";
 
 const Search = () => {
-  const items = getPhones();
+  const [products, setProducts] = useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      const fetchedProdcuts = await fetchProducts();
+
+      // Fetch images for each phone and add to its object
+      const phonesWithImages = await Promise.all(
+        fetchedProdcuts.map(async (product) => {
+          const image = await fetchProductImages(product.id); // Assuming fetchProductImages returns the image URL
+          return { ...product, image }; // Add the image URL to the phone object
+        })
+      );
+
+      console.log(phonesWithImages);
+
+      setProducts(phonesWithImages);
+    };
+
+    fetchData();
+  }, []);
+
   const brands_english = {
     Apple: "اپل",
     Samsung: "سامسونگ",
@@ -151,11 +172,19 @@ const Search = () => {
         </div>
         <div className="w-[calc(100vw-50px)] flex justify-center lg:justify-normal">
           <div className="w-full md:w-[41rem] lg:w-[38.5rem] desktop1:w-[55rem] desktop2:w-[70rem] 2xl:w-[87.5rem] grid place-items-center gap-5 md:grid-cols-2 lg:grid-cols-2 desktop1:grid-cols-3 desktop2:grid-cols-4 2xl:grid-cols-5 pb-28">
-            {items.map((item, index) => (
-              <Link href={`/product/${item.slug}`} key={item.id}>
-                <Card image={item.image} name={item.name} price={item.price} />
-              </Link>
-            ))}
+            {products.length > 0 ? (
+              products.map((product, index) => (
+                <Link href={`/product/${product.slug}`} key={product.id}>
+                  <Card
+                    image={product?.image?.image_url}
+                    name={product?.title}
+                    price={product?.price} // Fixed typo from products?.price to product?.price
+                  />
+                </Link>
+              ))
+            ) : (
+              <p>Loading...</p> // This is a placeholder, you can replace it with any loading indicator you prefer
+            )}
           </div>
         </div>
       </div>

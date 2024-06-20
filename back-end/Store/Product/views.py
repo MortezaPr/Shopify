@@ -1,3 +1,4 @@
+from django.http import JsonResponse
 from rest_framework.generics import (
     CreateAPIView,
     DestroyAPIView,
@@ -12,7 +13,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from .models import Laptop, Phone
-from .serializers import LaptopSerializer, PhoneSerializer
+from .serializers import LaptopSerializer, PhoneSerializer, ProductSerializer
 
 
 class CreatePhoneView(CreateAPIView):
@@ -97,3 +98,14 @@ class GetProductBySlug(APIView):
             return Response(serializer.data)
         else:
             return Response({"error": "Product not found"}, status=404)
+
+
+class ListAllProductsView(APIView):
+    permission_classes = [AllowAny]
+
+    def get(self, request, *args, **kwargs):
+        phones = Phone.objects.all()
+        laptops = Laptop.objects.all()
+        combined_queryset = list(phones) + list(laptops)  # Combine querysets
+        serializer = ProductSerializer(combined_queryset, many=True)
+        return JsonResponse(serializer.data, safe=False)

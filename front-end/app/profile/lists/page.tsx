@@ -5,7 +5,9 @@ import Link from "next/link";
 import Image from "next/image";
 import heart from "@/public/images/heart.png";
 import useLikedItems from "@/hooks/useLikedItems";
-import getPhones from "@/actions/getPhones";
+import fetchPhones from "@/actions/fetchPhones";
+import fetchProductImages from "@/actions/fetchProductImages";
+import { useEffect, useState } from "react";
 
 const getLikedItems = (likes, phones) => {
   return phones.filter((phone) => likes.includes(phone.id));
@@ -13,7 +15,26 @@ const getLikedItems = (likes, phones) => {
 
 const Lists = () => {
   const { likes } = useLikedItems();
-  const phones = getPhones();
+  const [phones, setPhones] = useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      const fetchedPhones = await fetchPhones();
+
+      // Fetch images for each phone and add to its object
+      const phonesWithImages = await Promise.all(
+        fetchedPhones.map(async (phone) => {
+          const image = await fetchProductImages(phone.id); // Assuming fetchProductImages returns the image URL
+          return { ...phone, image }; // Add the image URL to the phone object
+        })
+      );
+
+      console.log(phonesWithImages);
+
+      setPhones(phonesWithImages);
+    };
+
+    fetchData();
+  }, []);
   let likeItems = getLikedItems(likes, phones);
   return (
     <div
@@ -50,14 +71,14 @@ const Lists = () => {
               <div className="lg:w-[calc(100vw-80vw)] xl:w-[calc(100vw-83vw)] 2xl:w-[calc(100vw-87vw)] h-[19rem] border-slate-200 dark:border-neutral-800 border-2 rounded-lg">
                 <div className="flex justify-center pt-2">
                   <Image
-                    src={likedItem.image}
+                    src={likedItem.image.image_url}
                     alt="image"
                     width={160}
                     height={160}
                   />
                 </div>
                 <p className="pt-5 px-7 text-sm max-w-[20rem] overflow-hidden line-clamp-2">
-                  {likedItem.name}
+                  {likedItem.title}
                 </p>
                 <p className="flex justify-center text-sm pt-4">
                   {likedItem.price.toLocaleString("fa")} تومان
