@@ -14,6 +14,9 @@ dependencies:
   '@emotion/styled':
     specifier: ^11.13.0
     version: 11.13.0(@emotion/react@11.13.0)(@types/react@18.3.3)(react@18.3.1)
+  '@mui/icons-material':
+    specifier: ^5.16.5
+    version: 5.16.5(@mui/material@5.16.5)(@types/react@18.3.3)(react@18.3.1)
   '@mui/material':
     specifier: ^5.16.5
     version: 5.16.5(@emotion/react@11.13.0)(@emotion/styled@11.13.0)(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
@@ -379,6 +382,23 @@ packages:
 
   /@mui/core-downloads-tracker@5.16.5:
     resolution: {integrity: sha512-ziFn1oPm6VjvHQcdGcAO+fXvOQEgieIj0BuSqcltFU+JXIxjPdVYNTdn2HU7/Ak5Gabk6k2u7+9PV7oZ6JT5sA==}
+    dev: false
+
+  /@mui/icons-material@5.16.5(@mui/material@5.16.5)(@types/react@18.3.3)(react@18.3.1):
+    resolution: {integrity: sha512-bn88xxU/J9UV0s6+eutq7o3TTOrOlbCX+KshFb8kxgIxJZZfYz3JbAXVMivvoMF4Md6jCVUzM9HEkf4Ajab4tw==}
+    engines: {node: '>=12.0.0'}
+    peerDependencies:
+      '@mui/material': ^5.0.0
+      '@types/react': ^17.0.0 || ^18.0.0
+      react: ^17.0.0 || ^18.0.0
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+    dependencies:
+      '@babel/runtime': 7.25.0
+      '@mui/material': 5.16.5(@emotion/react@11.13.0)(@emotion/styled@11.13.0)(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
+      '@types/react': 18.3.3
+      react: 18.3.1
     dev: false
 
   /@mui/material-nextjs@5.16.4(@emotion/cache@11.13.1)(@mui/material@5.16.5)(@types/react@18.3.3)(next@14.2.5)(react@18.3.1):
@@ -2449,6 +2469,16 @@ packages:
   /natural-compare@1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
     dev: true
+
+  /next-themes@0.3.0(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-/QHIrsYpd6Kfk7xakK4svpDI5mmXP0gfvCoJdGpZQ2TOrQZmsW0QxjaiLn8wbIKjtm4BTSqLoix4lxYYOnLJ/w==}
+    peerDependencies:
+      react: ^16.8 || ^17 || ^18
+      react-dom: ^16.8 || ^17 || ^18
+    dependencies:
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+    dev: false
 
   /next@14.2.5(react-dom@18.3.1)(react@18.3.1):
     resolution: {integrity: sha512-0f8aRfBVL+mpzfBjYfQuLWh2WyAwtJXCRfkPF4UJ5qd2YwrHczsrSzXU4tRMV0OAxR8ZJZWPFn6uhSC56UTsLA==}
