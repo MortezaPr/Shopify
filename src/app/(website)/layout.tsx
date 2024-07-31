@@ -9,7 +9,6 @@ export default function WebsiteLayout({
     <div>
       <Navbar />
       {children}
-      dsaasdd
     </div>
   );
 }

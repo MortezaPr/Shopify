@@ -56,7 +56,7 @@ export default function Sidebar() {
       <Button onClick={toggleDrawer(true)}>
         <MenuIcon />
       </Button>
-      <Drawer anchor="right" open={open} onClose={toggleDrawer(false)}>
+      <Drawer anchor="left" open={open} onClose={toggleDrawer(false)}>
         {DrawerList}
       </Drawer>
     </div>
