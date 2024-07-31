@@ -1,38 +1,42 @@
 "use client";
-import localFont from "next/font/local";
-import TextField from "@mui/material/TextField";
+import { login } from "@/services/login";
 import { Button } from "@mui/material";
-import { useForm, SubmitHandler } from "react-hook-form";
-import { useState } from "react";
+import TextField from "@mui/material/TextField";
+import localFont from "next/font/local";
+import { useRouter } from "next/navigation";
+import { SubmitHandler, useForm } from "react-hook-form";
+import toast, { Toaster } from "react-hot-toast";
 
 const poppins = localFont({
   src: "../../../../public/fonts/Poppins-Bold.ttf",
 });
 
 type FormData = {
-  email: string;
+  username: string;
   password?: string;
 };
 
 export default function Login() {
-  const { register, handleSubmit } = useForm<FormData>();
-  const [showPasswordInput, setShowPasswordInput] = useState(false);
-  const [isEmailValid, setIsEmailValid] = useState(true);
+  const router = useRouter();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>();
 
-  const onSubmit: SubmitHandler<FormData> = (data) => {
-    // Define the regex pattern for email validation
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-    // Check if the email is valid
-    if (emailPattern.test(data.email)) {
-      setIsEmailValid(true);
-      // Proceed with the existing if statement
-      if (data.email !== "" && !showPasswordInput) {
-        setShowPasswordInput(true);
+  const onSubmit: SubmitHandler<FormData> = async (data) => {
+    if (data.username && data.password) {
+      try {
+        await login(data.username, data.password);
+        toast.success("شما با موفقیت وارد شدید!");
+        setTimeout(() => {
+          router.push("/");
+        }, 1000);
+      } catch (error) {
+        toast.error("نام کاربری یا رمز عبور اشتباه است!");
       }
     } else {
-      // Handle invalid email case (optional)
-      setIsEmailValid(false);
+      console.log("Username and password are required");
     }
   };
 
@@ -48,10 +52,9 @@ export default function Login() {
           <p className="text-xl font-semibold">ورود | ثبت‌نام</p>
           <div className="text-gray-500 pt-5 text-sm">
             <p>سلام!</p>
-            <p className="pt-2">لطفا ایمیل خود را وارد کنید</p>
+            <p className="pt-2">لطفا نام کاربری و رمز عبور خود را وارد کنید</p>
           </div>
         </div>
-
         <form
           className="flex flex-col mx-10 pt-5"
           onSubmit={handleSubmit(onSubmit)}
@@ -59,28 +62,26 @@ export default function Login() {
           <div dir="rtl">
             <TextField
               margin="normal"
-              required
               fullWidth
-              id="email"
-              label="ایمیل"
-              autoComplete="email"
+              id="username"
+              label="نام کاربری"
               autoFocus
-              error={!isEmailValid}
-              helperText={!isEmailValid ? "ایمیل نادرست است" : ""}
-              {...register("email")}
+              {...register("username", { required: "نام کاربری الزامی است" })}
+              error={!!errors.username}
+              helperText={errors.username ? errors.username.message : ""}
               dir="rtl"
             />
 
-            {showPasswordInput && (
-              <TextField
-                margin="normal"
-                fullWidth
-                label="رمز عبور"
-                type="password"
-                id="password"
-                {...register("password")}
-              />
-            )}
+            <TextField
+              margin="normal"
+              fullWidth
+              label="رمز عبور"
+              type="password"
+              id="password"
+              {...register("password", { required: "رمز عبور الزامی است" })}
+              error={!!errors.password}
+              helperText={errors.password ? errors.password.message : ""}
+            />
           </div>
 
           <Button
@@ -97,6 +98,7 @@ export default function Login() {
           </Button>
         </form>
       </div>
+      <Toaster />
     </div>
   );
 }
