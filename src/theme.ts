@@ -1,23 +1,27 @@
 "use client";
-import { Roboto } from "next/font/google";
 import { createTheme } from "@mui/material/styles";
-import { TextField } from "@mui/material";
-
-const roboto = Roboto({
-  weight: ["300", "400", "500", "700"],
-  subsets: ["latin"],
-  display: "swap",
-});
 
 const theme = createTheme({
+  direction: "rtl",
   palette: {
     primary: {
       main: "#6e50f6",
       dark: "#613ff7",
     },
+    grey: {
+      100: "#f8f8f8",
+      200: "#f1f1f1",
+      300: "#e1e1e1",
+      400: "#c4c4c4",
+      500: "#a7a7a7",
+      600: "#8a8a8a",
+      700: "#6e6e6e",
+      800: "#515151",
+      900: "#353535",
+    },
   },
   typography: {
-    fontFamily: roboto.style.fontFamily,
+    fontFamily: "IranSans",
   },
   components: {
     MuiTextField: {

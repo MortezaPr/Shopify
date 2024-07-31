@@ -16,3 +16,20 @@
     @apply text-2xl font-semibold;
   }
 }
+
+@font-face {
+  font-family: "IranSans";
+  src: url("../../public/fonts/IRANSansX-4-Regular.woff2") format("woff2");
+}
+
+body {
+  font-family: IranSans;
+}
+
+.rtl-text-field .MuiInputLabel-root {
+  direction: rtl;
+}
+
+.rtl-text-field .MuiInputBase-input {
+  direction: rtl;
+}

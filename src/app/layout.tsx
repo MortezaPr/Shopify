@@ -1,12 +1,29 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
+import localFont from "next/font/local";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 import { ThemeProvider } from "@mui/material/styles";
-import { Providers } from "./providers";
 import theme from "../theme";
-
-const inter = Inter({ subsets: ["latin"] });
+import { Rtl } from "./Rtl";
+const iranSans = localFont({
+  src: [
+    {
+      path: "../../public/fonts/IRANSansX-4-Regular.woff2",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../../public/fonts/IRANSansX-5-Medium.woff2",
+      weight: "600",
+      style: "semibold",
+    },
+    {
+      path: "../../public/fonts/IRANSansX-7-Bold.woff2",
+      weight: "700",
+      style: "bold",
+    },
+  ],
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -19,11 +36,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${inter.className} bg-base-light dark:bg-base-dark`}>
+    <html lang="en" dir="rtl">
+      <body className={`${iranSans.className} bg-base-light dark:bg-base-dark`}>
         <AppRouterCacheProvider>
           <ThemeProvider theme={theme}>
-            <Providers>{children}</Providers>
+            <Rtl>{children}</Rtl>;
           </ThemeProvider>
         </AppRouterCacheProvider>
       </body>
