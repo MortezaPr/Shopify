@@ -1,7 +1,11 @@
+import Slider from "./components/Slider";
+
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      صفحه اصلی
+    <main className="min-h-screen mt-36 mx-10">
+      <div className="w-full">
+        <Slider />
+      </div>
     </main>
   );
 }

@@ -7,7 +7,9 @@ export default function WebsiteLayout({
 }) {
   return (
     <div>
-      <Navbar />
+      <div className="flex justify-center">
+        <Navbar />
+      </div>
       {children}
     </div>
   );
