@@ -5,7 +5,9 @@ import TextField from "@mui/material/TextField";
 import localFont from "next/font/local";
 import { useRouter } from "next/navigation";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
+import ClipLoader from "react-spinners/ClipLoader";
 
 const poppins = localFont({
   src: "../../../../public/fonts/Poppins-Bold.ttf",
@@ -13,11 +15,12 @@ const poppins = localFont({
 
 type FormData = {
   username: string;
-  password?: string;
+  password: string;
 };
 
 export default function Login() {
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
   const {
     register,
     handleSubmit,
@@ -25,18 +28,19 @@ export default function Login() {
   } = useForm<FormData>();
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
+    setIsLoading(true);
     if (data.username && data.password) {
       try {
         await login(data.username, data.password);
         toast.success("شما با موفقیت وارد شدید!");
+        setIsLoading(false);
         setTimeout(() => {
           router.push("/");
         }, 1000);
       } catch (error) {
+        setIsLoading(false);
         toast.error("نام کاربری یا رمز عبور اشتباه است!");
       }
-    } else {
-      console.log("Username and password are required");
     }
   };
 
@@ -86,6 +90,7 @@ export default function Login() {
 
           <Button
             type="submit"
+            disabled={isLoading}
             variant="contained"
             sx={{
               marginTop: "2rem",
@@ -94,7 +99,16 @@ export default function Login() {
               fontWeight: "bold",
             }}
           >
-            ورود
+            {isLoading ? (
+              <ClipLoader
+                color="gray"
+                size={25}
+                aria-label="Loading Spinner"
+                data-testid="loader"
+              />
+            ) : (
+              "ورود"
+            )}
           </Button>
         </form>
       </div>
