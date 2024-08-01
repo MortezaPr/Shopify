@@ -56,7 +56,6 @@ const config: Config = {
         "slide-fwd":
           " slide-fwd 0.45s cubic-bezier(0.250, 0.460, 0.450, 0.940) both",
       },
-      
     },
     screens: {
       xs: "450px",
@@ -65,6 +64,8 @@ const config: Config = {
 
       md: "768px",
       // => @media (min-width: 768px) { ... }
+
+      mg: "815px",
 
       lg: "1024px",
       // => @media (min-width: 1024px) { ... }

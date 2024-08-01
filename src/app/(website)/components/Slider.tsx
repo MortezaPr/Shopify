@@ -15,8 +15,8 @@ import "swiper/css";
 export default function Slider() {
   return (
     <section>
-      <div className="container">
-        <div className="hidden md:block">
+      <div className="">
+        <div className="hidden mg:block">
           <Swiper
             navigation
             pagination={{ clickable: true }}
@@ -25,7 +25,7 @@ export default function Slider() {
               delay: 3000,
               disableOnInteraction: false,
             }}
-            className="h-full w-full rounded-xl"
+            className="h-full w-full rounded-xl "
           >
             {images.slice(0, 4).map((image, index) => (
               <SwiperSlide key={index}>
@@ -36,7 +36,7 @@ export default function Slider() {
             ))}
           </Swiper>
         </div>
-        <div className="block md:hidden">
+        <div className="block mg:hidden">
           <Swiper
             navigation
             pagination={{ clickable: true }}
@@ -47,13 +47,13 @@ export default function Slider() {
             }}
             className="h-full w-full rounded-xl"
           >
-          {images.slice(4, 8).map((image, index) => (
-            <SwiperSlide key={index}>
-              <div className="flex h-full w-full items-center justify-center rounded-xl">
-                <Image src={image.src} alt={image.alt} />
-              </div>
-            </SwiperSlide>
-          ))}
+            {images.slice(4, 8).map((image, index) => (
+              <SwiperSlide key={index}>
+                <div className="flex h-full w-full items-center justify-center rounded-xl">
+                  <Image src={image.src} alt={image.alt} />
+                </div>
+              </SwiperSlide>
+            ))}
           </Swiper>
         </div>
       </div>

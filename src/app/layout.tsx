@@ -3,6 +3,7 @@ import "./globals.css";
 import localFont from "next/font/local";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 import { ThemeProvider } from "@mui/material/styles";
+import { CookiesProvider } from "next-client-cookies/server";
 import theme from "../theme";
 import { Rtl } from "./Rtl";
 const iranSans = localFont({
@@ -40,7 +41,9 @@ export default function RootLayout({
       <body className={`${iranSans.className} bg-base-light dark:bg-base-dark`}>
         <AppRouterCacheProvider>
           <ThemeProvider theme={theme}>
-            <Rtl>{children}</Rtl>;
+            <Rtl>
+              <CookiesProvider>{children}</CookiesProvider>
+            </Rtl>
           </ThemeProvider>
         </AppRouterCacheProvider>
       </body>
