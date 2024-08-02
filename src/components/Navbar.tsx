@@ -35,7 +35,9 @@ export default function Navbar() {
           <div className="hidden lg:flex gap-7 text-sm">
             {Object.entries(links).map(([key, value]) => (
               <Link key={key} href={value}>
-                <p className="text-lg hover:text-primary">{key}</p>
+                <p className="text-lg hover:text-primary hover:font-semibold transition duration-300">
+                  {key}
+                </p>
               </Link>
             ))}
           </div>

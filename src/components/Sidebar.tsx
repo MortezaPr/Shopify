@@ -44,7 +44,7 @@ export default function Sidebar() {
       <div className="flex flex-col items-center gap-4 mt-5 text-sm">
         {Object.entries(links).map(([key, value]) => (
           <Link key={key} href={value} className="w-full">
-            <p className="text-lg hover:text-primary w-full flex justify-between px-5">
+            <p className="text-lg hover:text-primary hover:font-semibold transition duration-300 w-full flex justify-between px-5">
               <p className="pr-2">{key}</p>
               <ArrowBackIosNewIcon fontSize="small" />
             </p>
