@@ -8,6 +8,10 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import ClipLoader from "react-spinners/ClipLoader";
+import IconButton from "@mui/material/IconButton";
+import InputAdornment from "@mui/material/InputAdornment";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
 const poppins = localFont({
   src: "../../../../public/fonts/Poppins-Bold.ttf",
@@ -19,6 +23,8 @@ type FormData = {
 };
 
 export default function Login() {
+  const [showPassword, setShowPassword] = useState(false);
+  const handleClickShowPassword = () => setShowPassword(!showPassword);
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const {
@@ -80,11 +86,24 @@ export default function Login() {
               margin="normal"
               fullWidth
               label="رمز عبور"
-              type="password"
+              type={showPassword ? "text" : "password"}
               id="password"
               {...register("password", { required: "رمز عبور الزامی است" })}
               error={!!errors.password}
               helperText={errors.password ? errors.password.message : ""}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      edge="end"
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
             />
           </div>
 
