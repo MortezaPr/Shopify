@@ -7,6 +7,7 @@ import Link from "next/link";
 import Sidebar from "./Sidebar";
 import { useCookies } from "next-client-cookies";
 import { useRouter } from "next/navigation";
+import Badge from "@mui/material/Badge";
 
 const poppins = localFont({
   src: "../../public/fonts/Poppins-Bold.ttf",
@@ -44,12 +45,18 @@ export default function Navbar() {
 
           {hasCookie && (
             <div className="cursor-pointer hidden xs:flex lg:mr-7 py-2 px-3 lg:px-7 lg:py-[0.65rem] bg-gray-100 rounded-md items-center gap-2">
-              <div className="block md:hidden">
-                <ShoppingBagOutlinedIcon fontSize="small" />
-              </div>
-              <div className="hidden md:block">
-                <ShoppingBagOutlinedIcon fontSize="medium" />
-              </div>
+              <Badge
+                badgeContent={"۲"}
+                color="primary"
+                anchorOrigin={{ vertical: "top", horizontal: "left" }}
+              >
+                <div className="block md:hidden">
+                  <ShoppingBagOutlinedIcon fontSize="small" />
+                </div>
+                <div className="hidden md:block">
+                  <ShoppingBagOutlinedIcon fontSize="medium" />
+                </div>
+              </Badge>
               <p className="text-sm md:text-base">سبد خرید</p>
             </div>
           )}

@@ -7,11 +7,11 @@ import { useRouter } from "next/navigation";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
-import ClipLoader from "react-spinners/ClipLoader";
 import IconButton from "@mui/material/IconButton";
 import InputAdornment from "@mui/material/InputAdornment";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const poppins = localFont({
   src: "../../../../public/fonts/Poppins-Bold.ttf",
@@ -118,16 +118,7 @@ export default function Login() {
               fontWeight: "bold",
             }}
           >
-            {isLoading ? (
-              <ClipLoader
-                color="gray"
-                size={25}
-                aria-label="Loading Spinner"
-                data-testid="loader"
-              />
-            ) : (
-              "ورود"
-            )}
+            {isLoading ? <CircularProgress /> : "ورود"}
           </Button>
         </form>
       </div>

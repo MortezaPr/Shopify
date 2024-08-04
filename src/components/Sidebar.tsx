@@ -13,6 +13,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useCookies } from "next-client-cookies";
+import Badge from "@mui/material/Badge";
 
 const links = {
   محصولات: "/products",
@@ -76,12 +77,18 @@ export default function Sidebar() {
             <Divider />
           </div>
           <div className="cursor-pointer flex xs:hidden py-2 px-3 bg-gray-100 rounded-md items-center justify-center gap-2">
-            <div className="block md:hidden">
-              <ShoppingBagOutlinedIcon fontSize="small" />
-            </div>
-            <div className="hidden md:block">
-              <ShoppingBagOutlinedIcon fontSize="medium" />
-            </div>
+            <Badge
+              badgeContent={"۲"}
+              color="primary"
+              anchorOrigin={{ vertical: "top", horizontal: "left" }}
+            >
+              <div className="block md:hidden">
+                <ShoppingBagOutlinedIcon fontSize="small" />
+              </div>
+              <div className="hidden md:block">
+                <ShoppingBagOutlinedIcon fontSize="medium" />
+              </div>
+            </Badge>
             <p className="text-sm md:text-base">سبد خرید</p>
           </div>
         </div>
