@@ -1,16 +1,17 @@
 "use server";
 
-import axios from "axios";
+import { requestProcessor } from "@/utils/Network";
 import { cookies } from "next/headers";
 
 export async function login(username: string, password: string) {
   try {
-    const response = await axios.post("https://fakestoreapi.com/auth/login", {
-      username: username,
-      password: password,
+    const data = await requestProcessor({
+      url: "/auth/login",
+      method: "POST",
+      data: { username, password },
     });
 
-    const token = response.data.token;
+    const token = data.token;
     if (token) {
       cookies().set("token", token);
       console.log("Token saved in cookie:", token);

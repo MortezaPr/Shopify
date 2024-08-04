@@ -4,6 +4,7 @@ import SupportAgentOutlinedIcon from "@mui/icons-material/SupportAgentOutlined";
 import LocalShippingOutlinedIcon from "@mui/icons-material/LocalShippingOutlined";
 import AssignmentReturnOutlinedIcon from "@mui/icons-material/AssignmentReturnOutlined";
 import localFont from "next/font/local";
+import Products from "../products/page";
 
 const poppins = localFont({
   src: "../../../public/fonts/Poppins-Bold.ttf",
@@ -71,6 +72,8 @@ export default function Home() {
           </div>
         </div>
       </div>
+
+      <Products />
     </main>
   );
 }
