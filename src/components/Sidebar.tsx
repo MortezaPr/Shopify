@@ -1,6 +1,7 @@
 "use client";
 
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 import LoginIcon from "@mui/icons-material/Login";
 import localFont from "next/font/local";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -41,6 +42,7 @@ export default function Sidebar() {
       >
         Shopify
       </div>
+
       <div className="flex flex-col items-center gap-4 mt-5 text-sm">
         {Object.entries(links).map(([key, value]) => (
           <Link key={key} href={value} className="w-full">
@@ -52,7 +54,7 @@ export default function Sidebar() {
         ))}
       </div>
 
-      {!hasCookie && (
+      {!hasCookie ? (
         <div>
           <div className="my-5">
             <Divider />
@@ -67,6 +69,21 @@ export default function Sidebar() {
               </Button>
             </Link>
           </Box>
+        </div>
+      ) : (
+        <div className="mx-5">
+          <div className="my-5">
+            <Divider />
+          </div>
+          <div className="cursor-pointer flex xs:hidden py-2 px-3 bg-gray-100 rounded-md items-center justify-center gap-2">
+            <div className="block md:hidden">
+              <ShoppingBagOutlinedIcon fontSize="small" />
+            </div>
+            <div className="hidden md:block">
+              <ShoppingBagOutlinedIcon fontSize="medium" />
+            </div>
+            <p className="text-sm md:text-base">سبد خرید</p>
+          </div>
         </div>
       )}
     </Box>

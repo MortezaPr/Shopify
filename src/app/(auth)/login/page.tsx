@@ -1,5 +1,5 @@
 "use client";
-import { login } from "@/services/login";
+import { login } from "@/api/login";
 import { Button } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import localFont from "next/font/local";

@@ -43,9 +43,14 @@ export default function Navbar() {
           </div>
 
           {hasCookie && (
-            <div className="cursor-pointer mr-2 lg:mr-7 lg:ml-5 py-2 lg:py-3 px-5 lg:px-7 bg-gray-100 rounded-md flex gap-2">
-              <ShoppingBagOutlinedIcon />
-              <p>سبد خرید</p>
+            <div className="cursor-pointer hidden xs:flex lg:mr-7 py-2 px-3 lg:px-7 lg:py-[0.65rem] bg-gray-100 rounded-md items-center gap-2">
+              <div className="block md:hidden">
+                <ShoppingBagOutlinedIcon fontSize="small" />
+              </div>
+              <div className="hidden md:block">
+                <ShoppingBagOutlinedIcon fontSize="medium" />
+              </div>
+              <p className="text-sm md:text-base">سبد خرید</p>
             </div>
           )}
 
