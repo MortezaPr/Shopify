@@ -50,7 +50,7 @@ export default function Navbar() {
           )}
 
           {!hasCookie && (
-            <div className="hidden lg:block">
+            <div className="hidden lg:block mr-5">
               <Link href="/login">
                 <Button variant="outlined" color="primary">
                   <div className="flex gap-2">

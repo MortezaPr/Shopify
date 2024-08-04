@@ -2,11 +2,39 @@ import Slider from "./components/Slider";
 import DiscountOutlinedIcon from "@mui/icons-material/DiscountOutlined";
 import SupportAgentOutlinedIcon from "@mui/icons-material/SupportAgentOutlined";
 import LocalShippingOutlinedIcon from "@mui/icons-material/LocalShippingOutlined";
+import AssignmentReturnOutlinedIcon from "@mui/icons-material/AssignmentReturnOutlined";
 import localFont from "next/font/local";
 
 const poppins = localFont({
   src: "../../../public/fonts/Poppins-Bold.ttf",
 });
+
+const boxes = [
+  {
+    name: "تخفیف‌های ویژه",
+    icon: DiscountOutlinedIcon,
+    description:
+      "از تخفیف‌های ویژه ما بهره‌مند شوید و محصولات مورد علاقه خود را با قیمت‌های استثنایی خریداری کنید.",
+  },
+  {
+    name: "ارسال رایگان",
+    icon: LocalShippingOutlinedIcon,
+    description:
+      "با خرید از فروشگاه ما، از ارسال رایگان به سراسر کشور بهره‌مند شوید.",
+  },
+  {
+    name: "پشتیبانی ۲۴/۷",
+    icon: SupportAgentOutlinedIcon,
+    description:
+      "تیم پشتیبانی ما به صورت ۲۴ ساعته و ۷ روز هفته آماده پاسخگویی به سوالات و مشکلات شماست.",
+  },
+  {
+    name: "بازگشت آسان",
+    icon: AssignmentReturnOutlinedIcon,
+    description:
+      "شما می‌توانید به راحتی و بدون هیچ مشکلی کالای خود را بازگردانید و مبلغ خود را دریافت کنید.",
+  },
+];
 
 export default function Home() {
   return (
@@ -27,37 +55,19 @@ export default function Home() {
       </div>
 
       <div className="bg-custom-gradient pb-28 pt-11">
-        <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          <div className="p-6 bg-white shadow-lg rounded-lg">
-            <div className="flex items-center mb-2">
-              <DiscountOutlinedIcon className="text-2xl mr-2 ml-4 text-primary" />
-              <h2 className="text-2xl font-bold">تخفیف‌های ویژه</h2>
-            </div>
-            <p>
-              از تخفیف‌های ویژه ما بهره‌مند شوید و محصولات مورد علاقه خود را با
-              قیمت‌های استثنایی خریداری کنید.
-            </p>
-          </div>
-          <div className="p-6 bg-white shadow-lg rounded-lg">
-            <div className="flex items-center mb-2">
-              <LocalShippingOutlinedIcon className="text-2xl mb-1 mr-2 ml-4 text-primary" />
-              <h2 className="text-2xl font-bold mb-2">ارسال رایگان</h2>
-            </div>
-            <p>
-              با خرید از فروشگاه ما، از ارسال رایگان به سراسر کشور بهره‌مند
-              شوید.
-            </p>
-          </div>
-          <div className="p-6 bg-white shadow-lg rounded-lg">
-            <div className="flex items-center mb-2">
-              <SupportAgentOutlinedIcon className="text-2xl mb-1 mr-2 ml-4 text-primary" />
-              <h2 className="text-2xl font-bold mb-2">پشتیبانی ۲۴/۷</h2>
-            </div>
-
-            <p>
-              تیم پشتیبانی ما به صورت ۲۴ ساعته و ۷ روز هفته آماده پاسخگویی به
-              سوالات و مشکلات شماست.
-            </p>
+        <div className="w-full grid place-items-center">
+          <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-6 w-[80%]">
+            {boxes.map((box, index) => (
+              <div key={index} className="p-6 bg-white shadow-lg rounded-lg">
+                <div className="flex items-center mb-2">
+                  <box.icon className="text-2xl mb-2 mr-2 ml-4 text-primary" />
+                  <h2 className="text-lg xs:text-2xl font-bold mb-2">
+                    {box.name}
+                  </h2>
+                </div>
+                <p>{box.description}</p>
+              </div>
+            ))}
           </div>
         </div>
       </div>
