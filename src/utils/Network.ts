@@ -1,8 +1,6 @@
 import axios, { Method } from "axios";
 
-const axiosInstance = axios.create({
-  baseURL: "https://fakestoreapi.com/",
-});
+const axiosInstance = axios.create();
 
 interface RequestOptions {
   url: string;

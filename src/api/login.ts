@@ -6,7 +6,7 @@ import { cookies } from "next/headers";
 export async function login(username: string, password: string) {
   try {
     const data = await requestProcessor({
-      url: "/auth/login",
+      url: "https://fakestoreapi.com/auth/login",
       method: "POST",
       data: { username, password },
     });
