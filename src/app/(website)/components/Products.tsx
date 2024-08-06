@@ -4,7 +4,8 @@ import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import { getProducts } from "@/api/getProducts";
+import { getProducts } from "@/services/getProducts";
+import { Product } from "@/types";
 
 import Image from "next/image";
 
@@ -35,7 +36,7 @@ export default async function Products({
         }}
       >
         <Grid container spacing={2}>
-          {products.map((product) => (
+          {products.map((product: Product) => (
             <Grid item xs={12} sm={6} md={4} lg={3} key={product.id}>
               <Card
                 sx={{ height: "100%", borderRadius: 2 }}
