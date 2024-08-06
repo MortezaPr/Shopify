@@ -1,8 +1,8 @@
 import Slider from "./components/Slider";
-import { MdOutlineDiscount } from "react-icons/md";
-import { TbTruckDelivery } from "react-icons/tb";
-import { MdOutlineSupportAgent } from "react-icons/md";
-import { PiKeyReturnBold } from "react-icons/pi";
+import DiscountOutlinedIcon from "@mui/icons-material/DiscountOutlined";
+import SupportAgentOutlinedIcon from "@mui/icons-material/SupportAgentOutlined";
+import LocalShippingOutlinedIcon from "@mui/icons-material/LocalShippingOutlined";
+import AssignmentReturnOutlinedIcon from "@mui/icons-material/AssignmentReturnOutlined";
 import localFont from "next/font/local";
 import Products from "./components/Products";
 import ProductsPagination from "./components/Pagination";
@@ -14,25 +14,25 @@ const poppins = localFont({
 const boxes = [
   {
     name: "تخفیف‌های ویژه",
-    icon: MdOutlineDiscount,
+    icon: DiscountOutlinedIcon,
     description:
       "از تخفیف‌های ویژه ما بهره‌مند شوید و محصولات مورد علاقه خود را با قیمت‌های استثنایی خریداری کنید.",
   },
   {
     name: "ارسال رایگان",
-    icon: TbTruckDelivery,
+    icon: LocalShippingOutlinedIcon,
     description:
       "با خرید از فروشگاه ما، از ارسال رایگان به سراسر کشور بهره‌مند شوید.",
   },
   {
     name: "پشتیبانی ۲۴/۷",
-    icon: MdOutlineSupportAgent,
+    icon: SupportAgentOutlinedIcon,
     description:
       "تیم پشتیبانی ما به صورت ۲۴ ساعته و ۷ روز هفته آماده پاسخگویی به سوالات و مشکلات شماست.",
   },
   {
     name: "بازگشت آسان",
-    icon: PiKeyReturnBold,
+    icon: AssignmentReturnOutlinedIcon,
     description:
       "شما می‌توانید به راحتی و بدون هیچ مشکلی کالای خود را بازگردانید و مبلغ خود را دریافت کنید.",
   },

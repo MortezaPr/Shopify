@@ -5,7 +5,7 @@ import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 import { ThemeProvider } from "@mui/material/styles";
 import { CookiesProvider } from "next-client-cookies/server";
 import theme from "../theme";
-import { Rtl } from "./Rtl";
+
 const iranSans = localFont({
   src: [
     {
@@ -41,9 +41,7 @@ export default function RootLayout({
       <body className={`${iranSans.className} bg-base-light dark:bg-base-dark`}>
         <AppRouterCacheProvider>
           <ThemeProvider theme={theme}>
-            <Rtl>
-              <CookiesProvider>{children}</CookiesProvider>
-            </Rtl>
+            <CookiesProvider>{children}</CookiesProvider>
           </ThemeProvider>
         </AppRouterCacheProvider>
       </body>
