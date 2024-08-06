@@ -1,5 +1,9 @@
 "use client";
 
+import { CacheProvider } from "@emotion/react";
+import createCache from "@emotion/cache";
+import { prefixer } from "stylis";
+import rtlPlugin from "stylis-plugin-rtl";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 import LoginIcon from "@mui/icons-material/Login";
@@ -25,6 +29,11 @@ const poppins = localFont({
   src: "../../public/fonts/Poppins-Bold.ttf",
 });
 
+const cacheRtl = createCache({
+  key: "muirtl",
+  stylisPlugins: [prefixer, rtlPlugin],
+});
+
 export default function Sidebar() {
   const router = useRouter();
   const cookies = useCookies();
@@ -36,7 +45,7 @@ export default function Sidebar() {
   };
 
   const DrawerList = (
-    <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)}>
+    <Box sx={{ width: 250 }} role="presentation">
       <div
         onClick={() => router.push("/")}
         className={`${poppins.className} text-primary mt-5 mb-10 text-2xl flex justify-center cursor-pointer`}
@@ -46,9 +55,14 @@ export default function Sidebar() {
 
       <div className="flex flex-col items-center gap-4 mt-5 text-sm">
         {Object.entries(links).map(([key, value]) => (
-          <Link key={key} href={value} className="w-full">
+          <Link
+            key={key}
+            href={value}
+            className="w-full"
+            onClick={toggleDrawer(false)}
+          >
             <p className="text-lg hover:text-primary hover:font-semibold transition duration-300 w-full flex justify-between px-5">
-              <p className="pr-2">{key}</p>
+              <span className="pr-2">{key}</span>
               <ArrowBackIosNewIcon fontSize="small" />
             </p>
           </Link>
@@ -61,7 +75,7 @@ export default function Sidebar() {
             <Divider />
           </div>
           <Box sx={{ width: 200, ml: 3 }}>
-            <Link href="/login">
+            <Link href="/login" onClick={toggleDrawer(false)}>
               <Button variant="outlined" color="primary" fullWidth>
                 <div className="flex gap-2">
                   <LoginIcon />
@@ -80,7 +94,7 @@ export default function Sidebar() {
             <Badge
               badgeContent={"۲"}
               color="primary"
-              anchorOrigin={{ vertical: "top", horizontal: "left" }}
+              anchorOrigin={{ vertical: "top", horizontal: "right" }}
             >
               <div className="block md:hidden">
                 <ShoppingBagOutlinedIcon fontSize="small" />
@@ -97,13 +111,15 @@ export default function Sidebar() {
   );
 
   return (
-    <div>
-      <Button onClick={toggleDrawer(true)}>
-        <MenuIcon />
-      </Button>
-      <Drawer anchor="left" open={open} onClose={toggleDrawer(false)}>
-        {DrawerList}
-      </Drawer>
-    </div>
+    <CacheProvider value={cacheRtl}>
+      <div>
+        <Button onClick={toggleDrawer(true)}>
+          <MenuIcon />
+        </Button>
+        <Drawer anchor="left" open={open} onClose={toggleDrawer(false)}>
+          {DrawerList}
+        </Drawer>
+      </div>
+    </CacheProvider>
   );
 }
