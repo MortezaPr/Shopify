@@ -5,9 +5,8 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { getProducts } from "@/services/getProducts";
+import ProductImage from "./ProductImage";
 import { Product } from "@/types";
-
-import Image from "next/image";
 
 export default async function Products({
   searchParams = {},
@@ -44,12 +43,7 @@ export default async function Products({
               >
                 <div className="flex items-center justify-center h-48 mt-5 mb-2">
                   <div className="">
-                    <Image
-                      src={product.image}
-                      alt={product.title}
-                      width={120}
-                      height={120}
-                    />
+                    <ProductImage product={product}/>
                   </div>
                 </div>
 

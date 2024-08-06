@@ -15,7 +15,6 @@ export default function Slider() {
   const [loading, setLoading] = useState(true);
 
   const handleImageLoad = () => {
-    console.log("Image loaded");
     setLoading(false);
   };
 
