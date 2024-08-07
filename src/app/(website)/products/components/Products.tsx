@@ -21,23 +21,17 @@ export default async function Products({
   const limit = 10;
   const products = await getProducts(page, limit);
   return (
-    <Container maxWidth="xl">
+    <Container maxWidth={false}>
       <Box
         className="bg-primary bg-opacity-10"
         sx={{
-          padding: 2,
+          padding: "0.7rem",
           marginTop: 2,
           boxShadow: 1,
           borderRadius: 3,
-          "@media (min-width:600px)": {
-            padding: 3,
-          },
-          "@media (min-width:960px)": {
-            padding: 4,
-          },
         }}
       >
-        <Grid container spacing={2}>
+        <Grid container spacing="0.65rem">
           {products.map((product: Product) => (
             <Grid item xs={12} sm={6} md={4} lg={3} key={product.id}>
               <Link href={`/products/${product.id}`}>

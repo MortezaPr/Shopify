@@ -90,11 +90,11 @@ export default function Sidebar() {
           <div className="my-5">
             <Divider />
           </div>
-          <div className="cursor-pointer flex xs:hidden py-2 px-3 bg-gray-100 rounded-md items-center justify-center gap-2">
+          <Link href="/shpping-cart" className="cursor-pointer flex xs:hidden py-2 px-3 bg-gray-100 rounded-md items-center justify-center gap-2">
             <Badge
               badgeContent={"۲"}
               color="primary"
-              anchorOrigin={{ vertical: "top", horizontal: "right" }}
+              anchorOrigin={{ vertical: "top", horizontal: "left" }}
             >
               <div className="block md:hidden">
                 <ShoppingBagOutlinedIcon fontSize="small" />
@@ -104,7 +104,7 @@ export default function Sidebar() {
               </div>
             </Badge>
             <p className="text-sm md:text-base">سبد خرید</p>
-          </div>
+          </Link>
         </div>
       )}
     </Box>
