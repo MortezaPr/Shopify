@@ -67,6 +67,8 @@ const config: Config = {
 
       mg: "815px",
 
+      gl: "960px",
+
       lg: "1024px",
       // => @media (min-width: 1024px) { ... }
       gx: "1160px",
