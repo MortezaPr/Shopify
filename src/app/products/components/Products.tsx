@@ -7,6 +7,7 @@ import Typography from "@mui/material/Typography";
 import { getProducts } from "@/services/getProducts";
 import ProductImage from "./ProductImage";
 import { Product } from "@/types";
+import Link from "next/link";
 
 export default async function Products({
   searchParams = {},
@@ -37,28 +38,30 @@ export default async function Products({
         <Grid container spacing={2}>
           {products.map((product: Product) => (
             <Grid item xs={12} sm={6} md={4} lg={3} key={product.id}>
-              <Card
-                sx={{ height: "100%", borderRadius: 2 }}
-                className="cursor-pointer"
-              >
-                <div className="flex items-center justify-center h-48 mt-5 mb-2">
-                  <div className="">
-                    <ProductImage product={product}/>
+              <Link href={`/products/${product.id}`}>
+                <Card
+                  sx={{ height: "100%", borderRadius: 2 }}
+                  className="cursor-pointer"
+                >
+                  <div className="flex items-center justify-center h-48 mt-5 mb-2">
+                    <div className="">
+                      <ProductImage product={product} />
+                    </div>
                   </div>
-                </div>
 
-                <CardContent sx={{ flexGrow: 1 }}>
-                  <Typography gutterBottom component="div">
-                    {product.title}
-                  </Typography>
-                </CardContent>
-                <CardContent dir="ltr" className="ml-3 flex gap-2">
-                  <Typography color="text.primary">تومان</Typography>
-                  <Typography color="text.primary">
-                    {product.price.toLocaleString("fa")}
-                  </Typography>
-                </CardContent>
-              </Card>
+                  <CardContent sx={{ flexGrow: 1 }}>
+                    <Typography gutterBottom component="div">
+                      {product.title}
+                    </Typography>
+                  </CardContent>
+                  <CardContent dir="ltr" className="ml-3 flex gap-2">
+                    <Typography color="text.primary">تومان</Typography>
+                    <Typography color="text.primary">
+                      {product.price.toLocaleString("fa")}
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </Link>
             </Grid>
           ))}
         </Grid>

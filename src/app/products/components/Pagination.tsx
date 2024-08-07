@@ -1,8 +1,9 @@
 "use client";
 import Pagination from "@mui/material/Pagination";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams, usePathname } from "next/navigation";
 
 export default function ProductsPagination() {
+  const path = usePathname();
   const router = useRouter();
   const searchParams = useSearchParams();
   const page = searchParams.get("page") ? Number(searchParams.get("page")) : 1;
@@ -11,7 +12,7 @@ export default function ProductsPagination() {
     event: React.ChangeEvent<unknown>,
     value: number
   ) => {
-    router.push(`/?page=${value}`, { scroll: false });
+    router.push(`${path}/?page=${value}`, { scroll: false });
   };
 
   return (
