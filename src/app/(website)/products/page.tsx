@@ -7,9 +7,14 @@ export default function ProductsPage({
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
   return (
-    <main className="min-h-screen mx-10">
+    <div
+      className="min-h-screen mx-10
+    "
+    >
       <Products searchParams={searchParams} />
-      <ProductsPagination />
-    </main>
+      <div className="pt-5 pb-8">
+        <ProductsPagination />
+      </div>
+    </div>
   );
 }

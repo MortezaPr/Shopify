@@ -17,7 +17,7 @@ export default async function ProductDetail({
   console.log(product);
 
   return (
-    <main className="h-screen flex justify-center items-center">
+    <div className="h-screen flex justify-center items-center">
       <div className="h-full gl:h-[42rem] w-[60rem] bg-white gl:rounded-2xl shadow-md mg:p-20 gl:p-10 grid place-items-center mg:place-items-start mg:grid-cols-3 gap-16 gl:gap-5 overflow-y-scroll xs:overflow-y-hidden">
         <div className="mt-10 mg:mt-20 col-span-1">
           <Image
@@ -76,6 +76,6 @@ export default async function ProductDetail({
           </div>
         </div>
       </div>
-    </main>
+    </div>
   );
 }

@@ -81,7 +81,7 @@ const config: Config = {
     },
     backgroundImage: {
       "custom-gradient":
-        "radial-gradient(50% 50% at 50% 50%, rgba(110, 80, 246, 0.4) 0%, rgba(241, 245, 247, 0.4) 100%)",
+        "radial-gradient(50% 50% at 50% 50%, rgba(110, 80, 246, 0.4) 0%, rgba(249, 249, 249, 0.4) 100%)",
     },
   },
   plugins: [],
