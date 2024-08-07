@@ -3,8 +3,7 @@ import { getProduct } from "@/services/getProduct";
 import { Product } from "@/types";
 import Rating from "@mui/material/Rating";
 import StarIcon from "@mui/icons-material/Star";
-import Button from "@mui/material/Button";
-import Link from "next/link";
+import AddToCartButton from "../components/AddToCartButton";
 
 export default async function ProductDetail({
   params,
@@ -18,8 +17,8 @@ export default async function ProductDetail({
 
   return (
     <div className="h-screen flex justify-center items-center">
-      <div className="h-full gl:h-[42rem] w-[60rem] bg-white gl:rounded-2xl shadow-md mg:p-20 gl:p-10 grid place-items-center mg:place-items-start mg:grid-cols-3 gap-16 gl:gap-5 overflow-y-scroll xs:overflow-y-hidden">
-        <div className="mt-10 mg:mt-20 col-span-1">
+      <div className="h-[120vh] gl:h-[30rem] w-[60rem] bg-white gl:rounded-2xl shadow-md mg:p-20 gl:p-10 grid place-items-center mg:place-items-start mg:grid-cols-3 gap-16 gl:gap-5 overflow-y-scroll xs:overflow-y-hidden">
+        <div className="mt-10 mg:mt-5 col-span-1">
           <Image
             src={product.image}
             width={250}
@@ -27,7 +26,7 @@ export default async function ProductDetail({
             alt="product image"
           />
         </div>
-        <div className="mx-10 mg:mx-0 mg:mt-16 mg:col-span-2">
+        <div className="mx-10 mg:mx-0 mg:mt-10 mg:col-span-2">
           <div className="flex flex-col gap-10">
             <div className="text-xl xs:text-2xl font-semibold leading-relaxed">
               {product.title}
@@ -64,15 +63,7 @@ export default async function ProductDetail({
               </p>
             </div>
 
-            <Link href="/">
-              <Button
-                variant="contained"
-                fullWidth
-                sx={{ paddingY: "0.75rem" }}
-              >
-                <p className="font-bold">افزودن به سبد خرید</p>
-              </Button>
-            </Link>
+            <AddToCartButton productId={product.id} variant="contained" />
           </div>
         </div>
       </div>

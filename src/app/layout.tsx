@@ -5,6 +5,7 @@ import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 import { ThemeProvider } from "@mui/material/styles";
 import { CookiesProvider } from "next-client-cookies/server";
 import theme from "../theme";
+import { StoreProvider } from "@/store/StoreProvider";
 
 const iranSans = localFont({
   src: [
@@ -37,14 +38,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" dir="rtl">
-      <body className={`${iranSans.className} bg-base-light dark:bg-base-dark`}>
-        <AppRouterCacheProvider>
-          <ThemeProvider theme={theme}>
-            <CookiesProvider>{children}</CookiesProvider>
-          </ThemeProvider>
-        </AppRouterCacheProvider>
-      </body>
-    </html>
+    <StoreProvider>
+      <AppRouterCacheProvider>
+        <ThemeProvider theme={theme}>
+          <html lang="en" dir="rtl">
+            <body
+              className={`${iranSans.className} bg-base-light dark:bg-base-dark`}
+            >
+              <CookiesProvider>{children}</CookiesProvider>
+            </body>
+          </html>
+        </ThemeProvider>
+      </AppRouterCacheProvider>
+    </StoreProvider>
   );
 }

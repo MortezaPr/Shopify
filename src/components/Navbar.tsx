@@ -8,6 +8,8 @@ import Sidebar from "./Sidebar";
 import { useCookies } from "next-client-cookies";
 import { useRouter } from "next/navigation";
 import Badge from "@mui/material/Badge";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/store";
 
 const poppins = localFont({
   src: "../../public/fonts/Poppins-Bold.ttf",
@@ -23,6 +25,14 @@ export default function Navbar() {
   const router = useRouter();
   const cookies = useCookies();
   const hasCookie = cookies.get("token");
+
+  const productCount = useSelector((state: RootState) =>
+    state.shoppingCart.products.reduce(
+      (total, product) => total + product.count,
+      0
+    )
+  );
+
   return (
     <nav className="flex flex-row-reverse justify-center z-50 fixed w-full h-20">
       <div className="h-full w-full bg-white bg-opacity-85 backdrop-blur-lg shadow-sm flex flex-row-reverse lg:flex-row justify-between items-center px-5">
@@ -49,7 +59,7 @@ export default function Navbar() {
               className="cursor-pointer hidden xs:flex lg:mr-7 py-2 px-3 lg:px-7 lg:py-[0.65rem] bg-gray-100 rounded-md items-center gap-2"
             >
               <Badge
-                badgeContent={"۲"}
+                badgeContent={productCount}
                 color="primary"
                 anchorOrigin={{ vertical: "top", horizontal: "right" }}
               >

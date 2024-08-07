@@ -1,7 +1,7 @@
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-import Button from "@mui/material/Button";
+import AddToCartButton from "./AddToCartButton";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
@@ -34,16 +34,16 @@ export default async function Products({
         <Grid container spacing="0.65rem">
           {products.map((product: Product) => (
             <Grid item xs={12} sm={6} md={4} lg={3} key={product.id}>
-              <Link href={`/products/${product.id}`}>
-                <Card
-                  sx={{
-                    height: "100%",
-                    borderRadius: 2,
-                    display: "flex",
-                    flexDirection: "column",
-                  }}
-                  className="cursor-pointer"
-                >
+              <Card
+                sx={{
+                  height: "100%",
+                  borderRadius: 2,
+                  display: "flex",
+                  flexDirection: "column",
+                }}
+                className="cursor-pointer"
+              >
+                <Link href={`/products/${product.id}`}>
                   <div className="flex items-center justify-center h-48 mt-5 mb-2">
                     <div className="">
                       <ProductImage product={product} />
@@ -61,15 +61,11 @@ export default async function Products({
                       {product.price.toLocaleString("fa")}
                     </Typography>
                   </CardContent>
-                  <CardContent sx={{ mt: "auto" }}>
-                    {isLogedIn && (
-                      <Button variant="outlined" color="primary" fullWidth>
-                        اضافه کردن به سبد خرید
-                      </Button>
-                    )}
-                  </CardContent>
-                </Card>
-              </Link>
+                </Link>
+                <CardContent sx={{ mt: "auto" }}>
+                  {isLogedIn && <AddToCartButton productId={product.id} />}
+                </CardContent>
+              </Card>
             </Grid>
           ))}
         </Grid>

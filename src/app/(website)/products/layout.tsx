@@ -13,7 +13,7 @@ export default function ProductLayout({
   const marginTopClass = pathname.endsWith("/products")
     ? "mt-32"
     : pathname.match(/\/products\/\d+$/)
-    ? "mt-16"
+    ? "mt-32 gl:mt-5"
     : "";
 
   return <main className={marginTopClass}>{children}</main>;

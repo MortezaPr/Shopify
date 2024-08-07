@@ -18,6 +18,8 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useCookies } from "next-client-cookies";
 import Badge from "@mui/material/Badge";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/store";
 
 const links = {
   محصولات: "/products",
@@ -39,6 +41,13 @@ export default function Sidebar() {
   const cookies = useCookies();
   const hasCookie = cookies.get("token");
   const [open, setOpen] = useState(false);
+
+  const productCount = useSelector((state: RootState) =>
+    state.shoppingCart.products.reduce(
+      (total, product) => total + product.count,
+      0
+    )
+  );
 
   const toggleDrawer = (newOpen: boolean) => () => {
     setOpen(newOpen);
@@ -90,9 +99,12 @@ export default function Sidebar() {
           <div className="my-5">
             <Divider />
           </div>
-          <Link href="/shpping-cart" className="cursor-pointer flex xs:hidden py-2 px-3 bg-gray-100 rounded-md items-center justify-center gap-2">
+          <Link
+            href="/shpping-cart"
+            className="cursor-pointer flex xs:hidden py-2 px-3 bg-gray-100 rounded-md items-center justify-center gap-2"
+          >
             <Badge
-              badgeContent={"۲"}
+              badgeContent={productCount}
               color="primary"
               anchorOrigin={{ vertical: "top", horizontal: "left" }}
             >
