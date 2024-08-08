@@ -14,7 +14,6 @@ export default function ShoppingCart() {
   );
 
   const totalPrice = products.reduce((total, product) => {
-    console.log(total, product.price, product.count);
     return total + product.price * product.count;
   }, 0);
 

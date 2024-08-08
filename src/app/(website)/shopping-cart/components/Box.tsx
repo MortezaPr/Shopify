@@ -15,6 +15,7 @@ import {
 } from "@/store/shoppingCartSlice";
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import BoxSkeleton from "./BoxSkeleton";
 
 interface BoxProps {
   productId: number;
@@ -37,7 +38,7 @@ export default function Box({ productId, price }: BoxProps) {
   }, [productId]);
 
   if (!product) {
-    return <div>Loading...</div>;
+    return <BoxSkeleton />;
   }
 
   const handleAdd = () => {
