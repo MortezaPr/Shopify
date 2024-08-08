@@ -23,8 +23,25 @@ const shoppingCartSlice = createSlice({
       const existingProduct = state.products.find(
         (product) => product.id === productId
       );
-      if (!existingProduct) {
+      if (existingProduct) {
+        existingProduct.count += 1;
+      } else {
         state.products.push({ id: productId, count: 1 });
+      }
+    },
+    decrementProduct: (state, action: PayloadAction<number>) => {
+      const productId = action.payload;
+      const existingProduct = state.products.find(
+        (product) => product.id === productId
+      );
+      if (existingProduct) {
+        if (existingProduct.count > 1) {
+          existingProduct.count -= 1;
+        } else {
+          state.products = state.products.filter(
+            (product) => product.id !== productId
+          );
+        }
       }
     },
     removeProduct: (state, action: PayloadAction<number>) => {
@@ -49,6 +66,10 @@ const shoppingCartSlice = createSlice({
 export const selectProductExists = (state: RootState, productId: number) =>
   state.shoppingCart.products.some((product) => product.id === productId);
 
-export const { addProduct, removeProduct, updateProductCount } =
-  shoppingCartSlice.actions;
+export const {
+  addProduct,
+  decrementProduct,
+  removeProduct,
+  updateProductCount,
+} = shoppingCartSlice.actions;
 export default shoppingCartSlice.reducer;
