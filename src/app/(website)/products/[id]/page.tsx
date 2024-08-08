@@ -4,12 +4,14 @@ import { Product } from "@/types";
 import Rating from "@mui/material/Rating";
 import StarIcon from "@mui/icons-material/Star";
 import AddToCartButton from "../components/AddToCartButton";
+import { cookies } from "next/headers";
 
 export default async function ProductDetail({
   params,
 }: {
   params: { id: number };
 }) {
+  const isLogedIn = cookies().has("token");
   const product: Product = await getProduct(params.id);
   const value = product.rating.rate;
 
@@ -62,8 +64,9 @@ export default async function ProductDetail({
                 {product.price.toLocaleString("fa")} تومان
               </p>
             </div>
-
-            <AddToCartButton productId={product.id} variant="contained" />
+            {isLogedIn && (
+              <AddToCartButton productId={product.id} variant="contained" />
+            )}
           </div>
         </div>
       </div>
