@@ -26,7 +26,7 @@ export default function ShoppingCart() {
         </div>
       ) : (
         <div className="mt-36 flex flex-col gl:flex-row gap-5 justify-center">
-          <div className="h-full flex flex-col gap-3 mb-10">
+          <div className="h-full flex flex-col gap-3 mb-36 gl:mb-10">
             {products.map((product) => (
               <Box
                 key={product.id}
@@ -57,7 +57,7 @@ export default function ShoppingCart() {
                 <span>{totalPrice.toLocaleString("fa")} تومان</span>
               </div>
               <Button variant="contained" color="primary">
-                پرداخت
+                ادامه
               </Button>
             </div>
           </div>

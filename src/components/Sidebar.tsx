@@ -100,7 +100,7 @@ export default function Sidebar() {
             <Divider />
           </div>
           <Link
-            href="/shpping-cart"
+            href="/shopping-cart"
             className="cursor-pointer flex xs:hidden py-2 px-3 bg-gray-100 rounded-md items-center justify-center gap-2"
           >
             <Badge

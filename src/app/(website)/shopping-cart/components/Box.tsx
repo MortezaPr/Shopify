@@ -55,7 +55,7 @@ export default function Box({ productId, price }: BoxProps) {
 
   return (
     <div className="w-full h-full">
-      <div className="w-full gl:w-[38rem] gx:w-[45rem] h-64 bg-white rounded-xl border-gray-200 border-[1px]">
+      <div className="w-full gl:w-[38rem] gx:w-[45rem] h-72 sm:h-64 bg-white rounded-xl border-gray-200 border-[1px]">
         <div className="flex gap-10">
           <Link href={`/products/${productId}`} className="mt-14 mr-10">
             <Image
@@ -66,7 +66,7 @@ export default function Box({ productId, price }: BoxProps) {
             />
           </Link>
           <div className="flex flex-col w-full mt-10">
-            <p className="font-bold">{product.title}</p>
+            <p className="font-bold ml-5">{product.title}</p>
             <div className="flex flex-col sm:flex-row gap-5 sm:gap-20 mt-10 items-center">
               <div className="h-10 w-36 rounded-md bg-white border-[1px] border-gray-200 flex flex-row-reverse items-center justify-between px-2">
                 {cartItem && cartItem.count > 1 ? (

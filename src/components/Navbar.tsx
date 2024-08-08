@@ -57,6 +57,7 @@ export default function Navbar() {
             <Link
               href="/shopping-cart"
               className="cursor-pointer hidden xs:flex lg:mr-7 py-2 px-3 lg:px-7 lg:py-[0.65rem] bg-gray-100 rounded-md items-center gap-2"
+              scroll={true}
             >
               <Badge
                 badgeContent={productCount}
