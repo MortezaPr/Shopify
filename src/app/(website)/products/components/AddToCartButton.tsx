@@ -11,11 +11,13 @@ import { RootState } from "@/store/store";
 
 interface AddToCartButtonProps {
   productId: number;
+  price: number;
   variant?: "text" | "outlined" | "contained";
 }
 
 const AddToCartButton: React.FC<AddToCartButtonProps> = ({
   productId,
+  price,
   variant = "outlined",
 }) => {
   const dispatch = useDispatch();
@@ -23,11 +25,11 @@ const AddToCartButton: React.FC<AddToCartButtonProps> = ({
     selectProductExists(state, productId)
   );
 
-  const handleAddToCart = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleAddToCart = () => {
     if (productExists) {
       dispatch(removeProduct(productId));
     } else {
-      dispatch(addProduct(productId));
+      dispatch(addProduct({ id: productId, price }));
     }
   };
 

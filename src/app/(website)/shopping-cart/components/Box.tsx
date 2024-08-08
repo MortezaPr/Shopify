@@ -18,9 +18,10 @@ import Link from "next/link";
 
 interface BoxProps {
   productId: number;
+  price: number;
 }
 
-export default function Box({ productId }: BoxProps) {
+export default function Box({ productId, price }: BoxProps) {
   const [product, setProduct] = useState<Product | null>(null);
   const dispatch = useDispatch();
   const cartItem = useSelector((state: RootState) =>
@@ -40,7 +41,7 @@ export default function Box({ productId }: BoxProps) {
   }
 
   const handleAdd = () => {
-    dispatch(addProduct(productId));
+    dispatch(addProduct({ id: productId, price }));
   };
 
   const handleRemove = () => {
@@ -64,7 +65,7 @@ export default function Box({ productId }: BoxProps) {
             />
           </Link>
           <div className="flex flex-col mt-10">
-            <p className="font-bold text-sm">{product.title}</p>
+            <p className="font-bold">{product.title}</p>
             <div className="flex gap-20 mt-10 items-center">
               <div className="h-10 w-36 rounded-md bg-white border-[1px] border-gray-200 flex flex-row-reverse items-center justify-between px-2">
                 {cartItem && cartItem.count > 1 ? (
@@ -88,7 +89,7 @@ export default function Box({ productId }: BoxProps) {
                   className="cursor-pointer hover:text-primary"
                 />
               </div>
-              <div className="font-bold">
+              <div className="font-bold text-lg">
                 {product.price.toLocaleString("fa")} تومان
               </div>
             </div>

@@ -63,7 +63,12 @@ export default async function Products({
                   </CardContent>
                 </Link>
                 <CardContent sx={{ mt: "auto" }}>
-                  {isLogedIn && <AddToCartButton productId={product.id} />}
+                  {isLogedIn && (
+                    <AddToCartButton
+                      productId={product.id}
+                      price={product.price}
+                    />
+                  )}
                 </CardContent>
               </Card>
             </Grid>

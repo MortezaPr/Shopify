@@ -65,7 +65,11 @@ export default async function ProductDetail({
               </p>
             </div>
             {isLogedIn && (
-              <AddToCartButton productId={product.id} variant="contained" />
+              <AddToCartButton
+                productId={product.id}
+                price={product.price}
+                variant="contained"
+              />
             )}
           </div>
         </div>

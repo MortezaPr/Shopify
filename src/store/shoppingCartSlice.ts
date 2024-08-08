@@ -4,6 +4,7 @@ import { RootState } from "@/store/store";
 interface Product {
   id: number;
   count: number;
+  price: number;
 }
 
 interface ShoppingCartState {
@@ -18,15 +19,18 @@ const shoppingCartSlice = createSlice({
   name: "shoppingCart",
   initialState,
   reducers: {
-    addProduct: (state, action: PayloadAction<number>) => {
-      const productId = action.payload;
+    addProduct: (
+      state,
+      action: PayloadAction<{ id: number; price: number }>
+    ) => {
+      const { id, price } = action.payload;
       const existingProduct = state.products.find(
-        (product) => product.id === productId
+        (product) => product.id === id
       );
       if (existingProduct) {
         existingProduct.count += 1;
       } else {
-        state.products.push({ id: productId, count: 1 });
+        state.products.push({ id, count: 1, price });
       }
     },
     decrementProduct: (state, action: PayloadAction<number>) => {
