@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { SubmitHandler, useForm, Controller } from "react-hook-form";
 import dynamic from "next/dynamic";
 import InputComponent from "./components/InputComponent";
-import Select from "@mui/material/Select";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import { Button } from "@mui/material";
 
@@ -21,7 +21,34 @@ type FormData = {
   address: string;
 };
 
+const provincesWithCities: { [key: string]: string[] } = {
+  تهران: ["تهران", "کرج", "شهریار"],
+  اصفهان: ["اصفهان", "کاشان", "نجف‌آباد"],
+  فارس: ["شیراز", "مرودشت", "فسا"],
+  "خراسان رضوی": ["مشهد", "نیشابور", "سبزوار"],
+  مازندران: ["ساری", "بابلسر", "آمل", "بابل"],
+  گیلان: ["رشت", "لاهیجان", "سیاهکل"],
+  کرمان: ["کرمان", "رفسنجان", "بم"],
+  خوزستان: ["اهواز", "آبادان", "خرمشهر"],
+  گلستان: ["گرگان", "علی‌آباد", "مینودشت"],
+  اردبیل: ["اردبیل", "مشگین‌شهر", "نمین"],
+  یزد: ["یزد", "مهریز", "خاتم"],
+  همدان: ["همدان", "اسدآباد", "کبودراهنگ"],
+  "چهارمحال و بختیاری": ["شهرکرد", "فارسان", "کوهرنگ"],
+  لرستان: ["خرم‌آباد", "بروجرد", "الیگودرز"],
+  بوشهر: ["بوشهر", "دیّر", "کنگان"],
+  "آذربایجان غربی": ["ارومیه", "خوی", "سردشت"],
+  "آذربایجان شرقی": ["تبریز", "مراغه", "اهر"],
+  زنجان: ["زنجان", "خدابنده", "ایجرود"],
+  قزوین: ["قزوین", "تاکستان", "آلاد"],
+  قم: ["قم", "کاشان", "نوش‌آباد"],
+};
+
 export default function SubmitPurchasePage() {
+  const [provinces, setProvinces] = useState(Object.keys(provincesWithCities));
+  const [cities, setCities] = useState<string[]>([]);
+  const [selectedProvince, setSelectedProvince] = useState("");
+
   const [address, setAddress] = useState("");
   const [position, setPosition] = useState<[number, number] | null>(null);
   const {
@@ -56,6 +83,12 @@ export default function SubmitPurchasePage() {
 
   const onSubmit: SubmitHandler<FormData> = (data) => {
     console.log(data);
+  };
+
+  const handleProvinceChange = (event: SelectChangeEvent<string>) => {
+    const province = event.target.value;
+    setSelectedProvince(province);
+    setCities(provincesWithCities[province] || []);
   };
 
   return (
@@ -115,13 +148,22 @@ export default function SubmitPurchasePage() {
                   control={control}
                   defaultValue=""
                   render={({ field }) => (
-                    <Select {...field} input={<InputComponent fullWidth />}>
+                    <Select
+                      {...field}
+                      onChange={(e) => {
+                        handleProvinceChange(e);
+                        field.onChange(e);
+                      }}
+                      input={<InputComponent fullWidth />}
+                    >
                       <MenuItem value="">
                         <em>None</em>
                       </MenuItem>
-                      <MenuItem value={10}>Ten</MenuItem>
-                      <MenuItem value={20}>Twenty</MenuItem>
-                      <MenuItem value={30}>Thirty</MenuItem>
+                      {provinces.map((province) => (
+                        <MenuItem key={province} value={province}>
+                          {province}
+                        </MenuItem>
+                      ))}
                     </Select>
                   )}
                 />
@@ -139,9 +181,11 @@ export default function SubmitPurchasePage() {
                       <MenuItem value="">
                         <em>None</em>
                       </MenuItem>
-                      <MenuItem value={10}>Ten</MenuItem>
-                      <MenuItem value={20}>Twenty</MenuItem>
-                      <MenuItem value={30}>Thirty</MenuItem>
+                      {cities.map((city) => (
+                        <MenuItem key={city} value={city}>
+                          {city}
+                        </MenuItem>
+                      ))}
                     </Select>
                   )}
                 />
