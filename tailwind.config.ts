@@ -82,6 +82,7 @@ const config: Config = {
     backgroundImage: {
       "custom-gradient":
         "radial-gradient(50% 50% at 50% 50%, rgba(110, 80, 246, 0.4) 0%, rgba(249, 249, 249, 0.4) 100%)",
+        "footer-gradient": "linear-gradient(109deg, #6f4fbf 26.43%, #4b338a 77.39%);"
     },
   },
   plugins: [],

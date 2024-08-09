@@ -5,6 +5,7 @@ import LocalShippingOutlinedIcon from "@mui/icons-material/LocalShippingOutlined
 import AssignmentReturnOutlinedIcon from "@mui/icons-material/AssignmentReturnOutlined";
 import localFont from "next/font/local";
 import Products from "@/app/(website)/products/page";
+import Footer from "./components/Footer";
 
 const poppins = localFont({
   src: "../../../public/fonts/Poppins-Bold.ttf",
@@ -83,6 +84,7 @@ export default function Home({
         <h4 className="font-bold">جدیدترین محصولات</h4>
         <Products searchParams={searchParams} />
       </div>
+      <Footer />
     </main>
   );
 }
