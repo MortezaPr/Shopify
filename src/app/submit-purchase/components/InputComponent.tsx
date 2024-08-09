@@ -1,29 +1,39 @@
-import { styled, alpha } from "@mui/material/styles";
-import InputBase from "@mui/material/InputBase";
+import React from "react";
+import CustomInput from "./CustomInput";
+import { FieldErrors, UseFormRegister } from "react-hook-form";
 
-const InputComponent = styled(InputBase)(({ theme }) => ({
-  "label + &": {
-    marginTop: theme.spacing(3),
-  },
-  "& .MuiInputBase-input": {
-    borderRadius: 4,
-    backgroundColor: "#F3F6F9",
-    border: "1px solid",
-    borderColor: "#E0E3E7",
-    fontSize: 16,
-    padding: "10px 12px",
-    transition: theme.transitions.create([
-      "border-color",
-      "background-color",
-      "box-shadow",
-    ]),
-    fontFamily: ["IranSans"].join(","),
-    width: "100%", // Set width to 100%
-    "&:focus": {
-      boxShadow: `${alpha(theme.palette.primary.main, 0.25)} 0 0 0 0.2rem`,
-      borderColor: theme.palette.primary.main,
-    },
-  },
-}));
+interface InputComponentProps {
+  register: UseFormRegister<any>;
+  errors: FieldErrors;
+  inputName: string;
+  label: string;
+  validation?: object;
+}
 
-export default InputComponent;
+export default function InputComponent({
+  register,
+  errors,
+  inputName,
+  label,
+  validation,
+}: InputComponentProps) {
+  return (
+    <div className="flex flex-col gap-3 mg:items-center">
+      <label className="font-bold mr-3 mg:mr-0">{label}</label>
+      <div className="w-80 xs:w-96">
+        <CustomInput
+          fullWidth
+          {...register(inputName, {
+            required: "این مورد الزامیست",
+            ...validation,
+          })}
+        />
+        {errors[inputName] && (
+          <span className="text-xs text-red-500 pt-2">
+            {String(errors[inputName].message)}
+          </span>
+        )}
+      </div>
+    </div>
+  );
+}
