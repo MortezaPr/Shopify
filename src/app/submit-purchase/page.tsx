@@ -62,10 +62,10 @@ export default function SubmitPurchasePage() {
     <main className="w-full h-screen mt-10">
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="flex justify-center">
-          <div className="grid place-items-center grid-cols-2 gap-10">
+          <div className="flex flex-col mg:grid mg:place-items-center gap-10">
             <div className="flex flex-col gap-3 items-center">
               <label className="font-bold">نام</label>
-              <div className="w-96">
+              <div className="w-80 xs:w-96">
                 <InputComponent
                   fullWidth
                   {...register("firstName", {
@@ -76,7 +76,7 @@ export default function SubmitPurchasePage() {
             </div>
             <div className="flex flex-col gap-3 items-center">
               <label className="font-bold">نام خانوادگی</label>
-              <div className="w-96">
+              <div className="w-80 xs:w-96">
                 <InputComponent
                   fullWidth
                   {...register("lastName", {
@@ -87,7 +87,7 @@ export default function SubmitPurchasePage() {
             </div>
             <div className="flex flex-col gap-3 items-center">
               <label className="font-bold">شماره موبایل</label>
-              <div className="w-96">
+              <div className="w-80 xs:w-96">
                 <InputComponent
                   fullWidth
                   {...register("phoneNumber", {
@@ -98,7 +98,7 @@ export default function SubmitPurchasePage() {
             </div>
             <div className="flex flex-col gap-3 items-center">
               <label className="font-bold">کد پستی</label>
-              <div className="w-96">
+              <div className="w-80 xs:w-96">
                 <InputComponent
                   fullWidth
                   {...register("postalCode", {
@@ -109,7 +109,7 @@ export default function SubmitPurchasePage() {
             </div>
             <div className="flex flex-col gap-3 items-center">
               <label className="font-bold">استان</label>
-              <div className="w-96">
+              <div className="w-80 xs:w-96">
                 <Controller
                   name="province"
                   control={control}
@@ -129,7 +129,7 @@ export default function SubmitPurchasePage() {
             </div>
             <div className="flex flex-col gap-3 items-center">
               <label className="font-bold">شهرستان</label>
-              <div className="w-96">
+              <div className="w-80 xs:w-96">
                 <Controller
                   name="city"
                   control={control}
