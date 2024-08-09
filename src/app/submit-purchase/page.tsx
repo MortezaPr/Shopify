@@ -11,6 +11,10 @@ import provincesWithCities from "@/utils/provincesWithCities";
 import provinces from "@/utils/provinces";
 import InputComponent from "./components/InputComponent";
 import SelectComponent from "./components/SelectComponent";
+import toast, { Toaster } from "react-hot-toast";
+import { useRouter } from "next/navigation";
+import { useDispatch } from "react-redux";
+import { clearCart } from "@/store/shoppingCartSlice";
 
 const Map = dynamic(() => import("./components/Map"), {
   ssr: false,
@@ -27,8 +31,9 @@ type FormData = {
 };
 
 export default function SubmitPurchasePage() {
+  const router = useRouter();
   const [cities, setCities] = useState<string[]>([]);
-
+  const dispatch = useDispatch();
   const [address, setAddress] = useState("");
   const [position, setPosition] = useState<[number, number] | null>(null);
   const {
@@ -62,7 +67,11 @@ export default function SubmitPurchasePage() {
   }, []);
 
   const onSubmit: SubmitHandler<FormData> = (data) => {
-    console.log(data);
+    dispatch(clearCart());
+    toast.success("سفارش شما با موفقیت ثبت شد!");
+    setTimeout(() => {
+      router.push("/");
+    }, 2000);
   };
 
   const handleProvinceChange = (event: SelectChangeEvent<string>) => {
@@ -132,6 +141,7 @@ export default function SubmitPurchasePage() {
           </div>
         </div>
       </form>
+      <Toaster />
     </main>
   );
 }

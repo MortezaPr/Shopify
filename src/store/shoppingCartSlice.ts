@@ -1,3 +1,4 @@
+// shoppingCartSlice.ts
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "@/store/store";
 
@@ -64,6 +65,9 @@ const shoppingCartSlice = createSlice({
         existingProduct.count = action.payload.count;
       }
     },
+    clearCart: (state) => {
+      state.products = [];
+    },
   },
 });
 
@@ -75,5 +79,6 @@ export const {
   decrementProduct,
   removeProduct,
   updateProductCount,
+  clearCart,
 } = shoppingCartSlice.actions;
 export default shoppingCartSlice.reducer;
