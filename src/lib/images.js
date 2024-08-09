@@ -1,4 +1,3 @@
-// Images
 import banner1 from "/public/images/banner1.webp";
 import banner2 from "/public/images/banner2.webp";
 import banner3 from "/public/images/banner3.webp";
