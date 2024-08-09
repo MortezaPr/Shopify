@@ -53,6 +53,8 @@ export default function Box({ productId, price }: BoxProps) {
     dispatch(removeProduct(productId));
   };
 
+  const totalPrice = cartItem ? product.price * cartItem.count : 0;
+
   return (
     <div className="w-full h-full">
       <div className="w-full gl:w-[38rem] gx:w-[45rem] h-72 sm:h-64 bg-white rounded-xl border-gray-200 border-[1px]">
@@ -91,7 +93,7 @@ export default function Box({ productId, price }: BoxProps) {
                 />
               </div>
               <div className="font-bold text-lg">
-                {product.price.toLocaleString("fa")} تومان
+                {totalPrice.toLocaleString("fa")} تومان
               </div>
             </div>
           </div>

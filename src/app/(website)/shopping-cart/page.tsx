@@ -7,6 +7,7 @@ import Box from "./components/Box";
 import Image from "next/image";
 import shopping from "../../../../public/images/shopping.png";
 import { Button } from "@mui/material";
+import Link from "next/link";
 
 export default function ShoppingCart() {
   const products = useSelector(
@@ -36,31 +37,44 @@ export default function ShoppingCart() {
             ))}
           </div>
 
-          <div className="gl:hidden flex flex-col items-center h-32 w-full bg-white rounded-t-xl border-gray-200 border-[1px] fixed bottom-0">
+          <Link
+            href={`/submit-purchase`}
+            className="gl:hidden flex flex-col items-center h-32 w-full bg-white rounded-t-xl border-gray-200 border-[1px] fixed bottom-0"
+          >
             <div className="flex gap-10 pt-10">
               <div className="flex flex-col gap-3 font-bold">
                 <span>جمع سبد خرید:</span>
                 <span>{totalPrice.toLocaleString("fa")} تومان</span>
               </div>
-              <div className="w-36 sm:w-48">
+              <div className="w-40 xs:w-48">
                 <Button fullWidth variant="contained" color="primary">
-                  پرداخت
+                  تایید و تکمیل سفارش
                 </Button>
               </div>
             </div>
-          </div>
+          </Link>
 
-          <div className="hidden gl:flex flex-col items-center h-48 w-full gl:w-80 gx:w-96 bg-white rounded-xl border-gray-200 border-[1px]">
+          <Link
+            href={`/submit-purchase`}
+            className="hidden gl:flex flex-col items-center h-48 gl:w-80 gx:w-96 bg-white rounded-xl border-gray-200 border-[1px]"
+          >
             <div className="flex flex-col gap-10 pt-10">
-              <div className="gx:text-lg flex gap-7 font-bold">
+              <div className="gx:text-lg flex justify-center gap-7 font-bold">
                 <span>جمع سبد خرید:</span>
                 <span>{totalPrice.toLocaleString("fa")} تومان</span>
               </div>
-              <Button variant="contained" color="primary">
-                ادامه
-              </Button>
+              <div className="gl:w-72 gx:w-80">
+                <Button
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  sx={{ height: "3rem" }}
+                >
+                  <p className="font-bold">تایید و تکمیل سفارش</p>
+                </Button>
+              </div>
             </div>
-          </div>
+          </Link>
         </div>
       )}
     </main>
