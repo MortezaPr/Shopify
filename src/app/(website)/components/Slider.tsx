@@ -50,7 +50,8 @@ export default function Slider() {
                   <Image
                     src={image.src}
                     alt={image.alt}
-                    onLoadingComplete={handleImageLoad}
+                    onLoad={handleImageLoad}
+                    priority
                   />
                 </div>
               </SwiperSlide>
@@ -75,6 +76,7 @@ export default function Slider() {
                     src={image.src}
                     alt={image.alt}
                     onLoad={handleImageLoad}
+                    priority
                   />
                 </div>
               </SwiperSlide>
