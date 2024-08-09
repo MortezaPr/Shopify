@@ -1,4 +1,3 @@
-// LocationSelect.tsx
 import React from "react";
 import { Controller } from "react-hook-form";
 import Select from "@mui/material/Select";
@@ -37,9 +36,6 @@ const SelectComponent: React.FC<LocationSelectProps> = ({
               }}
               input={<CustomInput fullWidth />}
             >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
               {options.map((option) => (
                 <MenuItem key={option} value={option}>
                   {option}
