@@ -1,5 +1,4 @@
 "use client";
-
 import React, { useState, useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import dynamic from "next/dynamic";
@@ -32,13 +31,13 @@ type FormData = {
 
 export default function SubmitPurchasePage() {
   const router = useRouter();
-  const [cities, setCities] = useState<string[]>([]);
   const dispatch = useDispatch();
-  const [address, setAddress] = useState("");
+  const [cities, setCities] = useState<string[]>([]);
   const [position, setPosition] = useState<[number, number] | null>(null);
   const {
     register,
     handleSubmit,
+    setValue,
     control,
     formState: { errors },
   } = useForm<FormData>();
@@ -52,7 +51,7 @@ export default function SubmitPurchasePage() {
         `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}&accept-language=fa`
       );
       const data = await response.json();
-      setAddress(data.display_name);
+      setValue("address", data.display_name);
     };
 
     const handleError = (error: GeolocationPositionError) => {
@@ -64,9 +63,10 @@ export default function SubmitPurchasePage() {
     } else {
       console.error("Geolocation is not supported by this browser.");
     }
-  }, []);
+  }, [setValue]);
 
   const onSubmit: SubmitHandler<FormData> = (data) => {
+    console.log(data);
     dispatch(clearCart());
     toast.success("سفارش شما با موفقیت ثبت شد!");
     setTimeout(() => {
@@ -117,14 +117,13 @@ export default function SubmitPurchasePage() {
                   {...register("address", {
                     required: "This field is required",
                   })}
-                  value={address}
                 />
               </div>
             </div>
             <div className="w-full col-span-2">
               <Map
                 position={position}
-                setAddress={setAddress}
+                setAddress={(address) => setValue("address", address)} // Update address using setValue
                 setPosition={setPosition}
               />
             </div>
