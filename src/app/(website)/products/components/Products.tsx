@@ -19,7 +19,11 @@ export default async function Products({
   const isLogedIn = cookies().has("token");
   const page = parseInt(searchParams["page"] as string, 10) || 1;
   const limit = 10;
-  const products = await getProducts(page, limit);
+  const products = await getProducts();
+
+  const startIndex = (page - 1) * limit;
+  const endIndex = startIndex + limit;
+  const paginatedProducts = products.slice(startIndex, endIndex);
   return (
     <Container maxWidth={false}>
       <Box
@@ -32,7 +36,7 @@ export default async function Products({
         }}
       >
         <Grid container spacing="0.65rem">
-          {products.map((product: Product) => (
+          {paginatedProducts.map((product: Product) => (
             <Grid item xs={12} sm={6} md={4} lg={3} key={product.id}>
               <Card
                 sx={{
