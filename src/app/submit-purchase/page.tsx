@@ -123,7 +123,7 @@ export default function SubmitPurchasePage() {
             <div className="w-full col-span-2">
               <Map
                 position={position}
-                setAddress={(address) => setValue("address", address)} // Update address using setValue
+                setAddress={(address) => setValue("address", address)}
                 setPosition={setPosition}
               />
             </div>

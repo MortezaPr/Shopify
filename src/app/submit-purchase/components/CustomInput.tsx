@@ -18,7 +18,7 @@ const CustomInput = styled(InputBase)(({ theme }) => ({
       "box-shadow",
     ]),
     fontFamily: ["IranSans"].join(","),
-    width: "100%", // Set width to 100%
+    width: "100%",
     "&:focus": {
       boxShadow: `${alpha(theme.palette.primary.main, 0.25)} 0 0 0 0.2rem`,
       borderColor: theme.palette.primary.main,

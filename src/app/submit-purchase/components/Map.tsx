@@ -1,4 +1,3 @@
-// components/MapComponent.tsx
 import React, { useEffect } from "react";
 import {
   MapContainer,
