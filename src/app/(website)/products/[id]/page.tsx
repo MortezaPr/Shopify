@@ -5,6 +5,7 @@ import Rating from "@mui/material/Rating";
 import StarIcon from "@mui/icons-material/Star";
 import AddToCartButton from "../components/AddToCartButton";
 import { cookies } from "next/headers";
+import { notFound } from "next/navigation";
 
 export default async function ProductDetail({
   params,
@@ -12,10 +13,19 @@ export default async function ProductDetail({
   params: { id: number };
 }) {
   const isLogedIn = cookies().has("token");
-  const product: Product = await getProduct(params.id);
-  const value = product.rating.rate;
+  let product: Product | null = null;
 
-  console.log(product);
+  try {
+    product = await getProduct(params.id);
+  } catch (err) {
+    notFound();
+  }
+
+  if (!product) {
+    notFound();
+  }
+
+  const value = product.rating.rate;
 
   return (
     <div className="h-screen flex justify-center items-center">
