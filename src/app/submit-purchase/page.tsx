@@ -14,6 +14,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { clearCart } from "@/store/shoppingCartSlice";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const Map = dynamic(() => import("./components/Map"), {
   ssr: false,
@@ -34,6 +35,7 @@ export default function SubmitPurchasePage() {
   const dispatch = useDispatch();
   const [cities, setCities] = useState<string[]>([]);
   const [position, setPosition] = useState<[number, number] | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
   const {
     register,
     handleSubmit,
@@ -66,9 +68,14 @@ export default function SubmitPurchasePage() {
   }, [setValue]);
 
   const onSubmit: SubmitHandler<FormData> = (data) => {
-    console.log(data);
-    dispatch(clearCart());
-    toast.success("سفارش شما با موفقیت ثبت شد!");
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+      console.log(data);
+      dispatch(clearCart());
+      toast.success("سفارش شما با موفقیت ثبت شد!");
+    }, 1000);
+
     setTimeout(() => {
       router.push("/");
     }, 2000);
@@ -129,12 +136,17 @@ export default function SubmitPurchasePage() {
             </div>
             <div className="w-full mg:w-3/5 flex col-span-2 pb-10">
               <Button
+                disabled={isLoading}
                 fullWidth
                 type="submit"
                 variant="contained"
                 sx={{ height: "3rem" }}
               >
-                <p className="font-bold text-lg">تایید</p>
+                {isLoading ? (
+                  <CircularProgress />
+                ) : (
+                  <p className="font-bold text-lg">تایید</p>
+                )}
               </Button>
             </div>
           </div>
