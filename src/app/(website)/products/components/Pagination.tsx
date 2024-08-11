@@ -1,5 +1,6 @@
 "use client";
 import Pagination from "@mui/material/Pagination";
+import PaginationItem from "@mui/material/PaginationItem";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
 
 export default function ProductsPagination() {
@@ -23,6 +24,9 @@ export default function ProductsPagination() {
         color="primary"
         page={page}
         onChange={handlePageChange}
+        renderItem={(item) => (
+          <PaginationItem {...item} page={item.page?.toLocaleString("fa-IR")} />
+        )}
       />
     </div>
   );

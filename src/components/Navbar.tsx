@@ -60,7 +60,9 @@ export default function Navbar() {
               scroll={true}
             >
               <Badge
-                badgeContent={productCount}
+                badgeContent={
+                  productCount !== 0 ? productCount.toLocaleString("fa") : null
+                }
                 color="primary"
                 anchorOrigin={{ vertical: "top", horizontal: "right" }}
               >

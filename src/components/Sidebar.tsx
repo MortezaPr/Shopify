@@ -104,7 +104,9 @@ export default function Sidebar() {
             className="cursor-pointer flex xs:hidden py-2 px-3 bg-gray-100 rounded-md items-center justify-center gap-2"
           >
             <Badge
-              badgeContent={productCount}
+              badgeContent={
+                productCount !== 0 ? productCount.toLocaleString("fa") : null
+              }
               color="primary"
               anchorOrigin={{ vertical: "top", horizontal: "left" }}
             >
