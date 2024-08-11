@@ -28,7 +28,8 @@ const iranSans = localFont({
 });
 
 export const metadata: Metadata = {
-  manifest: "/manifest.json",
+  manifest:
+    process.env.NODE_ENV === "production" ? "/manifest.json" : undefined,
   title: "Shopify",
   description: "An e-commerce platform to build and manage online stores.",
 };
