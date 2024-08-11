@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import Box from "./components/Box";
@@ -17,6 +17,10 @@ export default function ShoppingCart() {
   const totalPrice = products.reduce((total, product) => {
     return total + product.price * product.count;
   }, 0);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <main className="h-screen">
