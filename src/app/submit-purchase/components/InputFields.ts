@@ -12,7 +12,7 @@ const inputFields = [
     label: "شماره موبایل",
     validation: {
       pattern: {
-        value: /^09\d{9}$/,
+        value: /^(09\d{9}|۰۹[\u06F0-\u06F9]{9})$/,
         message: "شماره موبایل باید با ۰۹ شروع شود و ۱۱ رقم باشد",
       },
     },
@@ -22,7 +22,7 @@ const inputFields = [
     label: "کد پستی",
     validation: {
       pattern: {
-        value: /^\d{10}$/,
+        value: /^(\d{10}|[\u06F0-\u06F9]{10})$/,
         message: "کد پستی باید ۱۰ رقم و بدون خط تیره باشد",
       },
     },
