@@ -29,7 +29,7 @@ export default async function ProductDetail({
 
   return (
     <div className="h-screen flex justify-center items-center">
-      <div className="h-[120vh] gl:h-[30rem] w-[60rem] bg-white gl:rounded-2xl shadow-md mg:p-20 gl:p-10 grid place-items-center mg:place-items-start mg:grid-cols-3 gap-16 gl:gap-5 overflow-y-scroll xs:overflow-y-hidden">
+      <div className="h-[120vh] gl:h-[35rem] w-[60rem] bg-white gl:rounded-2xl shadow-md mg:p-20 gl:p-10 grid place-items-center mg:place-items-start mg:grid-cols-3 gap-16 gl:gap-5 overflow-y-scroll xs:overflow-y-hidden">
         <div className="mt-10 mg:mt-5 col-span-1">
           <Image
             src={product.image}
