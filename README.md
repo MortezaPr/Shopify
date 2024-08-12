@@ -63,11 +63,11 @@ This project uses the [Fake Store API](https://fakestoreapi.com) to simulate pro
     ```bash
     npm run dev
     # or
-    yarn dev
+    yarn run dev
     # or
-    pnpm dev
+    pnpm run dev
     # or
-    bun dev
+    bun run dev
     ```
 4. The application will be accessible at http://localhost:3000.
 
