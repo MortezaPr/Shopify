@@ -40,7 +40,7 @@ This project uses the [Fake Store API](https://fakestoreapi.com) to simulate pro
 
 ## How to Run the Project
 
-1. Clone the repository** and navigate to the project directory:
+1. Clone the repository and navigate to the project directory:
 
    ```bash
    git clone https://github.com/MortezaPr/Shopify.git
