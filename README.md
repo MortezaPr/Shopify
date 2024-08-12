@@ -40,13 +40,13 @@ This project uses the [Fake Store API](https://fakestoreapi.com) to simulate pro
 
 ## How to Run the Project
 
-1. **Clone the repository** and navigate to the project directory:
+1. Clone the repository** and navigate to the project directory:
 
    ```bash
    git clone https://github.com/MortezaPr/Shopify.git
    cd Shopify
 
-2. **Install the dependencies using your preferred package manager:
+2. Install the dependencies using your preferred package manager:
 
     ```bash
     npm install
@@ -58,7 +58,7 @@ This project uses the [Fake Store API](https://fakestoreapi.com) to simulate pro
     bun install
     ```
 
-3. **Run the development server:
+3. Run the development server:
 
     ```bash
     npm run dev
@@ -69,7 +69,7 @@ This project uses the [Fake Store API](https://fakestoreapi.com) to simulate pro
     # or
     bun dev
     ```
-4. **The application will be accessible at http://localhost:3000.
+4. The application will be accessible at http://localhost:3000.
 
 ## Docker and Docker Compose
 
@@ -82,5 +82,5 @@ The project is containerized using Docker, making it easy to set up and run in a
    ```bash
    docker compose up --build
 
-4. **The application will be accessible at http://localhost:3000.
+4. The application will be accessible at http://localhost:3000.
 
